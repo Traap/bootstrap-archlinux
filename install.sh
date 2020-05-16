@@ -4,8 +4,6 @@ setTheStage() {
   echo "" && echo "Setting the stage!"
   cd
   rm -rf ~/git
-  mkdir ~/git
-  cd ~/git
 }
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneMyRepos
@@ -15,7 +13,9 @@ cloneMyRepos() {
   arr=("$@")
   for r in "${arr[@]}"
   do
-    git clone --depth 1 https://github.com/Traap/$r.git
+    src=https://github.com/Traap/$r.git
+    dst=~/git/$r
+    git clone --depth 1 $src $dst 
   done
 }
 # -------------------------------------------------------------------------- }}}
@@ -23,16 +23,16 @@ cloneMyRepos() {
 cloneBashGitPrompt() {
   echo "" && echo "Cloning bash-git-prompt."
   rm -rf ~/.bash-git-prompt
-  src="https://github.com/magicmonty/bash-git-prompt"
-  dst="~/.bash-git-prompt"
+  src=https://github.com/magicmonty/bash-git-prompt
+  dst=~/.bash-git-prompt
   git clone --depth 1 $src $dst
 }
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneBase16Colors
 cloneBase16Colors () {
   echo "" && echo "Cloning Base16 colors."
-  src="https://github.com/chriskempson/base16-shell"
-  dst="~/git/color/base16-shell"
+  src=https://github.com/chriskempson/base16-shell
+  dst=~/git/color/base16-shell
   git clone --depth 1 $src $dst
 }
 # -------------------------------------------------------------------------- }}}
