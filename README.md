@@ -1,17 +1,17 @@
 # TraapReset
 
-I use a bash script resetTraap to reset my environment.  I use this scripts
-from Arch Linux, ArcoLinux, msys, WSL1 and WSL2 Linux machines.
+I use this repository reset my ArchLinux, ArcoLinux, msys, WSL1
+and WSL2 Linux machines.
 
 
-### resetTraap does NOT.
+### TraapReset does NOT.
 1. Install or update the operating system.
 2. Does not perform any sanity or error checking.
 
-### resetTraap DOES:
-1. Clones repositories I use daily.
+### TraapReset DOES:
+1. Clones repositories used daily.
 2. Recreates symbolic links.
-3. Configures VIM and my plugins.
+3. Configures VIM and plugins.
 
 ### Disclaimers done.  Usage:
 ```bash
