@@ -7,7 +7,7 @@ setTheStage() {
 }
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneMyRepos
-repos=(amber autodoc docbld dotfiles emend-computer newdoc tmux vim ssh)
+repos=(amber autodoc docbld dotfiles newdoc tmux vim ssh)
 cloneMyRepos() {
   echo "" && echo "Cloning my repositories."
   arr=("$@")
@@ -15,7 +15,7 @@ cloneMyRepos() {
   do
     src=https://github.com/Traap/$r.git
     dst=~/git/$r
-    git clone --depth 1 $src $dst 
+    git clone --depth 1 $src $dst
   done
 }
 # -------------------------------------------------------------------------- }}}
