@@ -1,12 +1,15 @@
 #!/bin/bash
 # {{{ setTheStage
+
 setTheStage() {
   echo "" && echo "Setting the stage!"
   cd
   rm -rf ~/git
 }
+
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneMyRepos
+
 repos=(amber autodoc docbld dotfiles newdoc tmux vim ssh)
 cloneMyRepos() {
   echo "" && echo "Cloning my repositories."
@@ -18,8 +21,10 @@ cloneMyRepos() {
     git clone --depth 1 $src $dst
   done
 }
+
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneBashGitPrompt
+
 cloneBashGitPrompt() {
   echo "" && echo "Cloning bash-git-prompt."
   rm -rf ~/.bash-git-prompt
@@ -27,6 +32,7 @@ cloneBashGitPrompt() {
   dst=~/.bash-git-prompt
   git clone --depth 1 $src $dst
 }
+
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneBase16Colors
 cloneBase16Colors () {
@@ -35,12 +41,13 @@ cloneBase16Colors () {
   dst=~/git/color/base16-shell
   git clone --depth 1 $src $dst
 }
+
 # -------------------------------------------------------------------------- }}}
 # {{{ symLinks
+
 symLinks() {
   echo "" && echo "Making symbolic links."
   ln -fsv ~/git/dotfiles/bash_logout  ~/.bash_logout
-  ln -fsv ~/git/dotfiles/bashrc       ~/.bash_profile
   ln -fsv ~/git/dotfiles/bashrc       ~/.bashrc
   ln -fsv ~/git/dotfiles/config       ~/.config
   ln -fsv ~/git/dotfiles/dircolors    ~/.dircolors
@@ -56,15 +63,19 @@ symLinks() {
   ln -fsv ~/git/vim/vimrc_background  ~/.vimrc_background
   ln -fsv ~/git/vim/vimrc             ~/.vimrc
 }
+
 # -------------------------------------------------------------------------- }}}
 # {{{ sshPermissions
+
 sshPermissions() {
   echo "" && echo "Setting ssh permissions."
   chmod 600 ~/git/ssh/*
   chmod 644 ~/git/ssh/*.pub
 }
+
 # -------------------------------------------------------------------------- }}}
 # {{{ main
+
 main() {
   setTheStage
   cloneBashGitPrompt
@@ -75,6 +86,7 @@ main() {
   vim
   source ~/.bashrc
 }
+
 # -------------------------------------------------------------------------- }}}
 # The stage is set ... start the show!!!
 main "$@"
