@@ -48,7 +48,7 @@ cloneBase16Colors () {
 symLinks() {
   echo "" && echo "Making symbolic links."
   ln -fsv ~/git/dotfiles/bash_logout  ~/.bash_logout
-  ln -fsv ~/git/dotfiles/bashrc       ~/.bashrc
+  ln -fsv ~/git/dotfiles/bashrc-personal ~/.bashrc-personal
   ln -fsv ~/git/dotfiles/config       ~/.config
   ln -fsv ~/git/dotfiles/dircolors    ~/.dircolors
   ln -fsv ~/git/dotfiles/inputrc      ~/.inputrc
