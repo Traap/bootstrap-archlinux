@@ -4,7 +4,26 @@
 setTheStage() {
   echo "" && echo "Setting the stage!"
   cd
-  rm -rf ~/git
+  sudo rm -rf ~/git
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ cloneMySshRepo
+
+cloneMySshRepo() {
+  echo "" && echo "Cloning my ssh repo."
+  src=https://github.com/Traap/ssh.git
+  dst=~/git/ssh
+  git clone --depth 1 $src $dst
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ setSshPermissions
+
+setSshPermissions() {
+  echo "" && echo "Setting ssh permissions."
+  chmod 600 ~/git/ssh/*
+  chmod 644 ~/git/ssh/*.pub
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -20,7 +39,6 @@ repos=( \
   emend-computer \ 
   newdoc \
   resume \
-  ssh \
   tmux \
   TraapReset \
   vim \
@@ -32,9 +50,10 @@ cloneMyRepos() {
   arr=("$@")
   for r in "${arr[@]}"
   do
-    src=https://github.com/Traap/$r.git
+    src=git://github.com/Traap/$r.git
     dst=~/git/$r
     git clone --depth 1 $src $dst
+    echo ""
   done
 }
 
@@ -70,6 +89,28 @@ cloneTmuxPlugins () {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ deleteSymLinks
+
+deleteSymLinks() {
+  echo "" && echo "Deleting symbolic links."
+  rm  ~/.bash_logout
+  rm  ~/.bashrc-personal
+  rm  ~/.dircolors
+  rm  ~/.inputrc
+  rm  ~/.latexmkrc
+  rm  ~/.config.vim
+  rm  ~/.gitconfig
+  rm  ~/.gitignore_global
+  rm  ~/.ssh
+  rm  ~/.tmux
+  rm  ~/.tmux.conf
+  rm  ~/.config/nvim/init.vim
+  rm  ~/.vim
+  rm  ~/.vimrc_background
+  rm  ~/.vimrc
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ createSymLinks
 
 createSymLinks() {
@@ -81,23 +122,14 @@ createSymLinks() {
   ln -fsv ~/git/dotfiles/latexmkrc       ~/.latexmkrc
   ln -fsv ~/git/ssh/config.vim           ~/.config.vim
   ln -fsv ~/git/ssh/gitconfig            ~/.gitconfig
-  ln -fsv ~/git/ssh/gitignore_global    ~/.gitignore_global
-  ln -fsv ~/git/ssh                     ~/.ssh
-  ln -fsv ~/git/tmux                    ~/.tmux
-  ln -fsv ~/git/tmux/tmux.conf          ~/.tmux.conf
-  ln -fsv ~/git/vim/nvim.vim            ~/.config/nvim/init.vim
-  ln -fsv ~/git/vim                     ~/.vim
-  ln -fsv ~/git/vim/vimrc_background    ~/.vimrc_background
-  ln -fsv ~/git/vim/vimrc               ~/.vimrc
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ setSshPermissions
-
-setSshPermissions() {
-  echo "" && echo "Setting ssh permissions."
-  chmod 600 ~/git/ssh/*
-  chmod 644 ~/git/ssh/*.pub
+  ln -fsv ~/git/ssh/gitignore_global     ~/.gitignore_global
+  ln -fsv ~/git/ssh                      ~/.ssh
+  ln -fsv ~/git/tmux                     ~/.tmux
+  ln -fsv ~/git/tmux/tmux.conf           ~/.tmux.conf
+  ln -fsv ~/git/vim/nvim.vim             ~/.config/nvim/init.vim
+  ln -fsv ~/git/vim                      ~/.vim
+  ln -fsv ~/git/vim/vimrc_background     ~/.vimrc_background
+  ln -fsv ~/git/vim/vimrc                ~/.vimrc
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -121,11 +153,13 @@ loadVimPlugins() {
 
 main() {
   setTheStage
+  deleteSymLinks 
+  cloneMySshRepo
+  setSshPermissions
   cloneBashGitPrompt
   cloneBase16Colors
   cloneMyRepos ${repos[@]}
   cloneTmuxPlugins
-  setSshPermissions
   createSymLinks
   loadTmuxPlugins
   loadVimPlugins
