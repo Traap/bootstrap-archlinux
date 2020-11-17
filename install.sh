@@ -35,6 +35,7 @@ cloneBashGitPrompt() {
 
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneBase16Colors
+
 cloneBase16Colors () {
   echo "" && echo "Cloning Base16 colors."
   src=https://github.com/chriskempson/base16-shell
@@ -43,34 +44,61 @@ cloneBase16Colors () {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ symLinks
+# {{{ cloneTmuxPlugins 
 
-symLinks() {
-  echo "" && echo "Making symbolic links."
-  ln -fsv ~/git/dotfiles/bash_logout  ~/.bash_logout
-  ln -fsv ~/git/dotfiles/bashrc-personal ~/.bashrc-personal
-  ln -fsv ~/git/dotfiles/config       ~/.config
-  ln -fsv ~/git/dotfiles/dircolors    ~/.dircolors
-  ln -fsv ~/git/dotfiles/inputrc      ~/.inputrc
-  ln -fsv ~/git/dotfiles/latexmkrc    ~/.latexmkrc
-  ln -fsv ~/git/ssh/config.vim        ~/.config.vim
-  ln -fsv ~/git/ssh/gitconfig         ~/.gitconfig
-  ln -fsv ~/git/ssh/gitignore_global  ~/.gitignore_global
-  ln -fsv ~/git/ssh                   ~/.ssh
-  ln -fsv ~/git/tmux                  ~/.tmux
-  ln -fsv ~/git/tmux/tmux.conf        ~/.tmux.conf
-  ln -fsv ~/git/vim                   ~/.vim
-  ln -fsv ~/git/vim/vimrc_background  ~/.vimrc_background
-  ln -fsv ~/git/vim/vimrc             ~/.vimrc
+cloneTmuxPlugins () {
+  echo "" && echo "Cloning TMUX plugins."
+  src=https://github.com/tmux-plugins/tpm.git
+  dst=~/git/tmux/plugins/tpm
+  git clone --depth 1 $src $dst
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ sshPermissions
+# {{{ createSymLinks
 
-sshPermissions() {
+createSymLinks() {
+  echo "" && echo "Creating symbolic links."
+  ln -fsv ~/git/dotfiles/bash_logout     ~/.bash_logout
+  ln -fsv ~/git/dotfiles/bashrc-personal ~/.bashrc-personal
+  ln -fsv ~/git/dotfiles/config          ~/.config
+  ln -fsv ~/git/dotfiles/dircolors       ~/.dircolors
+  ln -fsv ~/git/dotfiles/inputrc         ~/.inputrc
+  ln -fsv ~/git/dotfiles/latexmkrc       ~/.latexmkrc
+  ln -fsv ~/git/ssh/config.vim           ~/.config.vim
+  ln -fsv ~/git/ssh/gitconfig            ~/.gitconfig
+  ln -fsv ~/git/ssh/gitignore_global     ~/.gitignore_global
+  ln -fsv ~/git/ssh                      ~/.ssh
+  ln -fsv ~/git/tmux                     ~/.tmux
+  ln -fsv ~/git/tmux/tmux.conf           ~/.tmux.conf
+  ln -fsv ~/git/vim/nvim.vim             ~/.config/nvim/init.vim
+  ln -fsv ~/git/vim                      ~/.vim
+  ln -fsv ~/git/vim/vimrc_background     ~/.vimrc_background
+  ln -fsv ~/git/vim/vimrc                ~/.vimrc
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ setSshPermissions
+
+setSshPermissions() {
   echo "" && echo "Setting ssh permissions."
   chmod 600 ~/git/ssh/*
   chmod 644 ~/git/ssh/*.pub
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ loadTmuxPlugins 
+
+loadTmuxPlugins() {
+  echo "" && echo "Loading TMUX plugins."
+  ~/.tmux/plugins/tpm/bin/install_plugins
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ loadVimPlugins 
+
+loadVimPlugins() {
+  echo "" && echo "Loading vim / neovim plugins."
+  vim 
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -81,12 +109,17 @@ main() {
   cloneBashGitPrompt
   cloneBase16Colors
   cloneMyRepos ${repos[@]}
-  sshPermissions
-  symLinks
-  vim
+  cloneTmuxPlugins
+  setSshPermissions
+  createSymLinks
+  loadTmuxPlugins
+  loadvimPlugins:wq
   source ~/.bashrc
 }
 
 # -------------------------------------------------------------------------- }}}
-# The stage is set ... start the show!!!
+# {{{ The stage is set ... start the show!!!
+
 main "$@"
+
+# -------------------------------------------------------------------------- }}}
