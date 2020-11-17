@@ -10,7 +10,23 @@ setTheStage() {
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneMyRepos
 
-repos=(amber autodoc docbld dotfiles newdoc tmux vim ssh)
+repos=( \
+  amber \
+  autodoc \
+  debian-bootstrap \
+  docbld \
+  dotfiles \
+  emend \
+  emend-computer \ 
+  newdoc \
+  resume \
+  ssh \
+  tmux \
+  TraapReset \
+  vim \
+  wiki \
+)
+
 cloneMyRepos() {
   echo "" && echo "Cloning my repositories."
   arr=("$@")
