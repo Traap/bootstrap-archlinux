@@ -114,7 +114,7 @@ loadTmuxPlugins() {
 
 loadVimPlugins() {
   echo "" && echo "Loading vim / neovim plugins."
-  vim 
+  nvim 
 }
 
 # -------------------------------------------------------------------------- }}}
