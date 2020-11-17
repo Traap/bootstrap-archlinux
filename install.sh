@@ -129,7 +129,7 @@ main() {
   setSshPermissions
   createSymLinks
   loadTmuxPlugins
-  loadvimPlugins:wq
+  loadvimPlugins
   source ~/.bashrc
 }
 
