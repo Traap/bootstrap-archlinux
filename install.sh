@@ -50,7 +50,7 @@ cloneMyRepos() {
   arr=("$@")
   for r in "${arr[@]}"
   do
-    src=git://github.com/Traap/$r.git
+    src=git@github.com/Traap/$r.git
     dst=~/git/$r
     git clone --depth 1 $src $dst
     echo ""
