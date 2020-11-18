@@ -50,7 +50,7 @@ cloneMyRepos() {
   arr=("$@")
   for r in "${arr[@]}"
   do
-    src=git@github.com/Traap/$r.git
+    src=https://github.com/Traap/$r.git
     dst=~/git/$r
     git clone --depth 1 $src $dst
     echo ""
@@ -163,15 +163,19 @@ loadVimPlugins() {
 main() {
   setTheStage
   deleteSymLinks 
+  createSymLinks
+
   cloneMySshRepo
   setSshPermissions
+
   cloneBashGitPrompt
   cloneBase16Colors
   cloneMyRepos ${repos[@]}
   cloneTmuxPlugins
-  createSymLinks
+
   loadTmuxPlugins
   loadVimPlugins
+
   source ~/.bashrc
 }
 
