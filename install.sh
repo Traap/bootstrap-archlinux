@@ -126,10 +126,19 @@ createSymLinks() {
   ln -fsv ~/git/ssh                      ~/.ssh
   ln -fsv ~/git/tmux                     ~/.tmux
   ln -fsv ~/git/tmux/tmux.conf           ~/.tmux.conf
-  ln -fsv ~/git/vim/nvim.vim             ~/.config/nvim/init.vim
+  ln -fsv ~/git/vim/init.vim             ~/.config/nvim/init.vim
   ln -fsv ~/git/vim                      ~/.vim
   ln -fsv ~/git/vim/vimrc_background     ~/.vimrc_background
   ln -fsv ~/git/vim/vimrc                ~/.vimrc
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ setSshPermissions
+
+setSshPermissions() {
+  echo "" && echo "Setting ssh permissions."
+  chmod 600 ~/git/ssh/*
+  chmod 644 ~/git/ssh/*.pub
 }
 
 # -------------------------------------------------------------------------- }}}
