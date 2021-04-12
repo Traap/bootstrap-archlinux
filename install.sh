@@ -89,47 +89,36 @@ cloneTmuxPlugins () {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ deleteSymLinks
-
-deleteSymLinks() {
-  echo "" && echo "Deleting symbolic links."
-  rm  ~/.bash_logout
-  rm  ~/.bashrc-personal
-  rm  ~/.dircolors
-  rm  ~/.inputrc
-  rm  ~/.latexmkrc
-  rm  ~/.config.vim
-  rm  ~/.gitconfig
-  rm  ~/.gitignore_global
-  rm  ~/.ssh
-  rm  ~/.tmux
-  rm  ~/.tmux.conf
-  rm  ~/.config/nvim/init.vim
-  rm  ~/.vim
-  rm  ~/.vimrc_background
-  rm  ~/.vimrc
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ createSymLinks
 
 createSymLinks() {
   echo "" && echo "Creating symbolic links."
-  ln -fsv ~/git/dotfiles/bash_logout     ~/.bash_logout
-  ln -fsv ~/git/dotfiles/bashrc-personal ~/.bashrc-personal
-  ln -fsv ~/git/dotfiles/dircolors       ~/.dircolors
-  ln -fsv ~/git/dotfiles/inputrc         ~/.inputrc
-  ln -fsv ~/git/dotfiles/latexmkrc       ~/.latexmkrc
-  ln -fsv ~/git/ssh/config.vim           ~/.config.vim
-  ln -fsv ~/git/ssh/gitconfig            ~/.gitconfig
-  ln -fsv ~/git/ssh/gitignore_global     ~/.gitignore_global
-  ln -fsv ~/git/ssh                      ~/.ssh
-  ln -fsv ~/git/tmux                     ~/.tmux
-  ln -fsv ~/git/tmux/tmux.conf           ~/.tmux.conf
-  ln -fsv ~/git/vim/init.vim             ~/.config/nvim/init.vim
-  ln -fsv ~/git/vim                      ~/.vim
-  ln -fsv ~/git/vim/vimrc_background     ~/.vimrc_background
-  ln -fsv ~/git/vim/vimrc                ~/.vimrc
+  ln -fsv ~/git/dotfiles/bash_logout      ~/.bash_logout
+  ln -fsv ~/git/dotfiles/bashrc           ~/.bashrc
+  ln -fsv ~/git/dotfiles/bashrc-personal  ~/.bashrc-personal
+  ln -fsv ~/git/dotfiles/dircolors        ~/.dircolors
+  ln -fsv ~/git/dotfiles/gitconfig        ~/.gitconfig
+  ln -fsv ~/git/dotfiles/gitignore_global ~/.gitignore_global
+  ln -fsv ~/git/dotfiles/inputrc          ~/.inputrc
+  ln -fsv ~/git/dotfiles/latexmkrc        ~/.latexmkrc
+  ln -fsv ~/git/dotfiles/minttyrc         ~/.minttyrc
+  ln -fsv ~/git/dotfiles/mozilla          ~/.mozilla
+  ln -fsv ~/git/ssh                       ~/.ssh
+  ln -fsv ~/git/ssh/config.vim            ~/.config.vim
+  ln -fsv ~/git/tmux                      ~/.tmux
+  ln -fsv ~/git/tmux/tmux.conf            ~/.tmux.conf
+  ln -fsv ~/git/vim                       ~/.vim
+  ln -fsv ~/git/vim/coc-package.json     ~/.config/coc/extensions/package.json 
+  ln -fsv ~/git/vim/vimrc                 ~/.config/nvim/init.vim
+  ln -fsv ~/git/vim/vimrc                 ~/.vimrc
+  ln -fsv ~/git/vim/vimrc_background      ~/.vimrc_background
+  
+  if [[ $(uname -r) =~ 'arch' ]]; then
+    ln -fsv ~/git/dotfiles/bspwm/autostart.sh ~/.config/bspwm/autostart.sh
+    ln -fsv ~/git/dotfiles/bspwm/bspwmrc      ~/.config/bspwm/bspwmrc
+    ln -fsv ~/git/dotfiles/bspwm/sxhkdrc      ~/.config/bspwm/sxhkd/sxhkdrc
+    ln -fsv ~/git/dotfiles/termite/config     ~/.config/termite/config
+  fi
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -162,7 +151,6 @@ loadVimPlugins() {
 
 main() {
   setTheStage
-  deleteSymLinks 
   createSymLinks
 
   cloneMySshRepo
