@@ -61,7 +61,7 @@ repos=( \
   docbld \
   dotfiles \
   emend \
-  emend-computer \ 
+  emend-computer \
   newdoc \
   resume \
   tmux \
@@ -104,7 +104,7 @@ cloneBase16Colors () {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ cloneTmuxPlugins 
+# {{{ cloneTmuxPlugins
 
 cloneTmuxPlugins () {
   echo "" && echo "Cloning TMUX plugins."
@@ -133,11 +133,11 @@ createSymLinks() {
   ln -fsv ~/git/tmux                      ~/.tmux
   ln -fsv ~/git/tmux/tmux.conf            ~/.tmux.conf
   ln -fsv ~/git/vim                       ~/.vim
-  ln -fsv ~/git/vim/coc-package.json     ~/.config/coc/extensions/package.json 
+  ln -fsv ~/git/vim/coc-package.json     ~/.config/coc/extensions/package.json
   ln -fsv ~/git/vim/vimrc                 ~/.config/nvim/init.vim
   ln -fsv ~/git/vim/vimrc                 ~/.vimrc
   ln -fsv ~/git/vim/vimrc_background      ~/.vimrc_background
-  
+
   if [[ $(uname -r) =~ 'arch' ]]; then
     ln -fsv ~/git/dotfiles/bspwm/autostart.sh ~/.config/bspwm/autostart.sh
     ln -fsv ~/git/dotfiles/bspwm/bspwmrc      ~/.config/bspwm/bspwmrc
@@ -179,7 +179,7 @@ loadYayExtras() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ loadTmuxPlugins 
+# {{{ loadTmuxPlugins
 
 loadTmuxPlugins() {
   echo "" && echo "Loading TMUX plugins."
@@ -187,11 +187,11 @@ loadTmuxPlugins() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ loadVimPlugins 
+# {{{ loadVimPlugins
 
 loadVimPlugins() {
   echo "" && echo "Loading vim / neovim plugins."
-  vim 
+  vim
 }
 
 # -------------------------------------------------------------------------- }}}
