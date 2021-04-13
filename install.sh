@@ -12,6 +12,9 @@ setTheStage() {
 
 main() {
   setTheStage
+
+  loadYayExtras
+
   createSymLinks
 
   cloneMySshRepo
@@ -22,7 +25,6 @@ main() {
   cloneMyRepos ${repos[@]}
   cloneTmuxPlugins
 
-  loadYayExtras
 
   loadTmuxPlugins
   loadVimPlugins
@@ -163,6 +165,7 @@ loadYayExtras() {
       neovim \
       npm \
       okular \
+      pandoc \
       rbenv \
       ripgrep \
       ruby-build \
