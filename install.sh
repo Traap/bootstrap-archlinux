@@ -8,13 +8,36 @@ setTheStage() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ main
+
+main() {
+  setTheStage
+  createSymLinks
+
+  cloneMySshRepo
+  setSshPermissions
+
+  cloneBashGitPrompt
+  cloneBase16Colors
+  cloneMyRepos ${repos[@]}
+  cloneTmuxPlugins
+
+  loadYayExtras
+
+  loadTmuxPlugins
+  loadVimPlugins
+
+  source ~/.bashrc
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ cloneMySshRepo
 
 cloneMySshRepo() {
   echo "" && echo "Cloning my ssh repo."
   src=https://github.com/Traap/ssh.git
   dst=~/git/ssh
-  git clone --depth 1 $src $dst
+  git clone  $src $dst
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -52,7 +75,7 @@ cloneMyRepos() {
   do
     src=https://github.com/Traap/$r.git
     dst=~/git/$r
-    git clone --depth 1 $src $dst
+    git clone  $src $dst
     echo ""
   done
 }
@@ -65,7 +88,7 @@ cloneBashGitPrompt() {
   rm -rf ~/.bash-git-prompt
   src=https://github.com/magicmonty/bash-git-prompt
   dst=~/.bash-git-prompt
-  git clone --depth 1 $src $dst
+  git clone  $src $dst
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -75,7 +98,7 @@ cloneBase16Colors () {
   echo "" && echo "Cloning Base16 colors."
   src=https://github.com/chriskempson/base16-shell
   dst=~/git/color/base16-shell
-  git clone --depth 1 $src $dst
+  git clone  $src $dst
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -85,7 +108,7 @@ cloneTmuxPlugins () {
   echo "" && echo "Cloning TMUX plugins."
   src=https://github.com/tmux-plugins/tpm.git
   dst=~/git/tmux/plugins/tpm
-  git clone --depth 1 $src $dst
+  git clone  $src $dst
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -131,6 +154,28 @@ setSshPermissions() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ loadYayExtras
+
+loadYayExtras() {
+  echo "" && echo "Loading yay extras."
+
+  yay -S --noconfirm \
+      neovim \
+      npm \
+      okular \
+      rbenv \
+      ripgrep \
+      ruby-build \
+      texlive-bin \
+      texlive-core \
+      texlive-latexextra \
+      texlive-music \
+      texlive-pictures \
+      texlive-publishers \
+      texlive-science
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ loadTmuxPlugins 
 
 loadTmuxPlugins() {
@@ -143,28 +188,7 @@ loadTmuxPlugins() {
 
 loadVimPlugins() {
   echo "" && echo "Loading vim / neovim plugins."
-  nvim 
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ main
-
-main() {
-  setTheStage
-  createSymLinks
-
-  cloneMySshRepo
-  setSshPermissions
-
-  cloneBashGitPrompt
-  cloneBase16Colors
-  cloneMyRepos ${repos[@]}
-  cloneTmuxPlugins
-
-  loadTmuxPlugins
-  loadVimPlugins
-
-  source ~/.bashrc
+  vim 
 }
 
 # -------------------------------------------------------------------------- }}}
