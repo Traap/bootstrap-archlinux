@@ -1,0 +1,20 @@
+#!/bin/bash
+# {{{ Define products to install. 
+#
+# Notes:
+#   1) 0 == false && 1 == true ... Duh!
+#   2) Options are listed alphabetically only because I scan them faster.
+#
+# {{{ Products to install. 
+
+base16ColorsFlag=0
+gitBashPromptFlag=0
+myReposFlag=0
+mySshRepoFlag=0
+neovimExtrasFlag=0
+symlinksFlag=0
+tmuxPluginsFlag=0
+vimPluginsFlag=0
+yayExtrasFlag=0
+
+# -------------------------------------------------------------------------- }}}
