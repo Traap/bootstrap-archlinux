@@ -1,13 +1,4 @@
 #!/bin/bash
-# {{{ setTheStage
-
-setTheStage() {
-  echo "" && echo "Setting the stage!"
-  cd
-  sudo rm -rf ~/git
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ main
 
 main() {
@@ -33,6 +24,17 @@ main() {
   loadVimPlugins
 
   source ~/.bashrc
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ setTheStage
+
+setTheStage() {
+  echo "" && echo "Setting the stage!"
+  cd
+  sudo rm -rf ~/git
+  sudo rm -rf ~/.config
+  sudo rm -rf ~/.local/share/nvim
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -75,7 +77,7 @@ repos=( \
   TraapReset \
   vim \
   wiki \
-)
+)nvi
 
 cloneMyRepos() {
   if [[ myReposFlag ]]; then
@@ -217,7 +219,6 @@ loadYayExtras() {
   echo "" && echo "Loading yay extras."
 
   yay -S --noconfirm \
-      neovim \
       npm \
       okular \
       pandoc \
@@ -239,7 +240,7 @@ loadYayExtras() {
 
 loadNeovimExtras() {
   if [[ neovimExtrasFlag ]]; then
-    echo "" && echo "Loading noovim extras."
+    echo "" && echo "Loading neovim extras."
     sudo \
       pacman -S --noconfirm \
         base-devel \
