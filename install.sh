@@ -19,6 +19,9 @@ main() {
   cloneMyRepos ${repos[@]}
   cloneTmuxPlugins
 
+  buildKJV
+  buildNeovim
+  
   loadNeovimExtras
   loadTmuxPlugins
   loadVimPlugins
@@ -208,6 +211,49 @@ setSshPermissions() {
     echo "" && echo "Setting ssh permissions."
     chmod 600 ~/git/ssh/*
     chmod 644 ~/git/ssh/*.pub
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Build KJV
+
+buildKJV() {
+  if [[ kjvFlag ]]; then
+    echo "" && echo "Building Authorized KJV."
+    src=https://github.com/Traap/kjv.git
+    dst=~/git/kjv
+    git clone  $src $dst
+    cd $dst
+    git checkout kjv-01
+    make
+    sudo mv kjv /usr/local/bin/.
+    echo ""
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Build Neovim 
+
+buildNeovim() {
+  if [[ neovimFlag ]]; then
+    echo "" && echo "Building neovim."
+    src=https://github.com/neovim/neovim
+    dst=~/git/neovim
+
+    if [[ -d ${dst} ]]; then
+      echo "Update neovim sources."
+      cd ${dst} 
+      git pull
+    else
+      echo "Clone neovim sources."
+      git clone  $src $dst
+    fi
+
+    echo "Build neovim."
+    cd ${dst}
+    sudo make install
+
+    echo ""
   fi
 }
 

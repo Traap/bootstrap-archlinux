@@ -9,8 +9,10 @@
 
 base16ColorsFlag=1
 gitBashPromptFlag=1
+kjvFlag=1
 myReposFlag=1
 mySshRepoFlag=1
+neovimFlag=1
 neovimExtrasFlag=1
 symlinksFlag=1
 tmuxPluginsFlag=1
