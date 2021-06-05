@@ -262,24 +262,29 @@ buildNeovim() {
 
 loadYayExtras() {
   if [[ yayExtrasFlag ]]; then
-  echo "" && echo "Loading yay extras."
+    echo "" && echo "Loading yay extras."
 
-  yay -S --noconfirm \
-      bat \
-      exa \
-      npm \
-      okular \
-      pandoc \
-      rbenv \
-      ripgrep \
-      ruby-build \
-      texlive-bin \
-      texlive-core \
-      texlive-latexextra \
-      texlive-music \
-      texlive-pictures \
-      texlive-publishers \
-      texlive-science
+    yay -S --noconfirm \
+        bat \
+        exa \
+        npm \
+        okular \
+        pandoc \
+        python \
+        proppler \
+        rbenv \
+        ripgrep \
+        ruby-build \
+        texlive-bin \
+        texlive-core \
+        texlive-latexextra \
+        texlive-music \
+        texlive-pictures \
+        texlive-publishers \
+        texlive-science
+
+    pip install ueberzug
+  
   fi
 }
 
