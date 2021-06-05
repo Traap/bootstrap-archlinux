@@ -219,6 +219,8 @@ loadYayExtras() {
   echo "" && echo "Loading yay extras."
 
   yay -S --noconfirm \
+      bat \
+      exa \
       npm \
       okular \
       pandoc \
