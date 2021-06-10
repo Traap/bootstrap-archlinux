@@ -7,6 +7,7 @@ main() {
   setTheStage
 
   loadYayExtras
+  updateMirrorList
 
   deleteSymLinks
   createSymLinks
@@ -21,7 +22,7 @@ main() {
 
   buildKJV
   buildNeovim
-  
+
   loadNeovimExtras
   loadTmuxPlugins
   loadVimPlugins
@@ -232,7 +233,7 @@ buildKJV() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Build Neovim 
+# {{{ Build Neovim
 
 buildNeovim() {
   if [[ neovimFlag ]]; then
@@ -242,7 +243,7 @@ buildNeovim() {
 
     if [[ -d ${dst} ]]; then
       echo "Update neovim sources."
-      cd ${dst} 
+      cd ${dst}
       git pull
     else
       echo "Clone neovim sources."
@@ -267,12 +268,15 @@ loadYayExtras() {
     yay -S --noconfirm \
         bat \
         exa \
+        graphaviz \
+        jre-openjdk-headless \
         npm \
         okular \
         pandoc \
         python \
         proppler \
         rbenv \
+        reflector \
         ripgrep \
         ruby-build \
         texlive-bin \
@@ -284,7 +288,20 @@ loadYayExtras() {
         texlive-science
 
     pip install ueberzug
-  
+
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ updateMirrorList
+
+updateMirrorList () {
+  if [[ mirroirFlag ]]; then
+    echo "" && echo "Updating mirror list."
+
+    sudo reflector -c "United States" \
+              -f 12 -l 10 -n 12 \
+              --save /etc/pacman.d/mirrorlist
   fi
 }
 
