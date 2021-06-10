@@ -287,7 +287,10 @@ loadYayExtras() {
         texlive-publishers \
         texlive-science
 
-    pip install ueberzug
+    pip install \
+      ueberzug \
+      pynvim \
+      neovim-remote
 
   fi
 }
