@@ -274,7 +274,7 @@ loadYayExtras() {
         okular \
         pandoc \
         python \
-        proppler \
+        poppler \
         rbenv \
         reflector \
         ripgrep \
