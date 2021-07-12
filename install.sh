@@ -45,7 +45,7 @@ setTheStage() {
 # {{{ cloneMySshRepo
 
 cloneMySshRepo() {
-  if [[ mySshRepoFlag ]]; then
+  if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Cloning my ssh repo."
     src=https://github.com/Traap/ssh.git
     dst=~/git/ssh
@@ -57,7 +57,7 @@ cloneMySshRepo() {
 # {{{ setSshPermissions
 
 setSshPermissions() {
-  if [[ mySshRepoFlag ]]; then
+  if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Setting ssh permissions."
     chmod 600 ~/git/ssh/*
     chmod 644 ~/git/ssh/*.pub
@@ -101,7 +101,7 @@ cloneMyRepos() {
 # {{{ cloneBashGitPrompt
 
 cloneBashGitPrompt() {
-  if [[ gitBashPromptFlag ]]; then
+  if [[ $gitBashPromptFlag ]]; then
     echo "" && echo "Cloning bash-git-prompt."
     rm -rf ~/.bash-git-prompt
     src=https://github.com/magicmonty/bash-git-prompt
@@ -114,7 +114,7 @@ cloneBashGitPrompt() {
 # {{{ cloneBase16Colors
 
 cloneBase16Colors () {
-  if [[ base16ColorsFlag ]]; then
+  if [[ $base16ColorsFlag ]]; then
     echo "" && echo "Cloning Base16 colors."
     src=https://github.com/chriskempson/base16-shell
     dst=~/git/color/base16-shell
@@ -126,7 +126,7 @@ cloneBase16Colors () {
 # {{{ cloneTmuxPlugins
 
 cloneTmuxPlugins () {
-  if [[ tmuxPluginsFlag ]]; then
+  if [[ $tmuxPluginsFlag ]]; then
     echo "" && echo "Cloning TMUX plugins."
     src=https://github.com/tmux-plugins/tpm.git
     dst=~/git/tmux/plugins/tpm
@@ -138,7 +138,7 @@ cloneTmuxPlugins () {
 # {{{ deleteSymLinks
 
 deleteSymLinks() {
-  if [[ symlinksFlag ]]; then
+  if [[ $symlinksFlag ]]; then
     echo "" && echo "Deleting symbolic links."
     rm -fv ~/.bash_logout
     rm -fv ~/.bashrc
@@ -173,7 +173,7 @@ deleteSymLinks() {
 # {{{ createSymLinks
 
 createSymLinks() {
-  if [[ symlinksFlag ]]; then
+  if [[ $symlinksFlag ]]; then
     echo "" && echo "Creating symbolic links."
     ln -fsv ~/git/dotfiles/bash_logout      ~/.bash_logout
     ln -fsv ~/git/dotfiles/bashrc           ~/.bashrc
@@ -208,7 +208,7 @@ createSymLinks() {
 # {{{ setSshPermissions
 
 setSshPermissions() {
-  if [[ mySshRepoFlag ]]; then
+  if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Setting ssh permissions."
     chmod 600 ~/git/ssh/*
     chmod 644 ~/git/ssh/*.pub
@@ -219,7 +219,7 @@ setSshPermissions() {
 # {{{ Build KJV
 
 buildKJV() {
-  if [[ kjvFlag ]]; then
+  if [[ $kjvFlag ]]; then
     echo "" && echo "Building Authorized KJV."
     src=https://github.com/Traap/kjv.git
     dst=~/git/kjv
@@ -236,7 +236,7 @@ buildKJV() {
 # {{{ Build Neovim
 
 buildNeovim() {
-  if [[ neovimFlag ]]; then
+  if [[ $neovimFlag ]]; then
     echo "" && echo "Building neovim."
     src=https://github.com/neovim/neovim
     dst=~/git/neovim
@@ -262,7 +262,7 @@ buildNeovim() {
 # {{{ loadYayExtras
 
 loadYayExtras() {
-  if [[ yayExtrasFlag ]]; then
+  if [[ $yayExtrasFlag ]]; then
     echo "" && echo "Loading yay extras."
 
     yay -S --noconfirm \
@@ -299,7 +299,7 @@ loadYayExtras() {
 # {{{ updateMirrorList
 
 updateMirrorList () {
-  if [[ mirroirFlag ]]; then
+  if [[ $mirroirFlag ]]; then
     echo "" && echo "Updating mirror list."
 
     sudo reflector -c "United States" \
@@ -312,7 +312,7 @@ updateMirrorList () {
 # {{{ loadNeovimExtras
 
 loadNeovimExtras() {
-  if [[ neovimExtrasFlag ]]; then
+  if [[ $neovimExtrasFlag ]]; then
     echo "" && echo "Loading neovim extras."
     sudo \
       pacman -S --noconfirm \
@@ -328,7 +328,7 @@ loadNeovimExtras() {
 # {{{ loadTmuxPlugins
 
 loadTmuxPlugins() {
-  if [[ tmuxPluginsFlag ]]; then
+  if [[ $tmuxPluginsFlag ]]; then
     echo "" && echo "Loading TMUX plugins."
     ~/.tmux/plugins/tpm/bin/install_plugins
   fi
@@ -338,7 +338,7 @@ loadTmuxPlugins() {
 # {{{ loadVimPlugins
 
 loadVimPlugins() {
-  if [[ vimPluginsFlag ]]; then
+  if [[ $vimPluginsFlag ]]; then
     echo "" && echo "Loading vim / neovim plugins."
     vim
   fi
