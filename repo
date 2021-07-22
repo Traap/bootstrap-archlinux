@@ -1,0 +1,16 @@
+repos=( \
+  TraapReset \
+  amber \
+  autodoc \
+  debian-bootstrap \
+  docbld \
+  dotfiles \
+  emend \
+  emend-computer \
+  kjv \
+  newdoc \
+  resume \
+  tmux \
+  vim \
+  wiki \
+)

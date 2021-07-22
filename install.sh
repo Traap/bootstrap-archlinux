@@ -67,21 +67,7 @@ setSshPermissions() {
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneMyRepos
 
-repos=( \
-  amber \
-  autodoc \
-  debian-bootstrap \
-  docbld \
-  dotfiles \
-  emend \
-  emend-computer \
-  newdoc \
-  resume \
-  tmux \
-  TraapReset \
-  vim \
-  wiki \
-)nvi
+source repos
 
 cloneMyRepos() {
   if [[ myReposFlag ]]; then
@@ -266,26 +252,25 @@ loadYayExtras() {
     echo "" && echo "Loading yay extras."
 
     yay -S --noconfirm \
-        bat \
-        exa \
-        graphaviz \
-        jre-openjdk-headless \
-        npm \
-        okular \
-        pandoc \
-        python \
-        poppler \
-        rbenv \
-        reflector \
-        ripgrep \
-        ruby-build \
-        texlive-bin \
-        texlive-core \
-        texlive-latexextra \
-        texlive-music \
-        texlive-pictures \
-        texlive-publishers \
-        texlive-science
+	bat \
+	exa \
+	graphaviz \
+	jre-openjdk-headless \
+	npm \
+	okular \
+	pandoc \
+	python \
+	poppler \
+	rbenv \
+	reflector \
+	ruby-build \
+	texlive-bin \
+	texlive-core \
+	texlive-latexextra \
+	texlive-music \
+	texlive-pictures \
+	texlive-publishers \
+	texlive-science
 
     pip install \
       ueberzug \
