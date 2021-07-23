@@ -4,11 +4,13 @@
 main() {
   loadConfig
   removePersonalization
-exit
 
   updateOS
   loadOsExtras
   updateMirrorList
+
+  installRuby
+  installRubyGems
 
   deleteSymLinks
   createSymLinks
@@ -25,10 +27,9 @@ exit
   buildNeovim 
 
   loadTmuxPlugins
-  loadVimPlugins 
 
-  installRuby
-  installRubyGems
+  loadVimPlugins 
+  loadNeovimlugins 
   
   source ~/.bashrc
 }
@@ -261,9 +262,7 @@ createSymLinks() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ setSshPermissions
-
-setSshPermissions() {
+# {{{ setSshPermissions setSshPermissions() {
   if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Setting ssh permissions."
     chmod 600 $cloneRoot/ssh/*
@@ -338,11 +337,21 @@ loadTmuxPlugins() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ loadNeovimlugins
+
+loadNeovimPlugins() {
+  if [[ $neovimPluginsFlag ]]; then
+    echo "" && echo "Loading neovim plugins."
+    nvim
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ loadVimPlugins
 
 loadVimPlugins() {
   if [[ $vimPluginsFlag ]]; then
-    echo "" && echo "Loading vim / neovim plugins."
+    echo "" && echo "Loading vim plugins."
     vim
   fi
 }
