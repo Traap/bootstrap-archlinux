@@ -255,7 +255,7 @@ createSymLinks() {
       ln -fsv $cloneRoot/dotfiles/bspwm/bspwmrc-monitor ~/.config/bspwm/bspwmrc
       ln -fsv $cloneRoot/dotfiles/bspwm/sxhkdrc         ~/.config/bspwm/sxhkd/sxhkdrc
       ln -fsv $cloneRoot/dotfiles/termite/config        ~/.config/termite/config
-    fr
+    fi 
   fi
 }
 
