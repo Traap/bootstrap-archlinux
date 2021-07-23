@@ -22,15 +22,15 @@ main() {
   cloneBase16Colors
   cloneMyRepos ${repos[@]}
   cloneTmuxPlugins
-  
+
   buildKJV
-  buildNeovim 
+  buildNeovim
 
   loadTmuxPlugins
 
-  loadNeovimPlugins 
-  loadVimPlugins 
-  
+  loadNeovimPlugins
+  loadVimPlugins
+
   [[ -f $HOME/.bashrc ]] &&   source $HOME/.bashrc
 }
 
@@ -55,7 +55,7 @@ removePersonalization() {
   if [[ $removePersonalizationFlag == 1 ]]; then
 	  echo && echo "Removing personilization!"
 	  cd
-	  sudo rm -rf $cloneRoot 
+	  sudo rm -rf $cloneRoot
 	  sudo rm -rf ~/.config/nvim
 	  sudo rm -rf ~/.local/share/nvim
 	  mkdir -p $cloneRoot
@@ -63,7 +63,7 @@ removePersonalization() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Update OS 
+# {{{ Update OS
 
 updateOS() {
   if [[ $osUpdateFlag == 1 ]]; then
@@ -73,18 +73,11 @@ updateOS() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Personalize OS by loading extra packages. 
+# {{{ Personalize OS by loading extra packages.
 
 loadOsExtras() {
 if [[ $osExtrasFlag == 1 ]]; then
-    echo "" && echo "Loading OS extras." 
-
-    sudo pacman -Syu --noconfirm \ 
-	    base-devel \ 
-	    cmake \ 
-	    ninja \ 
-	    tree-sitter \ 
-	    unzip
+    echo "" && echo "Loading OS extras."
 
     yay -S --noconfirm \
       bat \
@@ -96,9 +89,7 @@ if [[ $osExtrasFlag == 1 ]]; then
       pandoc \ python \
       python-pip \
       poppler \
-      rbenv \
       reflector \
-      ruby-build \
       texlive-bin \
       texlive-core \
       texlive-latexextra \
@@ -260,7 +251,7 @@ createSymLinks() {
       ln -fsv $cloneRoot/dotfiles/bspwm/bspwm-monitor ~/.config/bspwm/bspwm-monitor
       ln -fsv $cloneRoot/dotfiles/bspwm/sxhkdrc       ~/.config/bspwm/sxhkd/sxhkdrc
       ln -fsv $cloneRoot/dotfiles/termite/config      ~/.config/termite/config
-    fi 
+    fi
   fi
 }
 
@@ -298,6 +289,14 @@ buildKJV() {
 
 buildNeovim() {
   if [[ $neovimBuildFlag == 1 ]]; then
+    echo "" && echo "Acquire neovim dependencies."
+    sudo pacman -Syu --noconfirm \
+      base-devel \
+      cmake \
+      ninja \
+      tree-sitter \
+      unzip
+
     echo "" && echo "Building neovim."
     src=https://github.com/neovim/neovim
     dst=$cloneRoot/neovim
@@ -367,8 +366,13 @@ loadVimPlugins() {
 
 installRuby() {
   if [[ $rbenvFlag == 1 ]]; then
+    echo "" && echo "Acquire Ruby dependencies."
+    yay -S --noconfirm \
+      rbenv \
+      ruby-build \
 
-    rbenv init
+    echo "" && echo "Build and install Ruby."
+    eval "$(rbenv init -)"
     rbenv install $rubyVersion
     rbenv global $rubyVersion
 
@@ -393,7 +397,7 @@ installRubyGems() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Echo something with a separator line. 
+# {{{ Echo something with a separator line.
 
 say() {
   echo '**********************'
