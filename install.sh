@@ -28,10 +28,10 @@ main() {
 
   loadTmuxPlugins
 
+  loadNeovimPlugins 
   loadVimPlugins 
-  loadNeovimlugins 
   
-  source ~/.bashrc
+  [[ -f $HOME/.bashrc ]] &&   source $HOME/.bashrc
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -40,6 +40,7 @@ main() {
 loadConfig() {
   if [[ -f config ]]; then
     source config
+    setxkbmap -option caps:swapescape
     [[ $echoConfigFlag == 1 ]] && sayAndDo 'cat config'
   else
     echo "config not found."
@@ -51,12 +52,14 @@ loadConfig() {
 # {{{ removePersonalization
 
 removePersonalization() {
-  echo && echo "Removing personilization!"
-  cd
-  sudo rm -rf $cloneRoot 
-  sudo rm -rf ~/.config/nvim
-  sudo rm -rf ~/.local/share/nvim
-  mkdir -p $cloneRoot
+  if [[ $removePersonalizationFlag == 1 ]]; then
+	  echo && echo "Removing personilization!"
+	  cd
+	  sudo rm -rf $cloneRoot 
+	  sudo rm -rf ~/.config/nvim
+	  sudo rm -rf ~/.local/share/nvim
+	  mkdir -p $cloneRoot
+  fi
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -73,30 +76,30 @@ updateOS() {
 # {{{ Personalize OS by loading extra packages. 
 
 loadOsExtras() {
-  if [[ $osExtrasFlag ]]; then
-    echo "" && echo "Loading OS extras."
+if [[ $osExtrasFlag == 1 ]]; then
+    echo "" && echo "Loading OS extras." 
 
-    pacman -S --noconfirm \
-      base-devel \
-      cmake \
-      ninja \
-      tree-sitter \
-      unzip
+    pacman -Syu --noconfirm \ 
+	    base-devel \ 
+	    cmake \ 
+	    ninja \ 
+	    tree-sitter \ 
+	    unzip
 
-    yay -S --noconfirm \
+    ya -S --noconfirm \
       bat \
       exa \
-      graphaviz \
+      graphviz \
       jre-openjdk-headless \
       npm \
       okular \
-      pandoc \
-      python \
+      pandoc \ python \
+      python-pip \
       poppler \
       rbenv \
       reflector \
       ruby-build \
-      bexlive-bin \
+      texlive-bin \
       texlive-core \
       texlive-latexextra \
       texlive-music \
@@ -116,7 +119,7 @@ loadOsExtras() {
 # {{{ cloneMySshRepo
 
 cloneMySshRepo() {
-  if [[ $mySshRepoFlag ]]; then
+  if [[ $mySshRepoFlag == 1 ]]; then
     echo "" && echo "Cloning my ssh repo."
     src=https://github.com/Traap/ssh.git
     dst=$cloneRoot/ssh
@@ -128,7 +131,7 @@ cloneMySshRepo() {
 # {{{ setSshPermissions
 
 setSshPermissions() {
-  if [[ $mySshRepoFlag ]]; then
+  if [[ $mySshRepoFlag == 1 ]]; then
     echo "" && echo "Setting ssh permissions."
     chmod 600 $cloneRoot/ssh/*
     chmod 644 $cloneRoot/ssh/*.pub
@@ -141,7 +144,7 @@ setSshPermissions() {
 source repos
 
 cloneMyRepos() {
-  if [[ myReposFlag ]]; then
+  if [[ $myReposFlag == 1 ]]; then
     echo "" && echo "Cloning my repositories."
     arr=("$@")
     for r in "${arr[@]}"
@@ -158,7 +161,7 @@ cloneMyRepos() {
 # {{{ cloneBashGitPrompt
 
 cloneBashGitPrompt() {
-  if [[ $gitBashPromptFlag ]]; then
+  if [[ $gitBashPromptFlag == 1 ]]; then
     echo "" && echo "Cloning bash-git-prompt."
     rm -rf ~/.bash-git-prompt
     src=https://github.com/magicmonty/bash-git-prompt
@@ -171,7 +174,7 @@ cloneBashGitPrompt() {
 # {{{ cloneBase16Colors
 
 cloneBase16Colors () {
-  if [[ $base16ColorsFlag ]]; then
+  if [[ $base16ColorsFlag == 1 ]]; then
     echo "" && echo "Cloning Base16 colors."
     src=https://github.com/chriskempson/base16-shell
     dst=$cloneRoot/color/base16-shell
@@ -183,7 +186,7 @@ cloneBase16Colors () {
 # {{{ cloneTmuxPlugins
 
 cloneTmuxPlugins () {
-  if [[ $tmuxPluginsFlag ]]; then
+  if [[ $tmuxPluginsFlag == 1 ]]; then
     echo "" && echo "Cloning TMUX plugins."
     src=https://github.com/tmux-plugins/tpm.git
     dst=$cloneRoot/tmux/plugins/tpm
@@ -195,7 +198,7 @@ cloneTmuxPlugins () {
 # {{{ deleteSymLinks
 
 deleteSymLinks() {
-  if [[ $symlinksFlag ]]; then
+  if [[ $symlinksFlag == 1 ]]; then
     echo "" && echo "Deleting symbolic links."
     rm -fv ~/.bash_logout
     rm -fv ~/.bashrc
@@ -230,7 +233,7 @@ deleteSymLinks() {
 # {{{ createSymLinks
 
 createSymLinks() {
-  if [[ $symlinksFlag ]]; then
+  if [[ $symlinksFlag == 1 ]]; then
     echo "" && echo "Creating symbolic links."
     ln -fsv $cloneRoot/dotfiles/bash_logout      ~/.bash_logout
     ln -fsv $cloneRoot/dotfiles/bashrc           ~/.bashrc
@@ -266,7 +269,7 @@ createSymLinks() {
 
 setSshPermissions() {
 
-  if [[ $mySshRepoFlag ]]; then
+  if [[ $mySshRepoFlag == 1 ]]; then
     echo "" && echo "Setting ssh permissions."
     chmod 600 $cloneRoot/ssh/*
     chmod 644 $cloneRoot/ssh/*.pub
@@ -277,7 +280,7 @@ setSshPermissions() {
 # {{{ Build KJV
 
 buildKJV() {
-  if [[ $kjvFlag ]]; then
+  if [[ $kjvFlag == 1 ]]; then
     echo "" && echo "Building Authorized KJV."
     src=https://github.com/Traap/kjv.git
     dst=$cloneRoot/kjv
@@ -294,7 +297,7 @@ buildKJV() {
 # {{{ Build Neovim
 
 buildNeovim() {
-  if [[ $neovimFlag ]]; then
+  if [[ $neovimBuildFlag == 1 ]]; then
     echo "" && echo "Building neovim."
     src=https://github.com/neovim/neovim
     dst=$cloneRoot/neovim
@@ -310,7 +313,7 @@ buildNeovim() {
 
     echo "Build neovim."
     cd ${dst}
-    sudo make install
+    sudo make CMANE_BUILD=Release install
 
     echo ""
   fi
@@ -320,7 +323,7 @@ buildNeovim() {
 # {{{ updateMirrorList
 
 updateMirrorList () {
-  if [[ $mirroirFlag ]]; then
+  if [[ $mirroirFlag == 1 ]]; then
     echo "" && echo "Updating mirror list."
 
     sudo reflector -c "United States" \
@@ -333,7 +336,7 @@ updateMirrorList () {
 # {{{ loadNeovimlugins
 
 loadNeovimPlugins() {
-  if [[ $neovimPluginsFlag ]]; then
+  if [[ $neovimPluginsFlag == 1 ]]; then
     echo "" && echo "Loading neovim plugins."
     nvim
   fi
@@ -343,7 +346,7 @@ loadNeovimPlugins() {
 # {{{ loadTmuxPlugins
 
 loadTmuxPlugins() {
-  if [[ $tmuxPluginsFlag ]]; then
+  if [[ $tmuxPluginsFlag == 1 ]]; then
     echo "" && echo "Loading TMUX plugins."
     ~/.tmux/plugins/tpm/bin/install_plugins
   fi
@@ -353,7 +356,7 @@ loadTmuxPlugins() {
 # {{{ loadVimPlugins
 
 loadVimPlugins() {
-  if [[ $vimPluginsFlag ]]; then
+  if [[ $vimPluginsFlag == 1 ]]; then
     echo "" && echo "Loading vim plugins."
     vim
   fi
