@@ -8,21 +8,21 @@
 # -------------------------------------------------------------------------- }}}
 # {{{ Products to install. 
 
-base16ColorsFlag=0
-echoConfigFlag=0
-gitBashPromptFlag=0
-kjvFlag=0
+base16ColorsFlag=1
+echoConfigFlag=1
+gitBashPromptFlag=1
+kjvFlag=1
 myReposFlag=1
 mySshRepoFlag=1
-neovimBuildFlag=0
+neovimBuildFlag=1
 neovimPluginsFlag=1
-osExtrasFlag=0
-osUpdateFlag=0
-rbenvFlag=0
-removePersonalizationFlag=0
+osExtrasFlag=1
+osUpdateFlag=1
+rbenvFlag=1
+removePersonalizationFlag=1
 symlinksFlag=1
-tmuxPluginsFlag=0
-vimPluginsFlag=0
+tmuxPluginsFlag=1
+vimPluginsFlag=1
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Other variables used during product installationl
