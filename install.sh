@@ -2,11 +2,11 @@
 # {{{ main
 
 main() {
-  source config
+  loadConfig
+  removePersonalization
 
-  setTheStage
-
-  loadYayExtras
+  osUpdateFlag
+  loadOsExtras
   updateMirrorList
 
   deleteSymLinks
@@ -22,22 +22,92 @@ main() {
   
   buildKJV
   buildNeovim 
-  loadNeovimExtras 
+
   loadTmuxPlugins
   loadVimPlugins 
+
+  installRuby
+  installRubyGems
   
   source ~/.bashrc
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ setTheStage
+# {{{ Load configuraiton options.
 
-setTheStage() {
-  echo "" && echo "Setting the stage!"
+loadConfig() {
+  if [[ -f config ]]; then
+    [[ $echoConfigFlag == 1 ]] && sudo cat config
+    source config
+  else
+    echo "config not found."
+    exit
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ removePersonalization
+
+removePersonalization() {
+  echo "" && echo "Removing personilization!"
   cd
-  sudo rm -rf ~/git
+  sudo rm -rf $cloneRoot 
   sudo rm -rf ~/.config/nvim
   sudo rm -rf ~/.local/share/nvim
+  mkdir -p $cloneRoot
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Update OS 
+
+updateOS() {
+  if [[ $osUpdateFlag == 1 ]]; then
+    sudo pacman --noconfirm -Syyu
+    sudo yay --noconfirm -Syu
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Personalize OS by loading extra packages. 
+
+loadOsExtras() {
+  if [[ $yayExtrasFlag ]]; then
+    echo "" && echo "Loading OS extras."
+
+    pacman -S --noconfirm \
+      base-devel \
+      cmake \
+      ninja \
+      tree-sitter \
+      unzip
+
+    yay -S --noconfirm \
+      bat \
+      exa \
+      graphaviz \
+      jre-openjdk-headless \
+      npm \
+      okular \
+      pandoc \
+      python \
+      poppler \
+      rbenv \
+      reflector \
+      ruby-build \
+      bexlive-bin \
+      texlive-core \
+      texlive-latexextra \
+      texlive-music \
+      texlive-pictures \
+      texlive-publishers \
+      texlive-science
+
+    pip install \
+      ueberzug \
+      pynvim \
+      neovim-remote
+
+  fi
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -47,7 +117,7 @@ cloneMySshRepo() {
   if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Cloning my ssh repo."
     src=https://github.com/Traap/ssh.git
-    dst=~/git/ssh
+    dst=$cloneRoot/ssh
     git clone  $src $dst
   fi
 }
@@ -58,8 +128,8 @@ cloneMySshRepo() {
 setSshPermissions() {
   if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Setting ssh permissions."
-    chmod 600 ~/git/ssh/*
-    chmod 644 ~/git/ssh/*.pub
+    chmod 600 $cloneRoot/ssh/*
+    chmod 644 $cloneRoot/ssh/*.pub
   fi
 }
 
@@ -75,7 +145,7 @@ cloneMyRepos() {
     for r in "${arr[@]}"
     do
       src=https://github.com/Traap/$r.git
-      dst=~/git/$r
+      dst=$cloneRoot/$r
       git clone  $src $dst
       echo ""
     done
@@ -102,7 +172,7 @@ cloneBase16Colors () {
   if [[ $base16ColorsFlag ]]; then
     echo "" && echo "Cloning Base16 colors."
     src=https://github.com/chriskempson/base16-shell
-    dst=~/git/color/base16-shell
+    dst=$cloneRoot/color/base16-shell
     git clone  $src $dst
   fi
 }
@@ -114,7 +184,7 @@ cloneTmuxPlugins () {
   if [[ $tmuxPluginsFlag ]]; then
     echo "" && echo "Cloning TMUX plugins."
     src=https://github.com/tmux-plugins/tpm.git
-    dst=~/git/tmux/plugins/tpm
+    dst=$cloneRoot/tmux/plugins/tpm
     git clone  $src $dst
   fi
 }
@@ -159,31 +229,31 @@ deleteSymLinks() {
 createSymLinks() {
   if [[ $symlinksFlag ]]; then
     echo "" && echo "Creating symbolic links."
-    ln -fsv ~/git/dotfiles/bash_logout      ~/.bash_logout
-    ln -fsv ~/git/dotfiles/bashrc           ~/.bashrc
-    ln -fsv ~/git/dotfiles/bashrc-personal  ~/.bashrc-personal
-    ln -fsv ~/git/dotfiles/dircolors        ~/.dircolors
-    ln -fsv ~/git/dotfiles/gitconfig        ~/.gitconfig
-    ln -fsv ~/git/dotfiles/gitignore_global ~/.gitignore_global
-    ln -fsv ~/git/dotfiles/inputrc          ~/.inputrc
-    ln -fsv ~/git/dotfiles/latexmkrc        ~/.latexmkrc
-    ln -fsv ~/git/dotfiles/minttyrc         ~/.minttyrc
-    ln -fsv ~/git/ssh                       ~/.ssh
-    ln -fsv ~/git/ssh/config.vim            ~/.config.vim
-    ln -fsv ~/git/tmux                      ~/.tmux
-    ln -fsv ~/git/tmux/tmux.conf            ~/.tmux.conf
-    ln -fsv ~/git/vim                       ~/.vim
-    ln -fsv ~/git/vim/coc-package.json      ~/.config/coc/extensions/package.json
-    ln -fsv ~/git/vim/vimrc                 ~/.config/nvim/init.vim
-    ln -fsv ~/git/vim/vimrc                 ~/.vimrc
-    ln -fsv ~/git/vim/vimrc_background      ~/.vimrc_background
+    ln -fsv $cloneRoot/dotfiles/bash_logout      ~/.bash_logout
+    ln -fsv $cloneRoot/dotfiles/bashrc           ~/.bashrc
+    ln -fsv $cloneRoot/dotfiles/bashrc-personal  ~/.bashrc-personal
+    ln -fsv $cloneRoot/dotfiles/dircolors        ~/.dircolors
+    ln -fsv $cloneRoot/dotfiles/gitconfig        ~/.gitconfig
+    ln -fsv $cloneRoot/dotfiles/gitignore_global ~/.gitignore_global
+    ln -fsv $cloneRoot/dotfiles/inputrc          ~/.inputrc
+    ln -fsv $cloneRoot/dotfiles/latexmkrc        ~/.latexmkrc
+    ln -fsv $cloneRoot/dotfiles/minttyrc         ~/.minttyrc
+    ln -fsv $cloneRoot/ssh                       ~/.ssh
+    ln -fsv $cloneRoot/ssh/config.vim            ~/.config.vim
+    ln -fsv $cloneRoot/tmux                      ~/.tmux
+    ln -fsv $cloneRoot/tmux/tmux.conf            ~/.tmux.conf
+    ln -fsv $cloneRoot/vim                       ~/.vim
+    ln -fsv $cloneRoot/vim/coc-package.json      ~/.config/coc/extensions/package.json
+    ln -fsv $cloneRoot/vim/vimrc                 ~/.config/nvim/init.vim
+    ln -fsv $cloneRoot/vim/vimrc                 ~/.vimrc
+    ln -fsv $cloneRoot/vim/vimrc_background      ~/.vimrc_background
 
     if [[ $(uname -r) =~ 'arch' ]]; then
-      ln -fsv ~/git/dotfiles/bspwm/autostart.sh ~/.config/bspwm/autostart.sh
-      ln -fsv ~/git/dotfiles/bspwm/bspwmrc      ~/.config/bspwm/bspwmrc
-      ln -fsv ~/git/dotfiles/bspwm/sxhkdrc      ~/.config/bspwm/sxhkd/sxhkdrc
-      ln -fsv ~/git/dotfiles/termite/config     ~/.config/termite/config
-    fi
+      ln -fsv $cloneRoot/dotfiles/bspwm/autostart.sh ~/.config/bspwm/autostart.sh
+      ln -fsv $cloneRoot/dotfiles/bspwm/bspwmrc      ~/.config/bspwm/bspwmrc
+      ln -fsv $cloneRoot/dotfiles/bspwm/sxhkdrc      ~/.config/bspwm/sxhkd/sxhkdrc
+      ln -fsv $cloneRoot/dotfiles/termite/config     ~/.config/termite/config
+    fr
   fi
 }
 
@@ -193,8 +263,8 @@ createSymLinks() {
 setSshPermissions() {
   if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Setting ssh permissions."
-    chmod 600 ~/git/ssh/*
-    chmod 644 ~/git/ssh/*.pub
+    chmod 600 $cloneRoot/ssh/*
+    chmod 644 $cloneRoot/ssh/*.pub
   fi
 }
 
@@ -205,7 +275,7 @@ buildKJV() {
   if [[ $kjvFlag ]]; then
     echo "" && echo "Building Authorized KJV."
     src=https://github.com/Traap/kjv.git
-    dst=~/git/kjv
+    dst=$cloneRoot/kjv
     git clone  $src $dst
     cd $dst
     git checkout kjv-01
@@ -222,7 +292,7 @@ buildNeovim() {
   if [[ $neovimFlag ]]; then
     echo "" && echo "Building neovim."
     src=https://github.com/neovim/neovim
-    dst=~/git/neovim
+    dst=$cloneRoot/neovim
 
     if [[ -d ${dst} ]]; then
       echo "Update neovim sources."
@@ -242,42 +312,6 @@ buildNeovim() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ loadYayExtras
-
-loadYayExtras() {
-  if [[ $yayExtrasFlag ]]; then
-    echo "" && echo "Loading yay extras."
-
-    yay -S --noconfirm \
-	bat \
-	exa \
-	graphaviz \
-	jre-openjdk-headless \
-	npm \
-	okular \
-	pandoc \
-	python \
-	poppler \
-	rbenv \
-	reflector \
-	ruby-build \
-	texlive-bin \
-	texlive-core \
-	texlive-latexextra \
-	texlive-music \
-	texlive-pictures \
-	texlive-publishers \
-	texlive-science
-
-    pip install \
-      ueberzug \
-      pynvim \
-      neovim-remote
-
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ updateMirrorList
 
 updateMirrorList () {
@@ -287,22 +321,6 @@ updateMirrorList () {
     sudo reflector -c "United States" \
               -f 12 -l 10 -n 12 \
               --save /etc/pacman.d/mirrorlist
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ loadNeovimExtras
-
-loadNeovimExtras() {
-  if [[ $neovimExtrasFlag ]]; then
-    echo "" && echo "Loading neovim extras."
-    sudo \
-      pacman -S --noconfirm \
-        base-devel \
-        cmake \
-        ninja \
-        tree-sitter \
-        unzip
   fi
 }
 
@@ -323,6 +341,36 @@ loadVimPlugins() {
   if [[ $vimPluginsFlag ]]; then
     echo "" && echo "Loading vim / neovim plugins."
     vim
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Ruby
+
+installRuby() {
+  if [[ $rbenvFlag == 1 ]]; then
+
+    rbenv init
+    rbenv install $rubyVersion
+    rbenv global $rubyVersion
+
+    echo "Ruby installed."
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Ruby Gems
+
+installRubyGems() {
+  if [[ $rbenvFlag == 1 ]]; then
+
+    # Install Ruby Gems
+    gem install \
+        bundler \
+        rake \
+        rspec
+
+    echo "Ruby Gems installed."
   fi
 }
 
