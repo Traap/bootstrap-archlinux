@@ -79,14 +79,14 @@ loadOsExtras() {
 if [[ $osExtrasFlag == 1 ]]; then
     echo "" && echo "Loading OS extras." 
 
-    pacman -Syu --noconfirm \ 
+    sudo pacman -Syu --noconfirm \ 
 	    base-devel \ 
 	    cmake \ 
 	    ninja \ 
 	    tree-sitter \ 
 	    unzip
 
-    ya -S --noconfirm \
+    yay -S --noconfirm \
       bat \
       exa \
       graphviz \
