@@ -222,7 +222,7 @@ deleteSymLinks() {
     if [[ $(uname -r) =~ 'arch' ]]; then
       rm -fv ~/.config/bspwm/autostart.sh
       rm -fv ~/.config/bspwm/bspwmrc
-      rm -fv ~/.config/bspwm/bspwmrc-monitor
+      rm -fv ~/.config/bspwm/bspwm-monitor
       rm -fv ~/.config/bspwm/sxhkd/sxhkdrc
       rm -fv ~/.config/termite/config
     fi
@@ -255,11 +255,11 @@ createSymLinks() {
     ln -fsv $cloneRoot/vim/vimrc_background      ~/.vimrc_background
 
     if [[ $(uname -r) =~ 'arch' ]]; then
-      ln -fsv $cloneRoot/dotfiles/bspwm/autostart.sh    ~/.config/bspwm/autostart.sh
-      ln -fsv $cloneRoot/dotfiles/bspwm/bspwmrc         ~/.config/bspwm/bspwmrc
-      ln -fsv $cloneRoot/dotfiles/bspwm/bspwmrc-monitor ~/.config/bspwm/bspwmrc
-      ln -fsv $cloneRoot/dotfiles/bspwm/sxhkdrc         ~/.config/bspwm/sxhkd/sxhkdrc
-      ln -fsv $cloneRoot/dotfiles/termite/config        ~/.config/termite/config
+      ln -fsv $cloneRoot/dotfiles/bspwm/autostart.sh  ~/.config/bspwm/autostart.sh
+      ln -fsv $cloneRoot/dotfiles/bspwm/bspwmrc       ~/.config/bspwm/bspwmrc
+      ln -fsv $cloneRoot/dotfiles/bspwm/bspwm-monitor ~/.config/bspwm/bspwm-monitor
+      ln -fsv $cloneRoot/dotfiles/bspwm/sxhkdrc       ~/.config/bspwm/sxhkd/sxhkdrc
+      ln -fsv $cloneRoot/dotfiles/termite/config      ~/.config/termite/config
     fi 
   fi
 }
