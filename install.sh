@@ -262,7 +262,10 @@ createSymLinks() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ setSshPermissions setSshPermissions() {
+# {{{ setSshPermissions
+
+setSshPermissions() {
+
   if [[ $mySshRepoFlag ]]; then
     echo "" && echo "Setting ssh permissions."
     chmod 600 $cloneRoot/ssh/*
@@ -327,22 +330,22 @@ updateMirrorList () {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ loadTmuxPlugins
-
-loadTmuxPlugins() {
-  if [[ $tmuxPluginsFlag ]]; then
-    echo "" && echo "Loading TMUX plugins."
-    ~/.tmux/plugins/tpm/bin/install_plugins
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ loadNeovimlugins
 
 loadNeovimPlugins() {
   if [[ $neovimPluginsFlag ]]; then
     echo "" && echo "Loading neovim plugins."
     nvim
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ loadTmuxPlugins
+
+loadTmuxPlugins() {
+  if [[ $tmuxPluginsFlag ]]; then
+    echo "" && echo "Loading TMUX plugins."
+    ~/.tmux/plugins/tpm/bin/install_plugins
   fi
 }
 
