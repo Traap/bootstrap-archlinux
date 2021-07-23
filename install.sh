@@ -134,7 +134,6 @@ deleteSymLinks() {
     rm -fv ~/.inputrc
     rm -fv ~/.latexmkrc
     rm -fv ~/.minttyrc
-    rm -fv ~/.mozilla
     rm -fv ~/.ssh
     rm -fv ~/.config.vim
     rm -fv ~/.tmux
@@ -169,7 +168,6 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/inputrc          ~/.inputrc
     ln -fsv ~/git/dotfiles/latexmkrc        ~/.latexmkrc
     ln -fsv ~/git/dotfiles/minttyrc         ~/.minttyrc
-    ln -fsv ~/git/dotfiles/mozilla          ~/.mozilla
     ln -fsv ~/git/ssh                       ~/.ssh
     ln -fsv ~/git/ssh/config.vim            ~/.config.vim
     ln -fsv ~/git/tmux                      ~/.tmux
