@@ -4,8 +4,9 @@
 main() {
   loadConfig
   removePersonalization
+exit
 
-  osUpdateFlag
+  updateOS
   loadOsExtras
   updateMirrorList
 
@@ -37,8 +38,8 @@ main() {
 
 loadConfig() {
   if [[ -f config ]]; then
-    [[ $echoConfigFlag == 1 ]] && sudo cat config
     source config
+    [[ $echoConfigFlag == 1 ]] && sayAndDo 'cat config'
   else
     echo "config not found."
     exit
@@ -49,7 +50,7 @@ loadConfig() {
 # {{{ removePersonalization
 
 removePersonalization() {
-  echo "" && echo "Removing personilization!"
+  echo && echo "Removing personilization!"
   cd
   sudo rm -rf $cloneRoot 
   sudo rm -rf ~/.config/nvim
@@ -71,7 +72,7 @@ updateOS() {
 # {{{ Personalize OS by loading extra packages. 
 
 loadOsExtras() {
-  if [[ $yayExtrasFlag ]]; then
+  if [[ $osExtrasFlag ]]; then
     echo "" && echo "Loading OS extras."
 
     pacman -S --noconfirm \
@@ -374,6 +375,23 @@ installRubyGems() {
 
     echo "Ruby Gems installed."
   fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Echo something with a separator line. 
+
+say() {
+  echo '**********************'
+  echo "$@"
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Echo a command and then execute it.
+
+sayAndDo() {
+  say "$@"
+  $@
+  echo
 }
 
 # -------------------------------------------------------------------------- }}}
