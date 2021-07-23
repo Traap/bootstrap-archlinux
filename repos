@@ -9,6 +9,7 @@ repos=( \
   emend-computer \
   kjv \
   newdoc \
+  nvim \
   resume \
   tmux \
   vim \

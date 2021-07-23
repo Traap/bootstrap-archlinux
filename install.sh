@@ -19,14 +19,13 @@ main() {
   cloneBase16Colors
   cloneMyRepos ${repos[@]}
   cloneTmuxPlugins
-
+  
   buildKJV
-  buildNeovim
-
-  loadNeovimExtras
+  buildNeovim 
+  loadNeovimExtras 
   loadTmuxPlugins
-  loadVimPlugins
-
+  loadVimPlugins 
+  
   source ~/.bashrc
 }
 
@@ -37,7 +36,7 @@ setTheStage() {
   echo "" && echo "Setting the stage!"
   cd
   sudo rm -rf ~/git
-  sudo rm -rf ~/.config
+  sudo rm -rf ~/.config/nvim
   sudo rm -rf ~/.local/share/nvim
 }
 
