@@ -92,7 +92,8 @@ if [[ $osExtrasFlag == 1 ]]; then
       jre-openjdk-headless \
       npm \
       okular \
-      pandoc \ python \
+      pandoc \
+      python \
       python-pip \
       poppler \
       reflector \
@@ -232,6 +233,7 @@ deleteSymLinks() {
 createSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     echo "" && echo "Creating symbolic links."
+    make -p ~/.config
     ln -fsv $cloneRoot/dotfiles/bash_logout      ~/.bash_logout
     ln -fsv $cloneRoot/dotfiles/bashrc           ~/.bashrc
     ln -fsv $cloneRoot/dotfiles/bashrc-personal  ~/.bashrc-personal
