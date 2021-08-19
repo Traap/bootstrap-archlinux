@@ -79,6 +79,12 @@ loadOsExtras() {
 if [[ $osExtrasFlag == 1 ]]; then
     echo "" && echo "Loading OS extras."
 
+    sudo pacman -S --needed git base-devel
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    cd ..
+
     yay -S --noconfirm \
       bat \
       exa \
