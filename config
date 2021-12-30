@@ -6,7 +6,7 @@
 #   2) Options are listed alphabetically only because I scan them faster.
 #
 # -------------------------------------------------------------------------- }}}
-# {{{ Products to install. 
+# {{{ Products to install.
 
 base16ColorsFlag=1
 echoConfigFlag=1
@@ -20,16 +20,66 @@ osExtrasFlag=1
 osUpdateFlag=1
 rbenvFlag=1
 removePersonalizationFlag=1
+resolvFlag=0
 symlinksFlag=1
 tmuxPluginsFlag=1
 vimPluginsFlag=1
+wslFlag=0
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Other variables used during product installationl
+# {{{ Other variables used during product installation.
 
 cloneRoot=$HOME/git
 gitEmail="gary.a.howard@mac.com"
 gitName="Traap"
-rubyVersion='3.0.2'
+rubyVersion='3.0.3'
+
+# -------------------------------------------------------------------------- }}}
+# {{{ pacman packages
+
+pacman-packages =  \
+  base-devel \
+  cmake \
+  curl \
+  git \
+  ninja \
+  python \
+  tree-sitter \
+  unzip
+
+# -------------------------------------------------------------------------- }}}
+# {{{ yay packages
+
+yay-packages = \
+  bat \
+  exa \
+  fd \
+  graphviz \
+  jre-openjdk-headless \
+  npm \
+  okular \
+  pandoc \
+  python \
+  python-pip \
+  poppler \
+  reflector \
+  ripgrep \
+  tldr \
+  texlive-bin \
+  texlive-core \
+  texlive-latexextra \
+  texlive-music \
+  texlive-pictures \
+  texlive-publishers \
+  texlive-science \
+  yarn
+
+# -------------------------------------------------------------------------- }}}
+# {{{ pip packages
+
+pip-packages \
+  ueberzug \
+  pynvim \
+  neovim-remote
 
 # -------------------------------------------------------------------------- }}}

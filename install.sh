@@ -44,7 +44,7 @@ loadConfig() {
     setxkbmap -option caps:swapescape
     [[ $echoConfigFlag == 1 ]] && sayAndDo 'cat config'
   else
-    echo "config not found."
+    say 'config not found.'
     exit
   fi
 }
@@ -54,12 +54,10 @@ loadConfig() {
 
 removePersonalization() {
   if [[ $removePersonalizationFlag == 1 ]]; then
-	  echo && echo "Removing personilization!"
-	  cd
-	  sudo rm -rf $cloneRoot
-	  sudo rm -rf ~/.config/nvim
-	  sudo rm -rf ~/.local/share/nvim
-	  mkdir -p $cloneRoot
+    say 'Removing personilization!'
+    cd
+    sudo rm -rf $cloneRoot
+    mkdir -p $cloneRoot
   fi
 }
 
@@ -67,61 +65,25 @@ removePersonalization() {
 # {{{ Update OS
 
 updateOS() {
-  if [[ $osUpdateFlag == 1 ]]; then
-    sudo yay --noconfirm -Syu
-  fi
+  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo yay --noconfirm -Syu'
 }
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Personalize OS by loading extra packages.
 
 loadOsExtras() {
-if [[ $osExtrasFlag == 1 ]]; then
-    echo "" && echo "Loading OS extras."
+  if [[ $osExtrasFlag == 1 ]]; then
+    say 'Loading OS extras.'
 
-    sudo pacman -S --noconfirm \
-      base-devel \
-      cmake \
-      curl \
-      git \
-      ninja \
-      python \
-      tree-sitter \
-      unzip
+    sudo pacman -S --noconfirm ${pacman-packages}
 
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
     cd ..
 
-    yay -S --noconfirm \
-      bat \
-      exa \
-      fd \
-      graphviz \
-      jre-openjdk-headless \
-      npm \
-      okular \
-      pandoc \
-      python \
-      python-pip \
-      poppler \
-      reflector \
-      ripgrep \
-      texlive-bin \
-      texlive-core \
-      texlive-latexextra \
-      texlive-music \
-      texlive-pictures \
-      texlive-publishers \
-      texlive-science \
-      yarn
-
-    pip install \
-      ueberzug \
-      pynvim \
-      neovim-remote
-
+    yay -S --noconfirm ${yay-packages}
+    pip install ${pip-packages}
   fi
 }
 
@@ -130,7 +92,7 @@ if [[ $osExtrasFlag == 1 ]]; then
 
 cloneMySshRepo() {
   if [[ $mySshRepoFlag == 1 ]]; then
-    echo "" && echo "Cloning my ssh repo."
+    say 'Cloning my ssh repo.'
     src=https://github.com/Traap/ssh.git
     dst=$cloneRoot/ssh
     git clone  $src $dst
@@ -142,7 +104,7 @@ cloneMySshRepo() {
 
 setSshPermissions() {
   if [[ $mySshRepoFlag == 1 ]]; then
-    echo "" && echo "Setting ssh permissions."
+    say 'Setting ssh permissions.'
     chmod 600 $cloneRoot/ssh/*
     chmod 644 $cloneRoot/ssh/*.pub
   fi
@@ -155,7 +117,7 @@ source repos
 
 cloneMyRepos() {
   if [[ $myReposFlag == 1 ]]; then
-    echo "" && echo "Cloning my repositories."
+    say 'Cloning my repositories.'
     arr=("$@")
     for r in "${arr[@]}"
     do
@@ -172,7 +134,7 @@ cloneMyRepos() {
 
 cloneBashGitPrompt() {
   if [[ $gitBashPromptFlag == 1 ]]; then
-    echo "" && echo "Cloning bash-git-prompt."
+    say 'Cloning bash-git-prompt.'
     rm -rf ~/.bash-git-prompt
     src=https://github.com/magicmonty/bash-git-prompt
     dst=~/.bash-git-prompt
@@ -185,7 +147,7 @@ cloneBashGitPrompt() {
 
 cloneBase16Colors () {
   if [[ $base16ColorsFlag == 1 ]]; then
-    echo "" && echo "Cloning Base16 colors."
+    say 'Cloning Base16 colors.'
     src=https://github.com/chriskempson/base16-shell
     dst=$cloneRoot/color/base16-shell
     git clone  $src $dst
@@ -197,7 +159,7 @@ cloneBase16Colors () {
 
 cloneTmuxPlugins () {
   if [[ $tmuxPluginsFlag == 1 ]]; then
-    echo "" && echo "Cloning TMUX plugins."
+    say 'Cloning TMUX plugins.'
     src=https://github.com/tmux-plugins/tpm.git
     dst=$cloneRoot/tmux/plugins/tpm
     git clone  $src $dst
@@ -209,7 +171,7 @@ cloneTmuxPlugins () {
 
 deleteSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
-    echo "" && echo "Deleting symbolic links."
+    say 'Deleting symbolic links.'
     rm -fv ~/.bash_logout
     rm -fv ~/.bashrc
     rm -fv ~/.bashrc-personal
@@ -244,7 +206,7 @@ deleteSymLinks() {
 
 createSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
-    echo "" && echo "Creating symbolic links."
+    say 'Creating symbolic links.'
     make -p ~/.config
     ln -fsv $cloneRoot/dotfiles/bash_logout      ~/.bash_logout
     ln -fsv $cloneRoot/dotfiles/bashrc           ~/.bashrc
@@ -281,7 +243,7 @@ createSymLinks() {
 setSshPermissions() {
 
   if [[ $mySshRepoFlag == 1 ]]; then
-    echo "" && echo "Setting ssh permissions."
+    say 'Setting ssh permissions.'
     chmod 600 $cloneRoot/ssh/*
     chmod 644 $cloneRoot/ssh/*.pub
   fi
@@ -292,7 +254,7 @@ setSshPermissions() {
 
 buildKJV() {
   if [[ $kjvFlag == 1 ]]; then
-    echo "" && echo "Building Authorized KJV."
+    say 'Building Authorized KJV.'
     src=https://github.com/Traap/kjv.git
     dst=$cloneRoot/kjv
     git clone  $src $dst
@@ -309,7 +271,12 @@ buildKJV() {
 
 buildNeovim() {
   if [[ $neovimBuildFlag == 1 ]]; then
-    echo "" && echo "Acquire neovim dependencies."
+    say 'Remove neovim configuration.'
+    sudo rm -rf ~/.cache/nvim
+    sudo rm -rf ~/.config/nvim
+    sudo rm -rf ~/.local/share/nvim
+
+    say 'Acquire neovim dependencies.'
     sudo pacman -Syu --noconfirm \
       base-devel \
       cmake \
@@ -317,24 +284,24 @@ buildNeovim() {
       tree-sitter \
       unzip
 
-    echo "" && echo "Building neovim."
+    say 'Building neovim.'
     src=https://github.com/neovim/neovim
     dst=$cloneRoot/neovim
 
     if [[ -d ${dst} ]]; then
-      echo "Update neovim sources."
+      echo 'Update neovim sources.'
       cd ${dst}
       git pull
     else
-      echo "Clone neovim sources."
+      echo 'Clone neovim sources.'
       git clone  $src $dst
     fi
 
-    echo "Build neovim."
+    echo 'Build neovim.'
     cd ${dst}
     sudo make CMANE_BUILD=Release install
 
-    echo ""
+    echo
   fi
 }
 
@@ -343,7 +310,7 @@ buildNeovim() {
 
 addProgramsNeoVimInterfacesWith() {
   if [[ $neovimBuildFlag == 1 ]]; then
-    echo "" && echo "Add programs Neovim interfaces with."
+    say 'Add programs Neovim interfaces with.'
     gem install neovim
     sudo npm install -g neovim
     yarn global add neovim
@@ -357,11 +324,11 @@ addProgramsNeoVimInterfacesWith() {
 
 updateMirrorList () {
   if [[ $mirroirFlag == 1 ]]; then
-    echo "" && echo "Updating mirror list."
+    say 'Updating mirror list.'
 
     sudo reflector -c "United States" \
-              -f 12 -l 10 -n 12 \
-              --save /etc/pacman.d/mirrorlist
+      -f 12 -l 10 -n 12 \
+      --save /etc/pacman.d/mirrorlist
   fi
 }
 
@@ -370,7 +337,7 @@ updateMirrorList () {
 
 loadNeovimPlugins() {
   if [[ $neovimPluginsFlag == 1 ]]; then
-    echo "" && echo "Loading neovim plugins."
+    say 'Loading neovim plugins.'
     nvim
   fi
 }
@@ -380,7 +347,7 @@ loadNeovimPlugins() {
 
 loadTmuxPlugins() {
   if [[ $tmuxPluginsFlag == 1 ]]; then
-    echo "" && echo "Loading TMUX plugins."
+    say 'Loading TMUX plugins.'
     ~/.tmux/plugins/tpm/bin/install_plugins
   fi
 }
@@ -390,7 +357,7 @@ loadTmuxPlugins() {
 
 loadVimPlugins() {
   if [[ $vimPluginsFlag == 1 ]]; then
-    echo "" && echo "Loading vim plugins."
+    say 'Loading vim plugins.'
     vim
   fi
 }
@@ -400,17 +367,17 @@ loadVimPlugins() {
 
 installRuby() {
   if [[ $rbenvFlag == 1 ]]; then
-    echo "" && echo "Acquire Ruby dependencies."
+    say 'Acquire Ruby dependencies.'
     yay -S --noconfirm \
       rbenv \
       ruby-build \
 
-    echo "" && echo "Build and install Ruby."
+    say 'Build and install Ruby.'
     eval "$(rbenv init -)"
     rbenv install $rubyVersion
     rbenv global $rubyVersion
 
-    echo "Ruby installed."
+    echo 'Ruby installed.'
   fi
 }
 
@@ -422,11 +389,11 @@ installRubyGems() {
 
     # Install Ruby Gems
     gem install \
-        bundler \
-        rake \
-        rspec
+      bundler \
+      rake \
+      rspec
 
-    echo "Ruby Gems installed."
+    echo 'Ruby Gems installed.'
   fi
 }
 
@@ -434,15 +401,16 @@ installRubyGems() {
 # {{{ Echo something with a separator line.
 
 say() {
+  echo
   echo '**********************'
-  echo "$@"
+  echo '$@'
 }
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Echo a command and then execute it.
 
 sayAndDo() {
-  say "$@"
+  say '$@'
   $@
   echo
 }
@@ -450,6 +418,6 @@ sayAndDo() {
 # -------------------------------------------------------------------------- }}}
 # {{{ The stage is set ... start the show!!!
 
-main "$@"
+main '$@'
 
 # -------------------------------------------------------------------------- }}}
