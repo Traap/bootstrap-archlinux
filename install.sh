@@ -25,6 +25,7 @@ main() {
 
   buildKJV
   buildNeovim
+  addProgramsNeoVimInterfacesWith
 
   loadTmuxPlugins
 
@@ -67,7 +68,6 @@ removePersonalization() {
 
 updateOS() {
   if [[ $osUpdateFlag == 1 ]]; then
-    sudo pacman --noconfirm -Syyu
     sudo yay --noconfirm -Syu
   fi
 }
@@ -79,7 +79,16 @@ loadOsExtras() {
 if [[ $osExtrasFlag == 1 ]]; then
     echo "" && echo "Loading OS extras."
 
-    sudo pacman -S --needed git base-devel
+    sudo pacman -S --noconfirm \
+      base-devel \
+      cmake \
+      curl \
+      git \
+      ninja \
+      python \
+      tree-sitter \
+      unzip
+
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
@@ -88,6 +97,7 @@ if [[ $osExtrasFlag == 1 ]]; then
     yay -S --noconfirm \
       bat \
       exa \
+      fd \
       graphviz \
       jre-openjdk-headless \
       npm \
@@ -97,13 +107,15 @@ if [[ $osExtrasFlag == 1 ]]; then
       python-pip \
       poppler \
       reflector \
+      ripgrep \
       texlive-bin \
       texlive-core \
       texlive-latexextra \
       texlive-music \
       texlive-pictures \
       texlive-publishers \
-      texlive-science
+      texlive-science \
+      yarn
 
     pip install \
       ueberzug \
@@ -323,6 +335,20 @@ buildNeovim() {
     sudo make CMANE_BUILD=Release install
 
     echo ""
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Add programs Neovim interfaces with.
+
+addProgramsNeoVimInterfacesWith() {
+  if [[ $neovimBuildFlag == 1 ]]; then
+    echo "" && echo "Add programs Neovim interfaces with."
+    gem install neovim
+    sudo npm install -g neovim
+    yarn global add neovim
+    yay -S --noconfirm python-pop
+    python3 -m -pip install --user --upgrade pynvim
   fi
 }
 
