@@ -314,8 +314,8 @@ addProgramsNeoVimInterfacesWith() {
     gem install neovim
     sudo npm install -g neovim
     yarn global add neovim
-    yay -S --noconfirm python-pop
-    python3 -m -pip install --user --upgrade pynvim
+    yay -S --noconfirm python-pip
+    python3 -m pip install --user --upgrade pynvim
   fi
 }
 
