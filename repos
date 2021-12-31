@@ -1,3 +1,5 @@
+# {{{ GitHub.com repositories to clone.
+
 repos=( \
   TraapReset \
   amber \
@@ -10,8 +12,8 @@ repos=( \
   kjv \
   newdoc \
   nvim \
-  resume \
   tmux \
   vim \
-  wiki \
 )
+
+# -------------------------------------------------------------------------- }}}

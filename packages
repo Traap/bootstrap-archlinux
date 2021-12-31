@@ -1,0 +1,54 @@
+# {{{ pacman packages
+
+pacman-packages=( \
+  base-devel \
+  cmake \
+  curl \
+  git \
+  ninja \
+  nodejs \
+  npm \
+  python \
+  tmux \
+  tree-sitter \
+  unzip \
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ yay packages
+
+yay-packages=( \
+  bat \
+  exa \
+  fd \
+  graphviz \
+  jre-openjdk-headless \
+  npm \
+  okular \
+  pandoc \
+  poppler \
+  python \
+  python-pip \
+  reflector \
+  ripgrep \
+  texlive-bin \
+  texlive-core \
+  texlive-latexextra \
+  texlive-music \
+  texlive-pictures \
+  texlive-publishers \
+  texlive-science \
+  tldr \
+  yarn \
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ pip packages
+
+pip-packages=( \
+  ueberzug \
+  pynvim \
+  neovim-remote \
+)
+
+# -------------------------------------------------------------------------- }}}

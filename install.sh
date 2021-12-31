@@ -2,7 +2,7 @@
 # {{{ main
 
 main() {
-  loadConfig
+  sourceFiles
   removePersonalization
 
   updateOS
@@ -32,19 +32,30 @@ main() {
   loadNeovimPlugins
   loadVimPlugins
 
-  [[ -f $HOME/.bashrc ]] &&   source $HOME/.bashrc
+  swapCapsLockAndEscKey() {
+
+  [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Load configuraiton options.
+# {{{ Source all configuration files
 
-loadConfig() {
-  if [[ -f config ]]; then
-    source config
-    setxkbmap -option caps:swapescape
-    [[ $echoConfigFlag == 1 ]] && sayAndDo 'cat config'
+sourceFiles() {
+  files=(config repos packages)
+  for f in ${files[@]} do
+    source $f
+  done
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Source one configuraiton file.
+
+sourceFile() {
+  if [[ -f $1 ]]; then
+    source $1
+    [[ $echoConfigFlag == 1 ]] && sayAndDo cat $1
   else
-    say 'config not found.'
+    say $1 not found.
     exit
   fi
 }
@@ -112,8 +123,6 @@ setSshPermissions() {
 
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneMyRepos
-
-source repos
 
 cloneMyRepos() {
   if [[ $myReposFlag == 1 ]]; then
@@ -398,19 +407,26 @@ installRubyGems() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ Swap CAPSLOCK with ESC key.
+
+swapCapsLockAndEscKey() {
+  setxkbmap -option caps:swapescape
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ Echo something with a separator line.
 
 say() {
   echo
   echo '**********************'
-  echo '$@'
+  echo $@
 }
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Echo a command and then execute it.
 
 sayAndDo() {
-  say '$@'
+  say $@
   $@
   echo
 }
