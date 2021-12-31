@@ -8,6 +8,7 @@ pacman-packages=( \
   ninja \
   nodejs \
   npm \
+  openssh \
   python \
   tmux \
   tree-sitter \
@@ -29,6 +30,7 @@ yay-packages=( \
   poppler \
   python \
   python-pip \
+  ranager \
   reflector \
   ripgrep \
   texlive-bin \
