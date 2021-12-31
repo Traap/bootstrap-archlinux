@@ -44,7 +44,8 @@ sourceFiles() {
   missingFile=0
 
   files=(config repos packages)
-  for f in ${files[@]} do
+  for f in ${files[@]}
+  do
     source $f
   done
 
@@ -91,15 +92,15 @@ loadOsExtras() {
   if [[ $osExtrasFlag == 1 ]]; then
     say 'Loading OS extras.'
 
-    sudo pacman -S --noconfirm ${pacman-packages}
+    sudo pacman -S --noconfirm ${pacman_packages}
 
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
     cd ..
 
-    yay -S --noconfirm ${yay-packages}
-    pip install ${pip-packages}
+    yay -S --noconfirm ${yay_packages}
+    pip install ${pip_packages}
   fi
 }
 

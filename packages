@@ -1,6 +1,6 @@
 # {{{ pacman packages
 
-pacman-packages=( \
+pacman_packages=( \
   base-devel \
   cmake \
   curl \
@@ -13,12 +13,13 @@ pacman-packages=( \
   tmux \
   tree-sitter \
   unzip \
+  which \
 )
 
 # -------------------------------------------------------------------------- }}}
 # {{{ yay packages
 
-yay-packages=( \
+yay_packages=( \
   bat \
   exa \
   fd \
@@ -47,7 +48,7 @@ yay-packages=( \
 # -------------------------------------------------------------------------- }}}
 # {{{ pip packages
 
-pip-packages=( \
+pip_packages=( \
   ueberzug \
   pynvim \
   neovim-remote \
