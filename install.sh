@@ -32,7 +32,7 @@ main() {
   loadNeovimPlugins
   loadVimPlugins
 
-  swapCapsLockAndEscKey() {
+  swapCapsLockAndEscKey
 
   [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
 }
