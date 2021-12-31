@@ -222,7 +222,7 @@ deleteSymLinks() {
 createSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     say 'Creating symbolic links.'
-    make -p ~/.config
+    mkdir -p ~/.config
     ln -fsv $cloneRoot/dotfiles/bash_logout      ~/.bash_logout
     ln -fsv $cloneRoot/dotfiles/bashrc           ~/.bashrc
     ln -fsv $cloneRoot/dotfiles/bashrc-personal  ~/.bashrc-personal
