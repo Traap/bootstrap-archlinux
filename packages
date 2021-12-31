@@ -6,8 +6,6 @@ pacman_packages=( \
   curl \
   git \
   ninja \
-  nodejs \
-  npm \
   openssh \
   python \
   tmux \
