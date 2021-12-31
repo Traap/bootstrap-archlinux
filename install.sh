@@ -41,10 +41,15 @@ main() {
 # {{{ Source all configuration files
 
 sourceFiles() {
+  missingFile=0
+
   files=(config repos packages)
   for f in ${files[@]} do
     source $f
   done
+
+  [[ $missingFile == 1 ]] && say 'Missing file(s) program exiting.' && exit
+
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -56,7 +61,7 @@ sourceFile() {
     [[ $echoConfigFlag == 1 ]] && sayAndDo cat $1
   else
     say $1 not found.
-    exit
+    missingFile=1
   fi
 }
 
