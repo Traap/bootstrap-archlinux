@@ -6,7 +6,12 @@ main() {
   removePersonalization
 
   updateOS
-  loadOsExtras
+  installPacmanPackages
+  installYayPackages
+
+  installPipPackages
+  installTexPackages
+
   updateMirrorList
 
   installRuby
@@ -20,7 +25,7 @@ main() {
 
   cloneBashGitPrompt
   cloneBase16Colors
-  cloneMyRepos ${repos[@]}
+  cloneMyRepos
   cloneTmuxPlugins
 
   buildKJV
@@ -82,25 +87,52 @@ removePersonalization() {
 # {{{ Update OS
 
 updateOS() {
-  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo yay --noconfirm -Syu'
+  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo yay -Syu --noconfirm'
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Personalize OS by loading extra packages.
+# {{{ Install pacman packages.
 
-loadOsExtras() {
-  if [[ $osExtrasFlag == 1 ]]; then
-    say 'Loading OS extras.'
+installPacmanPackages() {
+  if [[ $pacmanPackagesFlag == 1 ]]; then
+    say 'Installing pacman packages.'
+    sudo pacman -Syu --noconfirm ${pacman_packages[@]}
+  fi
+}
 
-    sudo pacman -S --noconfirm ${pacman_packages}
+# -------------------------------------------------------------------------- }}}
+# {{{ Install yay packages.
+
+installYayPackages() {
+  if [[ $yayPackagesFlag == 1 ]]; then
+    say 'Installing yay packages.'
 
     git clone https://aur.archlinux.org/yay.git
     cd yay
     makepkg -si
     cd ..
 
-    yay -S --noconfirm ${yay_packages}
-    pip install ${pip_packages}
+    yay -Syu --noconfirm ${yay_packages[@]}
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install pip packages.
+
+installPipPackages() {
+  if [[ $pipPackagesFlag == 1 ]]; then
+    say 'Installing pip packages.'
+    pip install ${pip_packages[@]}
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install tex packages.
+
+installTexPackages() {
+  if [[ $texPackagesFlag == 1 ]]; then
+    say 'Installing tex packages.'
+    yay -S --noconfirm ${tex_packages[@]}
   fi
 }
 
@@ -124,6 +156,7 @@ setSshPermissions() {
     say 'Setting ssh permissions.'
     chmod 600 $cloneRoot/ssh/*
     chmod 644 $cloneRoot/ssh/*.pub
+    chmod 700 $cloneRoot/ssh/.git
   fi
 }
 
@@ -133,8 +166,7 @@ setSshPermissions() {
 cloneMyRepos() {
   if [[ $myReposFlag == 1 ]]; then
     say 'Cloning my repositories.'
-    arr=("$@")
-    for r in "${arr[@]}"
+    for r in "${repos[@]}"
     do
       src=https://github.com/Traap/$r.git
       dst=$cloneRoot/$r
@@ -186,7 +218,7 @@ cloneTmuxPlugins () {
 
 deleteSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
-    say 'Deleting symbolic links.'
+    echo "Deleting symbolic links."
     rm -fv ~/.bash_logout
     rm -fv ~/.bashrc
     rm -fv ~/.bashrc-personal
@@ -195,23 +227,23 @@ deleteSymLinks() {
     rm -fv ~/.gitignore_global
     rm -fv ~/.inputrc
     rm -fv ~/.latexmkrc
-    rm -fv ~/.minttyrc
     rm -fv ~/.ssh
     rm -fv ~/.config.vim
     rm -fv ~/.tmux
     rm -fv ~/.tmux.conf
     rm -fv ~/.vim
-    rm -fv ~/.config/coc/extensions/package.json
-    rm -fv ~/.config/nvim/init.vim
+    rm -fv ~/.config/nvim
     rm -fv ~/.vimrc
     rm -fv ~/.vimrc_background
 
-    if [[ $(uname -r) =~ 'arch' ]]; then
+    if [[ $(uname -r) =~ 'arch' || $(uname -r) =~ 'WSL2' ]]; then
       rm -fv ~/.config/bspwm/autostart.sh
-      rm -fv ~/.config/bspwm/bspwmrc
       rm -fv ~/.config/bspwm/bspwm-monitor
+      rm -fv ~/.config/bspwm/bspwmrc
       rm -fv ~/.config/bspwm/sxhkd/sxhkdrc
-      rm -fv ~/.config/termite/config
+      rm -fv ~/.config/ranger/rc.conf
+      rm -fv ~/.mailcap
+      rm -fv ~/.muttrc
     fi
   fi
 }
@@ -222,34 +254,36 @@ deleteSymLinks() {
 createSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     say 'Creating symbolic links.'
-    mkdir -p ~/.config
-    ln -fsv $cloneRoot/dotfiles/bash_logout      ~/.bash_logout
-    ln -fsv $cloneRoot/dotfiles/bashrc           ~/.bashrc
-    ln -fsv $cloneRoot/dotfiles/bashrc-personal  ~/.bashrc-personal
-    ln -fsv $cloneRoot/dotfiles/dircolors        ~/.dircolors
-    ln -fsv $cloneRoot/dotfiles/gitconfig        ~/.gitconfig
-    ln -fsv $cloneRoot/dotfiles/gitignore_global ~/.gitignore_global
-    ln -fsv $cloneRoot/dotfiles/inputrc          ~/.inputrc
-    ln -fsv $cloneRoot/dotfiles/latexmkrc        ~/.latexmkrc
-    ln -fsv $cloneRoot/dotfiles/minttyrc         ~/.minttyrc
-    ln -fsv $cloneRoot/ssh                       ~/.ssh
-    ln -fsv $cloneRoot/ssh/config.vim            ~/.config.vim
-    ln -fsv $cloneRoot/tmux                      ~/.tmux
-    ln -fsv $cloneRoot/tmux/tmux.conf            ~/.tmux.conf
-    ln -fsv $cloneRoot/vim                       ~/.vim
-    ln -fsv $cloneRoot/vim/coc-package.json      ~/.config/coc/extensions/package.json
-    ln -fsv $cloneRoot/vim/vimrc                 ~/.config/nvim/init.vim
-    ln -fsv $cloneRoot/vim/vimrc                 ~/.vimrc
-    ln -fsv $cloneRoot/vim/vimrc_background      ~/.vimrc_background
+    mkdir -p ~/.config/bspwm
+    mkdir -p ~/.config/sxhkd
+    mkdir -p ~/.config/ranger
+    ln -fsv ~/git/dotfiles/bash_logout      ~/.bash_logout
+    ln -fsv ~/git/dotfiles/bashrc           ~/.bashrc
+    ln -fsv ~/git/dotfiles/bashrc-personal  ~/.bashrc-personal
+    ln -fsv ~/git/dotfiles/dircolors        ~/.dircolors
+    ln -fsv ~/git/dotfiles/gitconfig        ~/.gitconfig
+    ln -fsv ~/git/dotfiles/gitignore_global ~/.gitignore_global
+    ln -fsv ~/git/dotfiles/inputrc          ~/.inputrc
+    ln -fsv ~/git/dotfiles/latexmkrc        ~/.latexmkrc
+    ln -fsv ~/git/nvim                      ~/.config/nvim
+    ln -fsv ~/git/ssh                       ~/.ssh
+    ln -fsv ~/git/ssh/config.vim            ~/.config.vim
+    ln -fsv ~/git/tmux                      ~/.tmux
+    ln -fsv ~/git/tmux/tmux.conf            ~/.tmux.conf
+    ln -fsv ~/git/vim                       ~/.vim
+    ln -fsv ~/git/vim/vimrc                 ~/.vimrc
+    ln -fsv ~/git/vim/vimrc_background      ~/.vimrc_background
 
-    if [[ $(uname -r) =~ 'arch' ]]; then
-      ln -fsv $cloneRoot/dotfiles/bspwm/autostart.sh  ~/.config/bspwm/autostart.sh
-      ln -fsv $cloneRoot/dotfiles/bspwm/bspwmrc       ~/.config/bspwm/bspwmrc
-      ln -fsv $cloneRoot/dotfiles/bspwm/bspwm-monitor ~/.config/bspwm/bspwm-monitor
-      ln -fsv $cloneRoot/dotfiles/bspwm/sxhkdrc       ~/.config/bspwm/sxhkd/sxhkdrc
-      ln -fsv $cloneRoot/dotfiles/termite/config      ~/.config/termite/config
+    if [[ $(uname -r) =~ 'arch' || $(uname -r) =~ 'WSL2' ]]; then
+      ln -fsv ~/git/dotfiles/bspwm/autostart.sh  ~/.config/bspwm/autostart.sh
+      ln -fsv ~/git/dotfiles/bspwm/bspwm-monitor ~/.config/bspwm/bspwm-monitor
+      ln -fsv ~/git/dotfiles/bspwm/bspwmrc       ~/.config/bspwm/bspwmrc
+      ln -fsv ~/git/dotfiles/bspwm/sxhkdrc       ~/.config/bspwm/sxhkd/sxhkdrc
+      ln -fsv ~/git/dotfiles/ranger/rc.conf      ~/.config/ranger/rc.conf
+      ln -fsv ~/git/mutt/mailcap                 ~/.mailcap
+      ln -fsv ~/git/mutt/muttrc                  ~/.muttrc
     fi
-  fi
+ fi
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -261,6 +295,7 @@ setSshPermissions() {
     say 'Setting ssh permissions.'
     chmod 600 $cloneRoot/ssh/*
     chmod 644 $cloneRoot/ssh/*.pub
+    chmod 700 $cloneRoot/ssh/.gi9t
   fi
 }
 

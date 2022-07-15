@@ -1,56 +1,60 @@
 # {{{ pacman packages
 
-pacman_packages=( \
-  base-devel \
-  cmake \
-  curl \
-  git \
-  ninja \
-  openssh \
-  python \
-  tmux \
-  tree-sitter \
-  unzip \
-  which \
-)
-
-# -------------------------------------------------------------------------- }}}
-# {{{ yay packages
-
-yay_packages=( \
-  bat \
-  exa \
-  fd \
-  graphviz \
-  jre-openjdk-headless \
-  nodejs \
-  npm \
-  okular \
-  pandoc \
-  poppler \
-  python \
-  python-pip \
-  ranager \
-  reflector \
-  ripgrep \
-  texlive-bin \
-  texlive-core \
-  texlive-latexextra \
-  texlive-music \
-  texlive-pictures \
-  texlive-publishers \
-  texlive-science \
-  tldr \
-  yarn \
+pacman_packages=(
+  "base-devel"
+  "cmake"
+  "curl"
+  "git"
+  "ninja"
+  "openssh"
+  "python"
+  "tmux"
+  "tree-sitter"
+  "unzip"
+  "which"
 )
 
 # -------------------------------------------------------------------------- }}}
 # {{{ pip packages
 
-pip_packages=( \
-  ueberzug \
-  pynvim \
-  neovim-remote \
+pip_packages=(
+  "ueberzug"
+  "pynvim"
+  "neovim-remote"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ tex pacakges
+
+tex_packages=(
+  "texlive-bin"
+  "texlive-core"
+  "texlive-latexextra"
+  "texlive-music"
+  "texlive-pictures"
+  "texlive-publishers"
+  "texlive-science"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ yay packages
+
+yay_packages=(
+  "bat"
+  "exa"
+  "fd"
+  "graphviz"
+  "jre-openjdk-headless"
+  "nodejs"
+  "npm"
+  "okular"
+  "pandoc"
+  "poppler"
+  "python"
+  "python-pip"
+  "ranager"
+  "reflector"
+  "ripgrep"
 )
 
 # -------------------------------------------------------------------------- }}}
