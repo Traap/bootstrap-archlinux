@@ -6,6 +6,7 @@ pacman_packages=(
   "curl"
   "git"
   "ninja"
+  "obs-backgroundremoval*.tar.zst"
   "openssh"
   "python"
   "tmux"
