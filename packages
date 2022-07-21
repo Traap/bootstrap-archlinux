@@ -59,8 +59,11 @@ yay_packages=(
   "python-pip"
   "ranager"
   "reflector"
+  "remmina"
   "ripgrep"
   "ripgrep-all"
+  "teams"
+  "thunderbird"
 )
 
 # -------------------------------------------------------------------------- }}}
