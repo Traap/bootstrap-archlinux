@@ -6,7 +6,7 @@ pacman_packages=(
   "curl"
   "git"
   "ninja"
-  "obs-backgroundremoval*.tar.zst"
+  "obs"
   "openssh"
   "python"
   "tmux"
@@ -43,6 +43,7 @@ tex_packages=(
 yay_packages=(
   "bat"
   "bluetooth-autoconnect"
+  "brave-bin"
   "exa"
   "fd"
   "graphviz"
