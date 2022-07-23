@@ -63,7 +63,16 @@ yay_packages=(
   "ripgrep"
   "ripgrep-all"
   "teams"
-  "thunderbird"
+  "rhunderbird"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ xyz packages
+
+# Note implmented yet.
+zyx_packages=(
+  "dbeaver"
+  "thunar-volman"
 )
 
 # -------------------------------------------------------------------------- }}}
