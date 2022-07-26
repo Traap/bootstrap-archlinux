@@ -117,7 +117,7 @@ installYayPackages() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Install pip packages.
+# {{{ Install e:ip packages.
 
 installPipPackages() {
   if [[ $pipPackagesFlag == 1 ]]; then
