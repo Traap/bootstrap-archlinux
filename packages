@@ -43,10 +43,13 @@ tex_packages=(
 yay_packages=(
   "bat"
   "bluetooth-autoconnect"
-  "brave-bin"
+  ":brave-bin"
   "exa"
+  "evolution"
   "fd"
   "graphviz"
+  "hunspell"
+  "hunspell-en_US"
   "jre-openjdk-headless"
   "nodejs"
   "npm"
@@ -63,7 +66,6 @@ yay_packages=(
   "ripgrep"
   "ripgrep-all"
   "teams"
-  "thunderbird"
 )
 
 # -------------------------------------------------------------------------- }}}
