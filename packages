@@ -43,10 +43,11 @@ tex_packages=(
 yay_packages=(
   "bat"
   "bluetooth-autoconnect"
-  ":brave-bin"
-  "exa"
+  "brave-bin"
   "evolution"
+  "exa"
   "fd"
+  "freerdp"
   "graphviz"
   "hunspell"
   "hunspell-en_US"

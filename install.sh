@@ -107,10 +107,10 @@ installYayPackages() {
   if [[ $yayPackagesFlag == 1 ]]; then
     say 'Installing yay packages.'
 
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    makepkg -si
-    cd ..
+    # git clone https://aur.archlinux.org/yay.git
+    # cd yay
+    # makepkg -si
+    # cd ..
 
     yay -Syu --noconfirm ${yay_packages[@]}
   fi
