@@ -41,6 +41,7 @@ tex_packages=(
 # {{{ yay packages
 
 yay_packages=(
+  "bashtop"
   "bat"
   "bluetooth-autoconnect"
   "brave-bin"
