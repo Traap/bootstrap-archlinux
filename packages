@@ -5,6 +5,7 @@ pacman_packages=(
   "cmake"
   "curl"
   "git"
+  "meld"
   "ninja"
   "obs"
   "openssh"
