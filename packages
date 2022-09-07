@@ -45,6 +45,7 @@ yay_packages=(
   "bat"
   "bluetooth-autoconnect"
   "brave-bin"
+  "dunst"
   "evolution"
   "exa"
   "fd"
