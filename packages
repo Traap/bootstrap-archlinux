@@ -71,6 +71,8 @@ yay_packages=(
   "remmina"
   "ripgrep"
   "ripgrep-all"
+  "screenkey"
+  "slop"
   "teams"
 )
 
@@ -82,5 +84,6 @@ zyx_packages=(
   "dbeaver"
   "thunar-volman"
 )
+
 
 # -------------------------------------------------------------------------- }}}
