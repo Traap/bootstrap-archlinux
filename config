@@ -8,26 +8,26 @@
 # -------------------------------------------------------------------------- }}}
 # {{{ Products to install.
 
-base16ColorsFlag=1
-echoConfigFlag=1
-gitBashPromptFlag=1
-kjvFlag=1
+base16ColorsFlag=0
+echoConfigFlag=0
+gitBashPromptFlag=0
+kjvFlag=0
 myReposFlag=0
 mySshRepoFlag=0
-neovimBuildFlag=1
-neovimPluginsFlag=1
+neovimBuildFlag=0
+neovimPluginsFlag=0
 osUpdateFlag=1
-pacmanPackagesFlag=1
-pipPackagesFlag=1
+pacmanPackagesFlag=0
+pipPackagesFlag=0
 rbenvFlag=1
 removePersonalizationFlag=0
 resolvFlag=0
 symlinksFlag=0
 tmuxPluginsFlag=0
-texPackagesFlag=1
+texPackagesFlag=0
 vimPluginsFlag=0
 wslFlag=0
-yayPackagesFlag=1
+yayPackagesFlag=0
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Other variables used during product installation.
@@ -35,6 +35,6 @@ yayPackagesFlag=1
 cloneRoot=$HOME/git
 gitEmail="gary.a.howard@mac.com"
 gitName="Traap"
-rubyVersion='3.0.3'
+rubyVersion='3.1.2'
 
 # -------------------------------------------------------------------------- }}}
