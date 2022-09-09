@@ -441,7 +441,8 @@ installRubyGems() {
     gem install \
       bundler \
       rake \
-      rspec
+      rspec \
+      neovim
 
     echo 'Ruby Gems installed.'
   fi
