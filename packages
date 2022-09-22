@@ -57,6 +57,7 @@ yay_packages=(
   "hunspell"
   "hunspell-en_US"
   "jre-openjdk-headless"
+  "nerd-fonts-hack"
   "nodejs"
   "npm"
   "obs-studio"
