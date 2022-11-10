@@ -1,19 +1,19 @@
-# {{{ GitHub.com repositories to clone.
+# {{{  GitHub repositories to clone.
 
-repos=( \
-  TraapReset \
-  amber \
-  autodoc \
-  debian-bootstrap \
-  docbld \
-  dotfiles \
-  emend \
-  emend-computer \
-  kjv \
-  newdoc \
-  nvim \
-  tmux \
-  vim \
+# These https://github.com/Traap/ public repositories.
+
+repos=(
+  "TraapReset"
+  "amber"
+  "autodoc"
+  "docbld"
+  "dotfiles"
+  "kjv"
+  "lvim"
+  "newdoc"
+  "nvim"
+  "tmux"
+  "vim"
 )
 
 # -------------------------------------------------------------------------- }}}

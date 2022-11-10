@@ -16,6 +16,7 @@ main() {
 
   installRuby
   installRubyGems
+  installRust
 
   deleteSymLinks
   createSymLinks
@@ -31,6 +32,7 @@ main() {
   buildKJV
   buildNeovim
   addProgramsNeoVimInterfacesWith
+  installLunarVim
 
   loadTmuxPlugins
 
@@ -87,7 +89,7 @@ removePersonalization() {
 # {{{ Update OS
 
 updateOS() {
-  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo yay -Syu --noconfirm'
+  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo pacman -Syu --noconfirm'
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -107,10 +109,10 @@ installYayPackages() {
   if [[ $yayPackagesFlag == 1 ]]; then
     say 'Installing yay packages.'
 
-    # git clone https://aur.archlinux.org/yay.git
-    # cd yay
-    # makepkg -si
-    # cd ..
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    cd ..
 
     yay -Syu --noconfirm ${yay_packages[@]}
   fi
@@ -370,6 +372,18 @@ addProgramsNeoVimInterfacesWith() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ Install LunarVim
+
+installLunarVim() {
+  if [[ $lunarVimFlag == 1 ]]; then
+    say 'Install LunarVim.'
+    local release='release-1.2/neovim-0.8'
+    local cmdUrl='https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh'
+    LV_BRANCH=$release bash <(curl -s $cmdUrl)
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ updateMirrorList
 
 updateMirrorList () {
@@ -445,6 +459,18 @@ installRubyGems() {
       neovim
 
     echo 'Ruby Gems installed.'
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Rust
+
+installRust() {
+  if [[ $rustFlag == 1 ]]; then
+
+    # Install Rust
+    curl --proto '=https' --tlsv1.2 -sFf https://sh.rustup.rs | sh
+    echo 'Rust installed.'
   fi
 }
 

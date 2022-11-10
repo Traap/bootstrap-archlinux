@@ -62,7 +62,7 @@ yay_packages=(
   "hunspell"
   "hunspell-en_US"
   "jre-openjdk-headless"
-  "nerd-fonts-hack"
+  "ttf-jetbrains-mono"
   "nodejs"
   "npm"
   "obs-studio"
@@ -72,7 +72,7 @@ yay_packages=(
   "poppler"
   "python"
   "python-pip"
-  "ranager"
+  "ranger"
   "reflector"
   "remmina"
   "ripgrep"
@@ -90,6 +90,5 @@ zyx_packages=(
   "dbeaver"
   "thunar-volman"
 )
-
 
 # -------------------------------------------------------------------------- }}}
