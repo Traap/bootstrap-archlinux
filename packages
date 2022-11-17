@@ -10,6 +10,7 @@ pacman_packages=(
   "ninja"
   "obs"
   "openssh"
+  "openssl"
   "python"
   "screenkey"
   "slop"
@@ -21,6 +22,18 @@ pacman_packages=(
   "xdo"
   "xdotool"
   "xsel"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ ruby-build packages
+
+ruby_build_packages=(
+  "base-devel"
+  "libffi"
+  "libyaml"
+  "openssl"
+  "rust"
+  "zlib"
 )
 
 # -------------------------------------------------------------------------- }}}

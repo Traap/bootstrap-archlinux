@@ -431,6 +431,10 @@ loadVimPlugins() {
 
 installRuby() {
   if [[ $rbenvFlag == 1 ]]; then
+
+    say 'Installing ruby-build dependencies.'
+    sudo pacman -Syu --noconfirm ${ruby_build_packages[@]}
+
     say 'Acquire Ruby dependencies.'
     yay -S --noconfirm \
       rbenv \
