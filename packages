@@ -62,6 +62,7 @@ tex_packages=(
 # {{{ yay packages
 
 yay_packages=(
+  "aspnet-runtime"
   "bashtop"
   "bat"
   "bluetooth-autoconnect"
@@ -69,13 +70,16 @@ yay_packages=(
   "dunst"
   "evolution"
   "exa"
+  "dotnet-runtime"
+  "dotnet-sdk"
   "fd"
   "freerdp"
   "graphviz"
+  "go"
   "hunspell"
   "hunspell-en_US"
   "jre-openjdk-headless"
-  "ttf-jetbrains-mono"
+  "luarocks"
   "nodejs"
   "npm"
   "obs-studio"
@@ -93,6 +97,7 @@ yay_packages=(
   "screenkey"
   "slop"
   "teams"
+  "ttf-jetbrains-mono"
 )
 
 # -------------------------------------------------------------------------- }}}
