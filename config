@@ -37,6 +37,6 @@ yayPackagesFlag=0
 cloneRoot=$HOME/git
 gitEmail="gary.a.howard@mac.com"
 gitName="Traap"
-rubyVersion='3.1.2'
+rubyVersion='3.2.0'
 
 # -------------------------------------------------------------------------- }}}

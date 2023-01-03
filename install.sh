@@ -259,22 +259,24 @@ createSymLinks() {
     mkdir -p ~/.config/bspwm
     mkdir -p ~/.config/sxhkd
     mkdir -p ~/.config/ranger
-    ln -fsv ~/git/dotfiles/bash_logout      ~/.bash_logout
-    ln -fsv ~/git/dotfiles/bashrc           ~/.bashrc
-    ln -fsv ~/git/dotfiles/bashrc-personal  ~/.bashrc-personal
-    ln -fsv ~/git/dotfiles/dircolors        ~/.dircolors
-    ln -fsv ~/git/dotfiles/gitconfig        ~/.gitconfig
-    ln -fsv ~/git/dotfiles/gitignore_global ~/.gitignore_global
-    ln -fsv ~/git/dotfiles/inputrc          ~/.inputrc
-    ln -fsv ~/git/dotfiles/latexmkrc        ~/.latexmkrc
-    ln -fsv ~/git/nvim                      ~/.config/nvim
-    ln -fsv ~/git/ssh                       ~/.ssh
-    ln -fsv ~/git/ssh/config.vim            ~/.config.vim
-    ln -fsv ~/git/tmux                      ~/.tmux
-    ln -fsv ~/git/tmux/tmux.conf            ~/.tmux.conf
-    ln -fsv ~/git/vim                       ~/.vim
-    ln -fsv ~/git/vim/vimrc                 ~/.vimrc
-    ln -fsv ~/git/vim/vimrc_background      ~/.vimrc_background
+    ln -fsv ~/git/dotfiles/bash/bash_logout      ~/.bash_logout
+    ln -fsv ~/git/dotfiles/bash/bashrc           ~/.bashrc
+    ln -fsv ~/git/dotfiles/bash/bashrc-personal  ~/.bashrc-personal
+    ln -fsv ~/git/dotfiles/bash/dircolors        ~/.dircolors
+    ln -fsv ~/git/dotfiles/bash/inputrc          ~/.inputrc
+    ln -fsv ~/git/dotfiles/git/gitconfig         ~/.gitconfig
+    ln -fsv ~/git/dotfiles/git/gitignore_global  ~/.gitignore_global
+    ln -fsv ~/git/dotfiles/latex/latexmkrc       ~/.latexmkrc
+    ln -fsv ~/git/nvim                           ~/.config/nvim
+    ln -fsv ~/git/ssh                            ~/.ssh
+    ln -fsv ~/git/ssh/config.vim                 ~/.config.vim
+    ln -fsv ~/git/tmux                           ~/.tmux
+    ln -fsv ~/git/tmux/tmux.conf                 ~/.tmux.conf
+    ln -fsv ~/git/lvim                           ~/.config/lvim
+    ln -fsv ~/git/nvim                           ~/.config/nvim
+    ln -fsv ~/git/vim                            ~/.vim
+    ln -fsv ~/git/vim/vimrc                      ~/.vimrc
+    ln -fsv ~/git/vim/vimrc_background           ~/.vimrc_background
 
     if [[ $(uname -r) =~ 'arch' || $(uname -r) =~ 'WSL2' ]]; then
       ln -fsv ~/git/dotfiles/bspwm/autostart.sh  ~/.config/bspwm/autostart.sh
@@ -282,8 +284,6 @@ createSymLinks() {
       ln -fsv ~/git/dotfiles/bspwm/bspwmrc       ~/.config/bspwm/bspwmrc
       ln -fsv ~/git/dotfiles/bspwm/sxhkdrc       ~/.config/bspwm/sxhkd/sxhkdrc
       ln -fsv ~/git/dotfiles/ranger/rc.conf      ~/.config/ranger/rc.conf
-      ln -fsv ~/git/mutt/mailcap                 ~/.mailcap
-      ln -fsv ~/git/mutt/muttrc                  ~/.muttrc
     fi
  fi
 }

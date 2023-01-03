@@ -3,7 +3,7 @@
 # These https://github.com/Traap/ public repositories.
 
 repos=(
-  "TraapReset"
+  "bootstrap-archlinux"
   "amber"
   "autodoc"
   "docbld"

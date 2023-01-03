@@ -68,7 +68,6 @@ yay_packages=(
   "bluetooth-autoconnect"
   "brave-bin"
   "dunst"
-  "evolution"
   "exa"
   "dotnet-runtime"
   "dotnet-sdk"
@@ -76,8 +75,7 @@ yay_packages=(
   "freerdp"
   "graphviz"
   "go"
-  "hunspell"
-  "hunspell-en_US"
+  "git-htmldocs"
   "jre-openjdk-headless"
   "luarocks"
   "nodejs"
@@ -97,15 +95,23 @@ yay_packages=(
   "screenkey"
   "slop"
   "teams"
+  "tldr"
   "ttf-jetbrains-mono"
+  "thunderbird"
+  "visual-studio-code-bin"
 )
 
 # -------------------------------------------------------------------------- }}}
 # {{{ xyz packages
 
-# Note implmented yet.
+# Not implmented yet.
 zyx_packages=(
+  "aspnet-runtime"
+  "dotnet-runtime"
+  "dotnet-sdk"
   "dbeaver"
+  "kubectl"
+  "postgresql"
   "thunar-volman"
 )
 
