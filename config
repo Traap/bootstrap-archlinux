@@ -10,26 +10,27 @@
 
 base16ColorsFlag=0
 echoConfigFlag=0
-gitBashPromptFlag=0
+gitBashPromptFlag=1
 kjvFlag=0
 lunarVimFlag=0
-myReposFlag=0
+myReposFlag=1
 mySshRepoFlag=0
-neovimBuildFlag=0
-neovimPluginsFlag=0
+neovimBuildFlag=1
+neovimPluginsFlag=1
+osUpdateKeysFlag=0
 osUpdateFlag=0
-pacmanPackagesFlag=0
-pipPackagesFlag=0
+pacmanPackagesFlag=1
+pipPackagesFlag=1
 rbenvFlag=0
 removePersonalizationFlag=0
-resolvFlag=0
+resolvFlag=1
 rustFlag=0
 symlinksFlag=0
 tmuxPluginsFlag=0
 texPackagesFlag=0
-vimPluginsFlag=0
-wslFlag=0
-yayPackagesFlag=0
+vimPluginsFlag=1
+wslFlag=1
+yayPackagesFlag=1
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Other variables used during product installation.

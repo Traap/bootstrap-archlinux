@@ -5,6 +5,7 @@ main() {
   sourceFiles
   removePersonalization
 
+  updateOSKeys
   updateOS
   installPacmanPackages
   installYayPackages
@@ -86,6 +87,20 @@ removePersonalization() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ Update OS Keys
+
+updateOS() {
+  if [[ $osUpdateKeysFlag == 1 ]];
+    say 'Update keys'
+    pacman-key --init
+    pacman-key --populate
+    pacman-key --refresh-keys
+    pacman -Sy archlinux-keyring --noconfirm
+    pacman -Syyu --noconfirm
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ Update OS
 
 updateOS() {
@@ -98,7 +113,7 @@ updateOS() {
 installPacmanPackages() {
   if [[ $pacmanPackagesFlag == 1 ]]; then
     say 'Installing pacman packages.'
-    sudo pacman -Syu --noconfirm ${pacman_packages[@]}
+    sudo pacman -Syyu --noconfirm ${pacman_packages[@]}
   fi
 }
 
