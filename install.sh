@@ -89,14 +89,14 @@ removePersonalization() {
 # -------------------------------------------------------------------------- }}}
 # {{{ Update OS Keys
 
-updateOS() {
-  if [[ $osUpdateKeysFlag == 1 ]];
+updateOSKeys() {
+  if [[ $osUpdateKeysFlag == 1 ]]; then
     say 'Update keys'
-    pacman-key --init
-    pacman-key --populate
-    pacman-key --refresh-keys
-    pacman -Sy archlinux-keyring --noconfirm
-    pacman -Syyu --noconfirm
+    sudo pacman-key --init
+    sudo pacman-key --populate
+    sudo pacman-key --refresh-keys
+    sudo pacman -Sy archlinux-keyring --noconfirm
+    sudo pacman -Syyu --noconfirm
   fi
 }
 
@@ -236,32 +236,47 @@ cloneTmuxPlugins () {
 deleteSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     echo "Deleting symbolic links."
-    rm -fv ~/.bash_logout
-    rm -fv ~/.bashrc
-    rm -fv ~/.bashrc-personal
-    rm -fv ~/.dircolors
-    rm -fv ~/.gitconfig
-    rm -fv ~/.gitignore_global
-    rm -fv ~/.inputrc
-    rm -fv ~/.latexmkrc
-    rm -fv ~/.ssh
-    rm -fv ~/.config.vim
-    rm -fv ~/.tmux
-    rm -fv ~/.tmux.conf
-    rm -fv ~/.vim
-    rm -fv ~/.config/nvim
-    rm -fv ~/.vimrc
-    rm -fv ~/.vimrc_background
+    # Symlinks at .config
+#    rm -rfv ~/.config/Thunar
+    rm -rfv ~/.bash_logout
+    rm -rfv ~/.config/alacritty
+    rm -rfv ~/.config/awesome
+    rm -rfv ~/.config/bspwm
+    rm -rfv ~/.config/dconf
+    rm -rfv ~/.config/dunst
+    rm -rfv ~/.config/kitty
+    rm -rfv ~/.config/lvim
+    rm -rfv ~/.config/nvim
+    rm -rfv ~/.config/picom
+    rm -rfv ~/.config/polybar
+    rm -rfv ~/.config/ranger
+    rm -rfv ~/.config/remmina
+    rm -rfv ~/.config/rofi
+    rm -rfv ~/.config/screenkey.json
+    rm -rfv ~/.config/sxhkd
+    rm -rfv ~/.config/volumeicon
+    rm -rfv ~/.config/wallpaper
 
-    if [[ $(uname -r) =~ 'arch' || $(uname -r) =~ 'WSL2' ]]; then
-      rm -fv ~/.config/bspwm/autostart.sh
-      rm -fv ~/.config/bspwm/bspwm-monitor
-      rm -fv ~/.config/bspwm/bspwmrc
-      rm -fv ~/.config/bspwm/sxhkd/sxhkdrc
-      rm -fv ~/.config/ranger/rc.conf
-      rm -fv ~/.mailcap
-      rm -fv ~/.muttrc
-    fi
+    # Symlinks at $HOME
+    rm -rfv ~/.bash_logout
+    rm -rfv ~/.bash_profile
+    rm -rfv ~/.bashrc
+    rm -rfv ~/.bashrc-personal
+    rm -rfv ~/.config.vim
+    rm -rfv ~/.dircolors
+    rm -rfv ~/.gitconfig
+    rm -rfv ~/.gitignore_global
+    rm -rfv ~/.inputrc
+    rm -rfv ~/.latexmkrc
+    rm -rfv ~/.mailcap
+    rm -rfv ~/.muttrc
+    rm -rfv ~/.ssh
+    rm -rfv ~/.tmux
+    rm -rfv ~/.tmux.conf
+    rm -rfv ~/.vim
+    rm -rfv ~/.vimrc
+    rm -rfv ~/.vimrc_background
+    rm -rrf ~/.xinitrc
   fi
 }
 
@@ -274,32 +289,45 @@ createSymLinks() {
     mkdir -p ~/.config/bspwm
     mkdir -p ~/.config/sxhkd
     mkdir -p ~/.config/ranger
+    # Symlinks at .config
+    ln -fsv ~/git/dotfiles/alacritty             ~/.config/alacritty
+    ln -fsv ~/git/dotfiles/awesome               ~/.config/awesome
+    ln -fsv ~/git/dotfiles/bspwm                 ~/.config/bspwm
+    ln -fsv ~/git/dotfiles/dconf                 ~/.config/dconf
+    ln -fsv ~/git/dotfiles/dunst                 ~/.config/dunst
+    ln -fsv ~/git/dotfiles/kitty                 ~/.config/kitty
+    ln -fsv ~/git/dotfiles/picom                 ~/.config/picom
+    ln -fsv ~/git/dotfiles/polybar               ~/.config/polybar
+    ln -fsv ~/git/dotfiles/ranger                ~/.config/ranger
+    ln -fsv ~/git/dotfiles/remmina               ~/.config/remmina
+    ln -fsv ~/git/dotfiles/rofi                  ~/.config/rofi
+    ln -fsv ~/git/dotfiles/sk/screenkey.json     ~/.config/screenkey.json
+    ln -fsv ~/git/dotfiles/sxhkd                 ~/.config/sxhkd
+    ln -fsv ~/git/dotfiles/volumeicon            ~/.config/volumeicon
+    ln -fsv ~/git/dotfiles/wallpaper             ~/.config/wallpaper
+    ln -fsv ~/git/lvim                           ~/.config/lvim
+    ln -fsv ~/git/nvim                           ~/.config/nvim
+
+    # Symlinks at $HOME
     ln -fsv ~/git/dotfiles/bash/bash_logout      ~/.bash_logout
+    ln -fsv ~/git/dotfiles/bash/bash_profile     ~/.bash_profile
     ln -fsv ~/git/dotfiles/bash/bashrc           ~/.bashrc
     ln -fsv ~/git/dotfiles/bash/bashrc-personal  ~/.bashrc-personal
     ln -fsv ~/git/dotfiles/bash/dircolors        ~/.dircolors
     ln -fsv ~/git/dotfiles/bash/inputrc          ~/.inputrc
+    ln -fsv ~/git/dotfiles/bash/xinitrc          ~/.xinitrc
     ln -fsv ~/git/dotfiles/git/gitconfig         ~/.gitconfig
     ln -fsv ~/git/dotfiles/git/gitignore_global  ~/.gitignore_global
     ln -fsv ~/git/dotfiles/latex/latexmkrc       ~/.latexmkrc
-    ln -fsv ~/git/nvim                           ~/.config/nvim
+    ln -fsv ~/git/mutt/mailcap                   ~/.mailcap
+    ln -fsv ~/git/mutt/muttrc                    ~/.muttrc
     ln -fsv ~/git/ssh                            ~/.ssh
     ln -fsv ~/git/ssh/config.vim                 ~/.config.vim
     ln -fsv ~/git/tmux                           ~/.tmux
     ln -fsv ~/git/tmux/tmux.conf                 ~/.tmux.conf
-    ln -fsv ~/git/lvim                           ~/.config/lvim
-    ln -fsv ~/git/nvim                           ~/.config/nvim
     ln -fsv ~/git/vim                            ~/.vim
     ln -fsv ~/git/vim/vimrc                      ~/.vimrc
     ln -fsv ~/git/vim/vimrc_background           ~/.vimrc_background
-
-    if [[ $(uname -r) =~ 'arch' || $(uname -r) =~ 'WSL2' ]]; then
-      ln -fsv ~/git/dotfiles/bspwm/autostart.sh  ~/.config/bspwm/autostart.sh
-      ln -fsv ~/git/dotfiles/bspwm/bspwm-monitor ~/.config/bspwm/bspwm-monitor
-      ln -fsv ~/git/dotfiles/bspwm/bspwmrc       ~/.config/bspwm/bspwmrc
-      ln -fsv ~/git/dotfiles/bspwm/sxhkdrc       ~/.config/bspwm/sxhkd/sxhkdrc
-      ln -fsv ~/git/dotfiles/ranger/rc.conf      ~/.config/ranger/rc.conf
-    fi
  fi
 }
 

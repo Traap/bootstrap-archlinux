@@ -99,6 +99,7 @@ yay_packages=(
   "ttf-jetbrains-mono"
   "thunderbird"
   "visual-studio-code-bin"
+  "yarn"
 )
 
 # -------------------------------------------------------------------------- }}}

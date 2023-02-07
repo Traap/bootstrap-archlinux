@@ -3,14 +3,7 @@
 # These https://github.com/Traap/ public repositories.
 
 repos=(
-  "bootstrap-archlinux"
-  "amber"
-  "autodoc"
-  "docbld"
   "dotfiles"
-  "kjv"
-  "lvim"
-  "newdoc"
   "nvim"
   "tmux"
   "vim"
