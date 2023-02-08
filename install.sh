@@ -514,7 +514,7 @@ stopWslAutogeneration () {
   if [[ $wslFlag == 1 ]]; then
     say 'Stop WSL autogeneration'
     sudo cp -v hosts /etc/.
-    # sudo cp -v resolv.conf /etc/.
+    sudo cp -v resolv.conf /etc/.
     sudo cp -v wsl.conf /etc/.
   fi
 }
