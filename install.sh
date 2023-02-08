@@ -2,6 +2,10 @@
 # {{{ main
 
 main() {
+  # Save current working directory.
+  cwd=$(pwd)
+
+  # Source configuration files and clean when necessary.
   sourceFiles
   removePersonalization
 
@@ -513,6 +517,7 @@ swapCapsLockAndEscKey() {
 stopWslAutogeneration () {
   if [[ $wslFlag == 1 ]]; then
     say 'Stop WSL autogeneration'
+    cd $cwd
     sudo cp -v hosts /etc/.
     sudo cp -v resolv.conf /etc/.
     sudo cp -v wsl.conf /etc/.
