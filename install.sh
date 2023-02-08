@@ -552,6 +552,10 @@ installSshDir() {
     #        bootstrap-archlinux/config/$gitUserName
     sed -i "s/GIT-USER-NAME/$gitUserName/g" $config
 
+    # Repace ssh-config-template/WSL-HOST-NAME with
+    #        bootstrap-archlinux/config/$wslHostName
+    sed -i "s/WSL-HOST-NAME/$wslHostName/g" $config
+
     say 'Initialize .ssh/config.vim'
     touch $cloneRoot/ssh/config.vim
   fi

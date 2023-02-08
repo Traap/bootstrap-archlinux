@@ -1,7 +1,7 @@
 # GitHub settings
 Host github.com
     User GIT-USER-NAME
-    IdentityFile ~/.ssh/
+    IdentityFile ~/.ssh/WSL-HOST-NAME
 
 # All Hosts
 Host *
