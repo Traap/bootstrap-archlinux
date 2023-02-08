@@ -1,0 +1,9 @@
+# GitHub settings
+Host github.com
+    User $gitName
+    IdentityFile ~/.ssh/
+
+# All Hosts
+Host *
+    ServerAliveInterval 300
+

@@ -423,7 +423,7 @@ updateMirrorList () {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ loadNeovimlugins
+# {{{ loadNeovimluginsconf
 
 loadNeovimPlugins() {
   if [[ $neovimPluginsFlag == 1 ]]; then
@@ -512,7 +512,7 @@ swapCapsLockAndEscKey() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Stop WSL sAutogeneration
+# {{{ Stop WSL Autogeneration
 
 stopWslAutogeneration () {
   if [[ $wslFlag == 1 ]]; then
@@ -531,16 +531,14 @@ installSshDir() {
   if [[ $sshDirFlag == 1 ]]; then
     say 'Initialize .ssh/config.'
     mkdir -p $cloneRoot/ssh
-    config=$cloneRoot/ssh/config
 
-    echo '# GitHub settings'                     > $config
-    echo 'Host github.com'                      >> $config
-    echo '    User' $gitName                    >> $config
-    echo '    IdentityFile ~/.ssh/'$wslHostName >> $config
-    echo ''                                     >> $config
-    echo '# All Hosts'                          >> $config
-    echo 'Host *'                               >> $config
-    echo '    ServerAliveInterval 300'          >> $config
+    # Create ssh/config from template.
+    template=ssh-config-template
+    config=$cloneRoot/ssh/config
+    cp -v $template $config
+
+    # Repace ssh-config-template/$gitUserName with bootstrap-archlinux/config.
+    sed -i '''s/$gitUserName'''/'''$gitUserName'''/g''' $config
 
     say 'Initialize .ssh/config.vim'
     touch $cloneRoot/ssh/config.vim
