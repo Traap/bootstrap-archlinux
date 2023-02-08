@@ -538,7 +538,7 @@ installSshDir() {
     cp -v $template $config
 
     # Repace ssh-config-template/$gitUserName with bootstrap-archlinux/config.
-    sed -i '''s/$gitUserName'''/'''$gitUserName'''/g''' $config
+    sed -i "s/$gitUserName/"$gitUserName"/g" $config
 
     say 'Initialize .ssh/config.vim'
     touch $cloneRoot/ssh/config.vim

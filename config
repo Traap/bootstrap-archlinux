@@ -11,36 +11,36 @@
 base16ColorsFlag=0
 desktopAppsFlag=0
 echoConfigFlag=0
-gitBashPromptFlag=1
+gitBashPromptFlag=0
 kjvFlag=0
 lunarVimFlag=0
-myReposFlag=1
-neovimBuildFlag=1
-neovimPluginsFlag=1
-osUpdateFlag=1
-osUpdateKeysFlag=1
+myReposFlag=0
+neovimBuildFlag=0
+neovimPluginsFlag=0
+osUpdateFlag=0
+osUpdateKeysFlag=0
 otherAppsFlag=0
-pacmanPackagesFlag=1
-pipPackagesFlag=1
-rbenvFlag=1
-removePersonalizationFlag=1
-resolvFlag=1
+pacmanPackagesFlag=0
+pipPackagesFlag=0
+rbenvFlag=0
+removePersonalizationFlag=0
+resolvFlag=0
 rustFlag=0
 sshDirFlag=1
-sshHostKeyFlag=1
-symlinksFlag=1
+sshHostKeyFlag=0
+symlinksFlag=0
 texPackagesFlag=0
-tmuxPluginsFlag=1
-vimPluginsFlag=1
-wslFlag=1
-yayPackagesFlag=1
+tmuxPluginsFlag=0
+vimPluginsFlag=0
+wslFlag=0
+yayPackagesFlag=0
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Other variables used during product installation.
 
 cloneRoot=$HOME/git
 gitEmail="gary.a.howard@mac.com"
-gitName="Traap"
+gitUserName="Traap"
 rubyVersion='3.2.0'
 wslHostName=Zero
 
