@@ -1,0 +1,17 @@
+# Stop regenrating this file by adding the following to /etc/wsl.config.
+# [network]
+# generateHosts = false
+
+# Standard host addresses.
+127.0.0.1 localhost
+::1       localhost ip6-localhost ip6-loopback
+ff02::1   ip6-allnodes
+ff02::2   ip6-allrouters
+
+# Private network examples.
+192.168.1.1   InternetModem
+192.168.1.120 DarkKnight
+192.168.1.122 Ninja
+192.168.1.89  Reaper
+
+# Remote AWS, Azure, or somewhere are listed below.

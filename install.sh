@@ -22,8 +22,6 @@ main() {
   deleteSymLinks
   createSymLinks
 
-  cloneMySshRepo
-  setSshPermissions
 
   cloneBashGitPrompt
   cloneBase16Colors
@@ -42,6 +40,12 @@ main() {
 
   swapCapsLockAndEscKey
 
+  stopWslAutogeneration
+
+  installSshDir
+  generateSshHostKey
+  setSshPermissions
+
   [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
 }
 
@@ -59,19 +63,6 @@ sourceFiles() {
 
   [[ $missingFile == 1 ]] && say 'Missing file(s) program exiting.' && exit
 
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ Source one configuraiton file.
-
-sourceFile() {
-  if [[ -f $1 ]]; then
-    source $1
-    [[ $echoConfigFlag == 1 ]] && sayAndDo cat $1
-  else
-    say $1 not found.
-    missingFile=1
-  fi
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -96,7 +87,6 @@ updateOSKeys() {
     sudo pacman-key --populate
     sudo pacman-key --refresh-keys
     sudo pacman -Sy archlinux-keyring --noconfirm
-    sudo pacman -Syyu --noconfirm
   fi
 }
 
@@ -104,7 +94,7 @@ updateOSKeys() {
 # {{{ Update OS
 
 updateOS() {
-  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo pacman -Syu --noconfirm'
+  [[ $osUpdateFlag == 1 ]] && sayAndDo 'sudo pacman -Syyu --noconfirm'
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -130,11 +120,12 @@ installYayPackages() {
     cd ..
 
     yay -Syu --noconfirm ${yay_packages[@]}
+    libtool --finish /usr/lib/libfakeroot
   fi
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Install e:ip packages.
+# {{{ Install pip packages.
 
 installPipPackages() {
   if [[ $pipPackagesFlag == 1 ]]; then
@@ -150,30 +141,6 @@ installTexPackages() {
   if [[ $texPackagesFlag == 1 ]]; then
     say 'Installing tex packages.'
     yay -S --noconfirm ${tex_packages[@]}
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ cloneMySshRepo
-
-cloneMySshRepo() {
-  if [[ $mySshRepoFlag == 1 ]]; then
-    say 'Cloning my ssh repo.'
-    src=https://github.com/Traap/ssh.git
-    dst=$cloneRoot/ssh
-    git clone  $src $dst
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ setSshPermissions
-
-setSshPermissions() {
-  if [[ $mySshRepoFlag == 1 ]]; then
-    say 'Setting ssh permissions.'
-    chmod 600 $cloneRoot/ssh/*
-    chmod 644 $cloneRoot/ssh/*.pub
-    chmod 700 $cloneRoot/ssh/.git
   fi
 }
 
@@ -332,19 +299,6 @@ createSymLinks() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ setSshPermissions
-
-setSshPermissions() {
-
-  if [[ $mySshRepoFlag == 1 ]]; then
-    say 'Setting ssh permissions.'
-    chmod 600 $cloneRoot/ssh/*
-    chmod 644 $cloneRoot/ssh/*.pub
-    chmod 700 $cloneRoot/ssh/.gi9t
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ Build KJV
 
 buildKJV() {
@@ -427,7 +381,7 @@ installLunarVim() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ updateMirrorList
+# {{{ Update mirror list with reflector
 
 updateMirrorList () {
   if [[ $mirroirFlag == 1 ]]; then
@@ -525,7 +479,66 @@ installRust() {
 # {{{ Swap CAPSLOCK with ESC key.
 
 swapCapsLockAndEscKey() {
-  setxkbmap -option caps:swapescape
+  [[ $swapKeysFlag == 1 ]] && sayAndDo 'setxkbmap -option caps:swapescape'
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Stop WSL sAutogeneration
+
+stopWslAutogeneration () {
+  if [[ $wslFlag == 1 ]]; then
+    say 'Stop WSL autogeneration'
+    sudo cp -v hosts /etc/.
+    # sudo cp -v resolv.conf /etc/.
+    sudo cp -v wsl.conf /etc/
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Make and configure ssh directory.
+
+installSshDir() {
+  if [[ $sshDirFlag == 1 ]]; then
+    say 'Initialize .ssh/config.'
+    mkdir -p $cloneRoot/ssh
+    config=$cloneRoot/ssh/config
+
+    echo '# GitHub settings'                     > $config
+    echo 'Host github.com'                      >> $config
+    echo '    User' $gitName                    >> $config
+    echo '    IdentityFile ~/.ssh/'$wslHostName >> $config
+    echo ''                                     >> $config
+    echo '# All Hosts'                          >> $config
+    echo 'Host *'                               >> $config
+    echo '    ServerAliveInterval 300'          >> $config
+
+    say 'Initialize .ssh/config.vim'
+    touch $cloneRoot/ssh/config.vim
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Generate sshkey for this host
+
+generateSshHostKey () {
+  if [[ $sshHostKeyFlag == 1 ]]; then
+    say 'Generate ssh host key.'
+    mkdir -p $cloneRoot/ssh
+    ssh-keygen -f $cloneRoot/ssh/$wslHostName
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Set sshkey permissions
+
+setSshPermissions() {
+
+  if [[ $sshHostKeyFlag == 1 ]]; then
+    say 'Setting ssh permissions.'
+    chmod 600 $cloneRoot/ssh/*
+    chmod 644 $cloneRoot/ssh/*.pub
+    # chmod 700 $cloneRoot/ssh/.git
+  fi
 }
 
 # -------------------------------------------------------------------------- }}}
