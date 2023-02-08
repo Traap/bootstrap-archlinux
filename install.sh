@@ -518,9 +518,20 @@ stopWslAutogeneration () {
   if [[ $wslFlag == 1 ]]; then
     say 'Stop WSL autogeneration'
     cd $cwd
+
+    # Copy host and resolv.conf to /etc.
     sudo cp -v hosts /etc/.
     sudo cp -v resolv.conf /etc/.
-    sudo cp -v wsl.conf /etc/.
+
+    # Create wsl.conf from template.
+    template=wsl-template.conf
+    conf=/etc/wsl.conf
+    sudo cp -v $template $conf
+
+    # Replace wsl-template.conf/WSL-[HOST|USER]-Name with
+    #         bootstrap-archlinux/config/$wsl[Host|User]Name
+    sudo sed -i "s/WSL-HOST-NAME/$wslHostName/g" $conf
+    sudo sed -i "s/WSL-USER-NAME/$wslUserName/g" $conf
   fi
 }
 
@@ -537,8 +548,9 @@ installSshDir() {
     config=$cloneRoot/ssh/config
     cp -v $template $config
 
-    # Repace ssh-config-template/$gitUserName with bootstrap-archlinux/config.
-    sed -i "s/$gitUserName/"$gitUserName"/g" $config
+    # Repace ssh-config-template/GIT-USER-NAME with
+    #        bootstrap-archlinux/config/$gitUserName
+    sed -i "s/GIT-USER-NAME/$gitUserName/g" $config
 
     say 'Initialize .ssh/config.vim'
     touch $cloneRoot/ssh/config.vim

@@ -1,6 +1,6 @@
 # GitHub settings
 Host github.com
-    User $gitName
+    User GIT-USER-NAME
     IdentityFile ~/.ssh/
 
 # All Hosts

@@ -32,16 +32,28 @@ symlinksFlag=0
 texPackagesFlag=0
 tmuxPluginsFlag=0
 vimPluginsFlag=0
-wslFlag=0
+wslFlag=1
 yayPackagesFlag=0
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Other variables used during product installation.
 
+# The root personal repositories are cloned to.
 cloneRoot=$HOME/git
+
+# The email assiciated with git commit messages.
 gitEmail="gary.a.howard@mac.com"
+
+# Git user namn used for commit messages.
 gitUserName="Traap"
+
+# Ruby version to install.  rbenv is the Ruby enviornment manager.
+# rubyVerion becomes the global Ruby version installed.
 rubyVersion='3.2.0'
+
+# Host name the Arch linux installation is known by.  The default host name
+# is the Windows 10 or Windows 11 host name.
 wslHostName=Zero
+wslUserName="Knook"
 
 # -------------------------------------------------------------------------- }}}
