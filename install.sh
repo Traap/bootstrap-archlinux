@@ -515,7 +515,7 @@ stopWslAutogeneration () {
     say 'Stop WSL autogeneration'
     sudo cp -v hosts /etc/.
     # sudo cp -v resolv.conf /etc/.
-    sudo cp -v wsl.conf /etc/
+    sudo cp -v wsl.conf /etc/.
   fi
 }
 
