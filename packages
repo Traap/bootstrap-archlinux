@@ -64,57 +64,60 @@ tex_packages=(
 # {{{ yay packages
 
 yay_packages=(
-  "aspnet-runtime"
   "bashtop"
   "bat"
   "bluetooth-autoconnect"
-  "brave-bin"
   "dunst"
   "exa"
-  "dotnet-runtime"
-  "dotnet-sdk"
   "fd"
   "freerdp"
   "graphviz"
   "go"
-  "git-htmldocs"
+  "giy-htmldocs"
   "jre-openjdk-headless"
+  "kubectl"
   "luarocks"
   "nodejs"
   "npm"
-  "obs-studio"
-  "okular"
-  "onlyoffice-bin"
   "pandoc"
   "poppler"
   "python"
   "python-pip"
   "ranger"
-  "remmina"
   "ripgrep"
   "ripgrep-all"
-  "screenkey"
   "slop"
-  "teams"
   "tldr"
   "ttf-jetbrains-mono"
-  "thunderbird"
-  "visual-studio-code-bin"
   "yarn"
 )
 
 # -------------------------------------------------------------------------- }}}
-# {{{ xyz packages
+# {{{ desktop packages
 
-# Not implmented yet.
-zyx_packages=(
+desktop_packages=(
+  "brave-bin"
+  "dbeaver"
+  "obs-studio"
+  "okular"
+  "onlyoffice-bin"
+  "postgresql"
+  "remmina"
+  "screenkey"
+  "teams"
+  "thunar-volman"
+  "thunderbird"
+  "visual-studio-code-bin"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Other packages
+
+other_packages=(
   "aspnet-runtime"
   "dotnet-runtime"
   "dotnet-sdk"
-  "dbeaver"
-  "kubectl"
-  "postgresql"
-  "thunar-volman"
+  "teams"
 )
 
 # -------------------------------------------------------------------------- }}}

@@ -5,47 +5,57 @@ main() {
   sourceFiles
   removePersonalization
 
+  # Update operating system and keys.
   updateOSKeys
   updateOS
+
+  # Install packages.
   installPacmanPackages
   installYayPackages
-
   installPipPackages
   installTexPackages
 
+  # Update mirrors.
   updateMirrorList
 
+  # Install programming languages.
   installRuby
   installRubyGems
   installRust
 
+  # Setup symlinks.
   deleteSymLinks
   createSymLinks
 
+  # Configure /etc/ and /.ssh directories.
+  stopWslAutogeneration
+  installSshDir
+  generateSshHostKey
+  setSshPermissions
 
+  # Clone different repositories needed for personalization.
   cloneBashGitPrompt
   cloneBase16Colors
   cloneMyRepos
   cloneTmuxPlugins
 
+  # Build applications from source code.
   buildKJV
   buildNeovim
   addProgramsNeoVimInterfacesWith
+
+  # Install editors and terminal multiplexers.
   installLunarVim
-
   loadTmuxPlugins
-
   loadNeovimPlugins
   loadVimPlugins
 
+  # Install desktop applications.
+  installDesktopApps
+  installOtherApps
+
+  # Final personalization.
   swapCapsLockAndEscKey
-
-  stopWslAutogeneration
-
-  installSshDir
-  generateSshHostKey
-  setSshPermissions
-
   [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
 }
 
@@ -98,12 +108,32 @@ updateOS() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ Install desktop applications.
+
+installDesktopApps() {
+  if [[ $desktopAppsFlag == 1 ]]; then
+    say 'Installing desktop applications.'
+    sudo yay -Syyu --noconfirm ${desktop_packages[@]}
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ Install pacman packages.
 
 installPacmanPackages() {
   if [[ $pacmanPackagesFlag == 1 ]]; then
     say 'Installing pacman packages.'
     sudo pacman -Syyu --noconfirm ${pacman_packages[@]}
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install other applications.
+
+installOtherApps() {
+  if [[ $otherAppsFlag == 1 ]]; then
+    say 'Installing other applications.'
+    sudo yay -Syyu --noconfirm ${other_packages[@]}
   fi
 }
 
@@ -320,11 +350,6 @@ buildKJV() {
 
 buildNeovim() {
   if [[ $neovimBuildFlag == 1 ]]; then
-    say 'Remove neovim configuration.'
-    sudo rm -rf ~/.cache/nvim
-    sudo rm -rf ~/.config/nvim
-    sudo rm -rf ~/.local/share/nvim
-
     say 'Acquire neovim dependencies.'
     sudo pacman -Syu --noconfirm \
       base-devel \
