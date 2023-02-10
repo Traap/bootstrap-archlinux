@@ -521,7 +521,9 @@ stopWslAutogeneration () {
 
     # Copy host and resolv.conf to /etc.
     sudo cp -v hosts /etc/.
-    sudo cp -v resolv.conf /etc/.
+
+    # TODO: Not supported yet.
+    # sudo cp -v resolv.conf /etc/.
 
     # Create wsl.conf from template.
     template=wsl-template.conf
