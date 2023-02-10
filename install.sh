@@ -80,18 +80,6 @@ sourceFiles() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ removePersonalization
-
-removePersonalization() {
-  if [[ $removePersonalizationFlag == 1 ]]; then
-    say 'Removing personilization!'
-    cd
-    sudo rm -rf $cloneRoot
-    mkdir -p $cloneRoot
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ Update OS Keys
 
 updateOSKeys() {
