@@ -7,7 +7,6 @@ main() {
 
   # Source configuration files and clean when necessary.
   sourceFiles
-  removePersonalization
 
   # Update operating system and keys.
   updateOSKeys
