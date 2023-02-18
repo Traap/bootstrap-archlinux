@@ -293,8 +293,8 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/sxhkd                 ~/.config/sxhkd
     ln -fsv ~/git/dotfiles/volumeicon            ~/.config/volumeicon
     ln -fsv ~/git/dotfiles/wallpaper             ~/.config/wallpaper
-    ln -fsv ~/git/lvim                           ~/.config/lvim
-    ln -fsv ~/git/nvim                           ~/.config/nvim
+    ln -fsv ~/git/lvim.traap                     ~/.config/lvim
+    ln -fsv ~/git/nvim.traap	                 ~/.config/nvim
 
     # Symlinks at $HOME
     ln -fsv ~/git/dotfiles/bash/bash_logout      ~/.bash_logout
