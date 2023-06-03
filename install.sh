@@ -1,4 +1,16 @@
 #!/bin/bash
+# {{{ Notes
+
+# Disable variable referenced but not assigned.
+#shellcheck disable=SC2154
+
+# Disable cant follow non-constant source.
+#shellcheck disable=SC1090
+
+# Disable not following file.  file does not exist.
+#shellcheck disable=SC1091
+
+# -- ----------------------------------------------------------------------- }}}
 # {{{ main
 
 main() {
@@ -16,6 +28,7 @@ main() {
   installPacmanPackages
   installYayPackages
   installPipPackages
+  installLuaRocksPackages
   installTexPackages
 
   # Update mirrors.
@@ -59,7 +72,7 @@ main() {
 
   # Final personalization.
   swapCapsLockAndEscKey
-  [[ -f $HOME/.bashrc ]] && source $HOME/.bashrc
+  [[ -f $HOME/.bashrc ]] && source "$HOME/.bashrc"
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -69,9 +82,9 @@ sourceFiles() {
   missingFile=0
 
   files=(config repos packages)
-  for f in ${files[@]}
+  for f in "${files[@]}"
   do
-    source $f
+    source "$f"
   done
 
   [[ $missingFile == 1 ]] && say 'Missing file(s) program exiting.' && exit
@@ -104,7 +117,7 @@ updateOS() {
 installDesktopApps() {
   if [[ $desktopAppsFlag == 1 ]]; then
     say 'Installing desktop applications.'
-    sudo yay -Syyu --noconfirm ${desktop_packages[@]}
+    sudo yay -Syyu --noconfirm "${desktop_packages[@]}"
   fi
 }
 
@@ -114,7 +127,7 @@ installDesktopApps() {
 installPacmanPackages() {
   if [[ $pacmanPackagesFlag == 1 ]]; then
     say 'Installing pacman packages.'
-    sudo pacman -Syyu --noconfirm ${pacman_packages[@]}
+    sudo pacman -Syyu --noconfirm "${pacman_packages[@]}"
   fi
 }
 
@@ -124,7 +137,7 @@ installPacmanPackages() {
 installOtherApps() {
   if [[ $otherAppsFlag == 1 ]]; then
     say 'Installing other applications.'
-    sudo yay -Syyu --noconfirm ${other_packages[@]}
+    sudo yay -Syyu --noconfirm "${other_packages[@]}"
   fi
 }
 
@@ -136,11 +149,11 @@ installYayPackages() {
     say 'Installing yay packages.'
 
     git clone https://aur.archlinux.org/yay.git
-    cd yay
+    cd yay || exit
     makepkg -si
     cd ..
 
-    yay -Syu --noconfirm ${yay_packages[@]}
+    yay -Syu --noconfirm "${yay_packages[@]}"
     libtool --finish /usr/lib/libfakeroot
   fi
 }
@@ -151,7 +164,17 @@ installYayPackages() {
 installPipPackages() {
   if [[ $pipPackagesFlag == 1 ]]; then
     say 'Installing pip packages.'
-    pip install ${pip_packages[@]}
+    pip install "${pip_packages[@]}"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install luarocks packages.
+
+installLuarocksPackages() {
+  if [[ $luarocksPackagesFlag == 1 ]]; then
+    say 'Installing luarocks packages.'
+    pip install "${luarocks_packages[@]}"
   fi
 }
 
@@ -161,7 +184,7 @@ installPipPackages() {
 installTexPackages() {
   if [[ $texPackagesFlag == 1 ]]; then
     say 'Installing tex packages.'
-    yay -S --noconfirm ${tex_packages[@]}
+    yay -S --noconfirm "${tex_packages[@]}"
   fi
 }
 
@@ -175,7 +198,7 @@ cloneMyRepos() {
     do
       src=https://github.com/Traap/$r.git
       dst=$cloneRoot/$r
-      git clone  $src $dst
+      git clone "$src" "$dst"
       echo ""
     done
   fi
@@ -190,7 +213,7 @@ cloneBashGitPrompt() {
     rm -rf ~/.bash-git-prompt
     src=https://github.com/magicmonty/bash-git-prompt
     dst=~/.bash-git-prompt
-    git clone  $src $dst
+    git clone "$src" "$dst"
   fi
 }
 
@@ -202,7 +225,7 @@ cloneBase16Colors () {
     say 'Cloning Base16 colors.'
     src=https://github.com/chriskempson/base16-shell
     dst=$cloneRoot/color/base16-shell
-    git clone  $src $dst
+    git clone "$src" "$dst"
   fi
 }
 
@@ -214,7 +237,7 @@ cloneTmuxPlugins () {
     say 'Cloning TMUX plugins.'
     src=https://github.com/tmux-plugins/tpm.git
     dst=$cloneRoot/tmux/plugins/tpm
-    git clone  $src $dst
+    git clone "$src" "$dst"
   fi
 }
 
@@ -224,8 +247,6 @@ cloneTmuxPlugins () {
 deleteSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     echo "Deleting symbolic links."
-    # Symlinks at .config
-#    rm -rfv ~/.config/Thunar
     rm -rfv ~/.bash_logout
     rm -rfv ~/.config/alacritty
     rm -rfv ~/.config/awesome
@@ -327,8 +348,8 @@ buildKJV() {
     say 'Building Authorized KJV.'
     src=https://github.com/Traap/kjv.git
     dst=$cloneRoot/kjv
-    git clone  $src $dst
-    cd $dst
+    git clone "$src" "$dst"
+    cd "$dst" || exit
     git checkout kjv-01
     make
     sudo mv kjv /usr/local/bin/.
@@ -355,15 +376,15 @@ buildNeovim() {
 
     if [[ -d ${dst} ]]; then
       echo 'Update neovim sources.'
-      cd ${dst}
+      cd "${dst}" || exit
       git pull
     else
       echo 'Clone neovim sources.'
-      git clone  $src $dst
+      git clone "$src" "$dst"
     fi
 
     echo 'Build neovim.'
-    cd ${dst}
+    cd "${dst}" || exit
     sudo make CMANE_BUILD=Release install
 
     echo
@@ -403,7 +424,7 @@ updateMirrorList () {
   if [[ $mirroirFlag == 1 ]]; then
     say 'Updating mirror list.'
 
-    sudo reflector -c "United States" \
+    sudo reflector -c "$reflectorLocation" \
       -f 12 -l 10 -n 12 \
       --save /etc/pacman.d/mirrorlist
   fi
@@ -446,7 +467,7 @@ installRuby() {
   if [[ $rbenvFlag == 1 ]]; then
 
     say 'Installing ruby-build dependencies.'
-    sudo pacman -Syu --noconfirm ${ruby_build_packages[@]}
+    sudo pacman -Syu --noconfirm "${ruby_build_packages[@]}"
 
     say 'Acquire Ruby dependencies.'
     yay -S --noconfirm \
@@ -455,8 +476,8 @@ installRuby() {
 
     say 'Build and install Ruby.'
     eval "$(rbenv init -)"
-    rbenv install $rubyVersion
-    rbenv global $rubyVersion
+    rbenv install "$rubyVersion"
+    rbenv global "$rubyVersion"
 
     echo 'Ruby installed.'
   fi
@@ -504,7 +525,7 @@ swapCapsLockAndEscKey() {
 stopWslAutogeneration () {
   if [[ $wslFlag == 1 ]]; then
     say 'Stop WSL autogeneration'
-    cd $cwd
+    cd "$cwd" || exit
 
     # Copy host and resolv.conf to /etc.
     sudo cp -v hosts /etc/.
@@ -530,23 +551,23 @@ stopWslAutogeneration () {
 installSshDir() {
   if [[ $sshDirFlag == 1 ]]; then
     say 'Initialize .ssh/config.'
-    mkdir -p $cloneRoot/ssh
+    mkdir -p "$cloneRoot/ssh"
 
     # Create ssh/config from template.
     template=ssh-config-template
     config=$cloneRoot/ssh/config
-    cp -v $template $config
+    cp -v "$template" "$config"
 
     # Repace ssh-config-template/GIT-USER-NAME with
     #        bootstrap-archlinux/config/$gitUserName
-    sed -i "s/GIT-USER-NAME/$gitUserName/g" $config
+    sed -i "s/GIT-USER-NAME/$gitUserName/g" "$config"
 
     # Repace ssh-config-template/WSL-HOST-NAME with
     #        bootstrap-archlinux/config/$wslHostName
-    sed -i "s/WSL-HOST-NAME/$wslHostName/g" $config
+    sed -i "s/WSL-HOST-NAME/$wslHostName/g" "$config"
 
     say 'Initialize .ssh/config.vim'
-    touch $cloneRoot/ssh/config.vim
+    touch "$cloneRoot/ssh/config.vim"
   fi
 }
 
@@ -556,8 +577,8 @@ installSshDir() {
 generateSshHostKey () {
   if [[ $sshHostKeyFlag == 1 ]]; then
     say 'Generate ssh host key.'
-    mkdir -p $cloneRoot/ssh
-    ssh-keygen -f $cloneRoot/ssh/$wslHostName
+    mkdir -p "$cloneRoot/ssh"
+    ssh-keygen -f "$cloneRoot/ssh/$wslHostName"
   fi
 }
 
@@ -568,8 +589,8 @@ setSshPermissions() {
 
   if [[ $sshHostKeyFlag == 1 ]]; then
     say 'Setting ssh permissions.'
-    chmod 600 $cloneRoot/ssh/*
-    chmod 644 $cloneRoot/ssh/*.pub
+    chmod 600 "$cloneRoot/ssh/*"
+    chmod 644 "$cloneRoot/ssh/*.pub"
     # chmod 700 $cloneRoot/ssh/.git
   fi
 }
@@ -580,21 +601,21 @@ setSshPermissions() {
 say() {
   echo
   echo '**********************'
-  echo $@
+  echo "$@"
 }
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Echo a command and then execute it.
 
 sayAndDo() {
-  say $@
-  $@
+  say "$@"
+  "$@"
   echo
 }
 
 # -------------------------------------------------------------------------- }}}
 # {{{ The stage is set ... start the show!!!
 
-main $@
+main "$@"
 
 # -------------------------------------------------------------------------- }}}

@@ -27,6 +27,13 @@ pacman_packages=(
 )
 
 # -------------------------------------------------------------------------- }}}
+# {{{ luarocks packages
+
+luarocks_packages=(
+  "jsregexp"
+)
+
+# -------------------------------------------------------------------------- }}}
 # {{{ ruby-build packages
 
 ruby_build_packages=(

@@ -5,6 +5,8 @@
 #   1) 0 == false && 1 == true ... Duh!
 #   2) Options are listed alphabetically only because I scan them faster.
 #
+#shellcheck disable=SC2034
+#
 # -------------------------------------------------------------------------- }}}
 # {{{ Products to install.
 
@@ -13,6 +15,7 @@ desktopAppsFlag=0
 echoConfigFlag=0
 gitBashPromptFlag=1
 kjvFlag=0
+luarocksPackages=1
 lunarVimFlag=0
 myReposFlag=1
 neovimBuildFlag=1
@@ -55,5 +58,8 @@ rubyVersion='3.2.0'
 # is the Windows 10 or Windows 11 host name.
 wslHostName=Zero
 wslUserName="knook"
+
+# Reflector location is used to update the mirror list.
+reflectorLocation="United States"
 
 # -------------------------------------------------------------------------- }}}
