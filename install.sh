@@ -295,9 +295,11 @@ deleteSymLinks() {
 createSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     say 'Creating symbolic links.'
+    mkdir -p ~/.config
     mkdir -p ~/.config/bspwm
     mkdir -p ~/.config/sxhkd
     mkdir -p ~/.config/ranger
+
     # Symlinks at .config
     ln -fsv ~/git/dotfiles/alacritty             ~/.config/alacritty
     ln -fsv ~/git/dotfiles/awesome               ~/.config/awesome
@@ -315,7 +317,7 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/volumeicon            ~/.config/volumeicon
     ln -fsv ~/git/dotfiles/wallpaper             ~/.config/wallpaper
     ln -fsv ~/git/lvim.traap                     ~/.config/lvim
-    ln -fsv ~/git/nvim.traap	                 ~/.config/nvim
+    ln -fsv ~/git/nvim.traap                     ~/.config/nvim
 
     # Symlinks at $HOME
     ln -fsv ~/git/dotfiles/bash/bash_logout      ~/.bash_logout
