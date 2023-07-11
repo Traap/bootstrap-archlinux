@@ -296,8 +296,6 @@ createSymLinks() {
   if [[ $symlinksFlag == 1 ]]; then
     say 'Creating symbolic links.'
     mkdir -p ~/.config
-    mkdir -p ~/.config/bspwm
-    mkdir -p ~/.config/sxhkd
     mkdir -p ~/.config/ranger
 
     # Symlinks at .config
