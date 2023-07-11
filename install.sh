@@ -28,7 +28,7 @@ main() {
   installPacmanPackages
   installYayPackages
   installPipPackages
-  installLuaRocksPackages
+  installLuarocksPackages
   installTexPackages
 
   # Update mirrors.
@@ -73,6 +73,14 @@ main() {
   # Final personalization.
   swapCapsLockAndEscKey
   [[ -f $HOME/.bashrc ]] && source "$HOME/.bashrc"
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Tell them what is about to happen.
+
+say() {
+  echo '********************'
+  echo "${1}"
 }
 
 # -------------------------------------------------------------------------- }}}
@@ -599,7 +607,6 @@ setSshPermissions() {
 # {{{ Echo something with a separator line.
 
 say() {
-  echo
   echo '**********************'
   echo "$@"
 }
@@ -609,7 +616,7 @@ say() {
 
 sayAndDo() {
   say "$@"
-  "$@"
+  $@
   echo
 }
 
