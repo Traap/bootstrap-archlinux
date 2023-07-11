@@ -59,6 +59,7 @@ pip_packages=(
 
 tex_packages=(
   "texlive-bin"
+  "texlive-binextra"
   "texlive-core"
   "texlive-latexextra"
   "texlive-music"
