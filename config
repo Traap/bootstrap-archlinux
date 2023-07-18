@@ -13,14 +13,15 @@
 base16ColorsFlag=0
 desktopAppsFlag=0
 echoConfigFlag=0
-gitBashPromptFlag=1
+gitBashPromptFlag=0
+heyMailFlag=1
 kjvFlag=0
 luarocksPackages=0
 lunarVimFlag=0
 myReposFlag=0
 neovimBuildFlag=0
 neovimPluginsFlag=0
-osUpdateFlag=1
+osUpdateFlag=0
 osUpdateKeysFlag=0
 otherAppsFlag=0
 pacmanPackagesFlag=0

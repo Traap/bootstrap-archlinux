@@ -69,6 +69,7 @@ main() {
   # Install desktop applications.
   installDesktopApps
   installOtherApps
+  installHeyMail
 
   # Final personalization.
   swapCapsLockAndEscKey
@@ -517,6 +518,25 @@ installRust() {
     # Install Rust
     curl --proto '=https' --tlsv1.2 -sFf https://sh.rustup.rs | sh
     echo 'Rust installed.'
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install HeyMail
+
+installHeyMail() {
+  if [[ $heyMailFlag == 1 ]]; then
+    # Install Hey Mail
+    git clone https://aur.archlinux.org/snapd.git
+    cd snapd
+    makepkg -si
+
+    sudo systemctl enable --now snapd.socket
+
+    sudo ln -s /var/lib/snapd/snap /snap
+
+    # Next step is done after logout or reboot. Rats!
+    # sudo snap install hey-mail
   fi
 }
 
