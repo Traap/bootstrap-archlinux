@@ -113,6 +113,7 @@ desktop_packages=(
   "postgresql"
   "remmina"
   "screenkey"
+  "shotcut"
   "teams"
   "thunar-volman"
   "thunderbird"
