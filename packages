@@ -108,6 +108,7 @@ desktop_packages=(
   "brave-bin"
   "dbeaver"
   "obs-studio"
+  "obs-backgroundremoval"
   "okular"
   "onlyoffice-bin"
   "postgresql"
