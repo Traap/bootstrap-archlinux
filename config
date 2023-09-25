@@ -14,7 +14,7 @@ base16ColorsFlag=0
 desktopAppsFlag=0
 echoConfigFlag=0
 gitBashPromptFlag=0
-heyMailFlag=1
+heyMailFlag=0
 kjvFlag=0
 luarocksPackages=0
 lunarVimFlag=0
@@ -31,7 +31,7 @@ removePersonalizationFlag=0
 resolvFlag=0
 rustFlag=0
 sshDirFlag=0
-sshHostKeyFlag=0
+sshHostKeyFlag=1
 symlinksFlag=0
 texPackagesFlag=0
 tmuxPluginsFlag=0
@@ -57,7 +57,7 @@ rubyVersion='3.2.0'
 
 # Host name the Arch linux installation is known by.  The default host name
 # is the Windows 10 or Windows 11 host name.
-wslHostName=Zero
+wslHostName=DarkKnight
 wslUserName="knook"
 
 # Reflector location is used to update the mirror list.

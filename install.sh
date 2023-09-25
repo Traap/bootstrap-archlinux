@@ -617,10 +617,10 @@ setSshPermissions() {
 
   if [[ $sshHostKeyFlag == 1 ]]; then
     say 'Setting ssh permissions.'
-    chmod 600 "$cloneRoot/ssh/*"
-    chmod 644 "$cloneRoot/ssh/*.pub"
-    # chmod 700 $cloneRoot/ssh/.git
+    chmod 600 "$cloneRoot/ssh/$wslHostName"
+    chmod 644 "$cloneRoot/ssh/$wslHostName.pub"
   fi
+  # chmod 700 $cloneRoot/ssh/.git
 }
 
 # -------------------------------------------------------------------------- }}}
