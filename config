@@ -18,6 +18,7 @@ heyMailFlag=0
 kjvFlag=0
 luarocksPackages=0
 lunarVimFlag=0
+mirrorFlag=1
 myReposFlag=0
 neovimBuildFlag=0
 neovimPluginsFlag=0
@@ -31,7 +32,7 @@ removePersonalizationFlag=0
 resolvFlag=0
 rustFlag=0
 sshDirFlag=0
-sshHostKeyFlag=1
+sshHostKeyFlag=0
 symlinksFlag=0
 texPackagesFlag=0
 tmuxPluginsFlag=0
@@ -53,12 +54,12 @@ gitUserName="Traap"
 
 # Ruby version to install.  rbenv is the Ruby enviornment manager.
 # rubyVerion becomes the global Ruby version installed.
-rubyVersion='3.2.0'
+rubyVersion='3.3.0'
 
 # Host name the Arch linux installation is known by.  The default host name
 # is the Windows 10 or Windows 11 host name.
-wslHostName=DarkKnight
-wslUserName="knook"
+wslHostName=GSA-MKGLQ
+wslUserName="135272"
 
 # Reflector location is used to update the mirror list.
 reflectorLocation="United States"

@@ -430,7 +430,7 @@ installLunarVim() {
 # {{{ Update mirror list with reflector
 
 updateMirrorList () {
-  if [[ $mirroirFlag == 1 ]]; then
+  if [[ $mirrorFlag == 1 ]]; then
     say 'Updating mirror list.'
 
     sudo reflector -c "$reflectorLocation" \
