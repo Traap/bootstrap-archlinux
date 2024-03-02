@@ -1,9 +1,10 @@
 # GitHub settings
 Host github.com
-    User GIT-USER-NAME
-    IdentityFile ~/.ssh/WSL-HOST-NAME
+  Hostname ssh.github.com
+  Port 443
+  User GIT-USER-NAME
+  IdentityFile ~/.ssh/WSL-HOST-NAME
 
 # All Hosts
 Host *
-    ServerAliveInterval 300
-
+  ServerAliveInterval 300

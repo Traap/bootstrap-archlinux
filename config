@@ -2,43 +2,42 @@
 # {{{ Notes
 #
 # Notes:
-#   1) 0 == false && 1 == true ... Duh!
-#   2) Options are listed alphabetically only because I scan them faster.
+#   Options are listed alphabetically only because I scan them faster.
 #
 #shellcheck disable=SC2034
 #
 # -------------------------------------------------------------------------- }}}
 # {{{ Products to install.
 
-base16ColorsFlag=0
-desktopAppsFlag=0
-echoConfigFlag=0
-gitBashPromptFlag=0
-heyMailFlag=0
-kjvFlag=0
-luarocksPackages=0
-lunarVimFlag=0
-mirrorFlag=1
-myReposFlag=0
-neovimBuildFlag=0
-neovimPluginsFlag=0
-osUpdateFlag=0
-osUpdateKeysFlag=0
-otherAppsFlag=0
-pacmanPackagesFlag=0
-pipPackagesFlag=0
-rbenvFlag=0
-removePersonalizationFlag=0
-resolvFlag=0
-rustFlag=0
-sshDirFlag=0
-sshHostKeyFlag=0
-symlinksFlag=0
-texPackagesFlag=0
-tmuxPluginsFlag=0
-vimPluginsFlag=0
-wslFlag=0
-yayPackagesFlag=0
+base16ColorsFlag=false
+desktopAppsFlag=false
+echoConfigFlag=false
+gitBashPromptFlag=false
+heyMailFlag=false
+kjvFlag=false
+luarocksPackages=false
+lunarVimFlag=false
+mirrorFlag=false
+myReposFlag=false
+neovimBuildFlag=false
+neovimPluginsFlag=false
+osUpdateFlag=false
+osUpdateKeysFlag=false
+otherAppsFlag=false
+pacmanPackagesFlag=false
+pipPackagesFlag=false
+rbenvFlag=false
+removePersonalizationFlag=false
+resolvFlag=false
+rustFlag=false
+sshDirFlag=false
+sshHostKeyFlag=false
+symlinksFlag=false
+texPackagesFlag=false
+tmuxPluginsFlag=true
+vimPluginsFlag=false
+wslFlag=false
+yayPackagesFlag=false
 
 # -------------------------------------------------------------------------- }}}
 # {{{ Other variables used during product installation.
@@ -58,8 +57,8 @@ rubyVersion='3.3.0'
 
 # Host name the Arch linux installation is known by.  The default host name
 # is the Windows 10 or Windows 11 host name.
-wslHostName=GSA-MKGLQ
-wslUserName="135272"
+wslHostName=Zero
+wslUserName=Traap
 
 # Reflector location is used to update the mirror list.
 reflectorLocation="United States"
