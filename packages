@@ -12,6 +12,7 @@ pacman_packages=(
   "reflector"
   "openssh"
   "openssl"
+  "pamac"
   "python"
   "screenkey"
   "slop"
@@ -24,6 +25,8 @@ pacman_packages=(
   "xdo"
   "xdotool"
   "xsel"
+  "xfce4-appfinder"
+  "xfce4-settings"
 )
 
 # -------------------------------------------------------------------------- }}}
