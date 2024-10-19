@@ -46,6 +46,13 @@ ruby_build_packages=(
 )
 
 # -------------------------------------------------------------------------- }}}
+# {{{ nodejs packages
+
+nodejs_packages=(
+  "neovim"
+)
+
+# -------------------------------------------------------------------------- }}}
 # {{{ pip packages
 
 pip_packages=(
@@ -82,6 +89,7 @@ yay_packages=(
   "fdfind"
   "flameshot"
   "freerdp"
+  "fastfetch"
   "giy-htmldocs"
   "go"
   "graphviz"

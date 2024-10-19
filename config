@@ -21,6 +21,7 @@ mirrorFlag=false
 myReposFlag=false
 neovimBuildFlag=false
 neovimPluginsFlag=false
+nodeJsFlag=false
 osUpdateFlag=false
 osUpdateKeysFlag=false
 otherAppsFlag=false
@@ -34,9 +35,9 @@ sshDirFlag=false
 sshHostKeyFlag=false
 symlinksFlag=false
 texPackagesFlag=false
-tmuxPluginsFlag=true
-vimPluginsFlag=false
-wslFlag=false
+timezoneFlag=true
+tmuxPluginsFlag=false
+vimPluginsFlag=false wslFlag=false
 yayPackagesFlag=false
 
 # -------------------------------------------------------------------------- }}}
@@ -62,5 +63,8 @@ wslUserName=Traap
 
 # Reflector location is used to update the mirror list.
 reflectorLocation="United States"
+
+# Timezone
+timezone=America/Los_Angeles
 
 # -------------------------------------------------------------------------- }}}

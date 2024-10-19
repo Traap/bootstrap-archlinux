@@ -61,6 +61,7 @@ main() {
   addProgramsNeoVimInterfacesWith
 
   # Install editors and terminal multiplexers.
+  installNodeJs
   installLunarVim
   loadTmuxPlugins
   loadNeovimPlugins
@@ -73,6 +74,9 @@ main() {
 
   # Final personalization.
   swapCapsLockAndEscKey
+  setTimezone
+
+  # Source bashrc for kicks ... :)
   [[ -f $HOME/.bashrc ]] && source "$HOME/.bashrc"
 }
 
@@ -147,6 +151,16 @@ installOtherApps() {
   if [[ $otherAppsFlag == true ]]; then
     say 'Installing other applications.'
     sudo yay -Syyu --noconfirm "${other_packages[@]}"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install node packages.
+
+installNodeJs() {
+  if [[ $nodeJsFlag == true ]]; then
+    say 'Installing NodeJs packages .'
+    sudo npm install -g "${nodejs_packages[@]}"
   fi
 }
 
@@ -518,7 +532,6 @@ installRubyGems() {
 
 installRust() {
   if [[ $rustFlag == true ]]; then
-
     # Install Rust
     curl --proto '=https' --tlsv1.2 -sFf https://sh.rustup.rs | sh
     echo 'Rust installed.'
@@ -530,6 +543,8 @@ installRust() {
 
 installHeyMail() {
   if [[ $heyMailFlag == true ]]; then
+    say 'Installing Hey Mail.'
+
     # Install Hey Mail
     git clone https://aur.archlinux.org/snapd.git
     cd snapd
@@ -541,6 +556,18 @@ installHeyMail() {
 
     # Next step is done after logout or reboot. Rats!
     # sudo snap install hey-mail
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Set timezone
+
+setTimezone() {
+  if [[ $timezoneFlag == true ]]; then
+    say 'Setting timezone and ntp sync.'
+    sudo timedatectl set-timezone $timezone
+    sudo timedatectl set-ntp true
+    sudo systemctl restart systemd-timesyncd
   fi
 }
 
