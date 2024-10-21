@@ -35,9 +35,10 @@ sshDirFlag=false
 sshHostKeyFlag=false
 symlinksFlag=false
 texPackagesFlag=false
-timezoneFlag=true
+timezoneFlag=false
 tmuxPluginsFlag=false
-vimPluginsFlag=false wslFlag=false
+vimPluginsFlag=false
+wslFlag=false
 yayPackagesFlag=false
 
 # -------------------------------------------------------------------------- }}}
