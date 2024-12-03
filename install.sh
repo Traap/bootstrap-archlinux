@@ -171,10 +171,13 @@ installYayPackages() {
   if [[ $yayPackagesFlag == true ]]; then
     say 'Installing yay packages.'
 
-    git clone https://aur.archlinux.org/yay.git
-    cd yay || exit
-    makepkg -si
-    cd ..
+    if [[ ! $(which yay) ]]; then
+      say 'Building yay'
+      git clone https://aur.archlinux.org/yay.git
+      cd yay || exit
+      makepkg -si
+      cd ..
+    fi
 
     yay -Syu --noconfirm "${yay_packages[@]}"
     libtool --finish /usr/lib/libfakeroot
@@ -273,16 +276,16 @@ deleteSymLinks() {
 
     # Symlinks at .config
     rm -rfv ~/.config/Thunar
-    rm -rfv ~/.bash_logout
     rm -rfv ~/.config/alacritty
-    rm -rfv ~/.config/awesome
     rm -rfv ~/.config/bspwm
     rm -rfv ~/.config/dconf
     rm -rfv ~/.config/dunst
+    rm -rfv ~/.config/foot
     rm -rfv ~/.config/hypr
     rm -rfv ~/.config/kitty
-    rm -rfv ~/.config/lvim
+    # rm -rfv ~/.config/lvim
     rm -rfv ~/.config/nvim
+    rm -rfv ~/.config/neofetch
     rm -rfv ~/.config/picom
     rm -rfv ~/.config/polybar
     rm -rfv ~/.config/ranger
@@ -292,7 +295,13 @@ deleteSymLinks() {
     rm -rfv ~/.config/sxhkd
     rm -rfv ~/.config/volumeicon
     rm -rfv ~/.config/wallpaper
+    rm -rfv ~/.config/waybar
+    rm -rfv ~/.config/wayfire
+    rm -rfv ~/.config/wayfire.ini
     rm -rfv ~/.config/wezterm
+    rm -rfv ~/.config/wlogout
+    rm -rfv ~/.config/wofi
+    rm -rfv ~/.config/wofifull
 
     # Symlinks at $HOME
     rm -rfv ~/.bash_logout
@@ -305,8 +314,8 @@ deleteSymLinks() {
     rm -rfv ~/.gitignore_global
     rm -rfv ~/.inputrc
     rm -rfv ~/.latexmkrc
-    rm -rfv ~/.mailcap
-    rm -rfv ~/.muttrc
+    # rm -rfv ~/.mailcap
+    # rm -rfv ~/.muttrc
     rm -rfv ~/.ssh
     rm -rfv ~/.tmux
     rm -rfv ~/.tmux.conf
@@ -327,12 +336,16 @@ createSymLinks() {
     mkdir -p ~/.config/ranger
 
     # Symlinks at .config
+    ln -fsv ~/git/dotfiles/Thunar                ~/.config/Thunar
     ln -fsv ~/git/dotfiles/alacritty             ~/.config/alacritty
-    ln -fsv ~/git/dotfiles/awesome               ~/.config/awesome
+    ln -fsv ~/git/dotfiles/autostart             ~/.config/autostart
     ln -fsv ~/git/dotfiles/bspwm                 ~/.config/bspwm
     ln -fsv ~/git/dotfiles/dconf                 ~/.config/dconf
+    ln -fsv ~/git/dotfiles/foot                  ~/.config/foot
     ln -fsv ~/git/dotfiles/dunst                 ~/.config/dunst
+    ln -fsv ~/git/dotfiles/hypr                  ~/.config/hypr
     ln -fsv ~/git/dotfiles/kitty                 ~/.config/kitty
+    ln -fsv ~/git/dotfiles/neofetch              ~/.config/neofetch
     ln -fsv ~/git/dotfiles/picom                 ~/.config/picom
     ln -fsv ~/git/dotfiles/polybar               ~/.config/polybar
     ln -fsv ~/git/dotfiles/ranger                ~/.config/ranger
@@ -342,7 +355,15 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/sxhkd                 ~/.config/sxhkd
     ln -fsv ~/git/dotfiles/volumeicon            ~/.config/volumeicon
     ln -fsv ~/git/dotfiles/wallpaper             ~/.config/wallpaper
-    ln -fsv ~/git/lvim.traap                     ~/.config/lvim
+    ln -fsv ~/git/dotfiles/waybar                ~/.config/waybar
+    ln -fsv ~/git/dotfiles/wayfire               ~/.config/wayfire
+    ln -fsv ~/git/dotfiles/wayfire/wayfire.ini   ~/.config/wayfire.ini
+    ln -fsv ~/git/dotfiles/wayfire/wf-shell.ini  ~/.config/wf-shell.ini
+    ln -fsv ~/git/dotfiles/wezterm               ~/.config/wezterm
+    ln -fsv ~/git/dotfiles/wlogout               ~/.config/wlogout
+    ln -fsv ~/git/dotfiles/wofi                  ~/.config/wofi
+    ln -fsv ~/git/dotfiles/wofifull              ~/.config/wofifull
+    # ln -fsv ~/git/lvim.traap                     ~/.config/lvim
     ln -fsv ~/git/nvim.traap                     ~/.config/nvim
 
     # Symlinks at $HOME
@@ -356,14 +377,15 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/git/gitconfig         ~/.gitconfig
     ln -fsv ~/git/dotfiles/git/gitignore_global  ~/.gitignore_global
     ln -fsv ~/git/dotfiles/latex/latexmkrc       ~/.latexmkrc
-    ln -fsv ~/git/mutt/mailcap                   ~/.mailcap
-    ln -fsv ~/git/mutt/muttrc                    ~/.muttrc
+    # ln -fsv ~/git/mutt/mailcap                   ~/.mailcap
+    # ln -fsv ~/git/mutt/muttrc                    ~/.muttrc
     ln -fsv ~/git/ssh                            ~/.ssh
     ln -fsv ~/git/ssh/config.vim                 ~/.config.vim
     ln -fsv ~/git/tmux                           ~/.tmux
     ln -fsv ~/git/tmux/tmux.conf                 ~/.tmux.conf
     ln -fsv ~/git/vim                            ~/.vim
     ln -fsv ~/git/vim/vimrc                      ~/.vimrc
+
  fi
 }
 
