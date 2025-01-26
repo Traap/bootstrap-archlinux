@@ -55,13 +55,18 @@ ruby_build_packages=(
 
 nodejs_packages=(
   "neovim"
+  "node-gyp"
+  "nodejs"
+  "nodejs-nopt"
+  "npm"
+  "semver"
+  "yarn"
 )
 
 # -------------------------------------------------------------------------- }}}
 # {{{ pip packages
 
 pip_packages=(
-  "ueberzug"
   "pynvim"
   "neovim-remote"
 )
@@ -90,11 +95,11 @@ yay_packages=(
   "dunst"
   "exa"
   "fastfetch"
+  "fastfetch"
   "fd"
   "fdfind"
   "flameshot"
   "freerdp"
-  "fastfetch"
   "fzf"
   "giy-htmldocs"
   "go"
@@ -107,8 +112,8 @@ yay_packages=(
   "neofetch"
   "nodejs"
   "npm"
-  "pandoc"
   "pamac-aur"
+  "pandoc"
   "poppler"
   "python"
   "python-pip"
@@ -131,8 +136,8 @@ yay_packages=(
 desktop_packages=(
   "brave-bin"
   "dbeaver"
-  "obs-studio"
   "obs-backgroundremoval"
+  "obs-studio"
   "okular"
   "onlyoffice-bin"
   "postgresql"
