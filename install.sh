@@ -92,15 +92,20 @@ say() {
 # {{{ Source all configuration files
 
 sourceFiles() {
-  missingFile=0
+  missingFile=false
 
   files=(config repos packages)
   for f in "${files[@]}"
   do
-    source "$f"
+    if [[ -f $f ]]; then
+      source "$f"
+    else
+      missingFile=true
+      echo "Configuration file $f is missing."
+    fi
   done
 
-  [[ $missingFile == true ]] && say 'Missing file(s) program exiting.' && exit
+  [[ $missingFile == true ]] && echo 'Missing file(s) program exiting.' && exit
 
 }
 
