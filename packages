@@ -1,12 +1,11 @@
-# {{{ pacman packages
 
-pacman_packages=(
   "base-devel"
   "cmake"
   "curl"
   "dunst"
   "git"
   "go"
+  "imagemagick"
   "meld"
   "ninja"
   "openssh"
@@ -21,6 +20,7 @@ pacman_packages=(
   "unzip"
   "wget"
   "which"
+  "wl-clipboard"
   "xclip"
   "xdg-desktop-portal"
   "xdg-desktop-portal-gtk"
@@ -29,6 +29,8 @@ pacman_packages=(
   "xfce4-appfinder"
   "xfce4-settings"
   "xsel"
+# {{{ pacman packages
+pacman_packages=(
 )
 
 # -------------------------------------------------------------------------- }}}
@@ -89,6 +91,7 @@ tex_packages=(
 # {{{ yay packages
 
 yay_packages=(
+  "7zip"
   "bashtop"
   "bat"
   "bluetooth-autoconnect"
@@ -105,6 +108,7 @@ yay_packages=(
   "go"
   "graphviz"
   "hey-mail-bin"
+  "jq"
   "jre-openjdk-headless"
   "kubectl"
   "lazygit"
