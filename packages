@@ -1,9 +1,12 @@
+# {{{ pacman packages
 
+pacman_packages=(
   "base-devel"
   "cmake"
   "curl"
   "dunst"
   "git"
+  "github-cli"
   "go"
   "imagemagick"
   "meld"
@@ -29,8 +32,6 @@
   "xfce4-appfinder"
   "xfce4-settings"
   "xsel"
-# {{{ pacman packages
-pacman_packages=(
 )
 
 # -------------------------------------------------------------------------- }}}
