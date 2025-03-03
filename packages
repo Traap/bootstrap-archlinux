@@ -9,6 +9,7 @@ pacman_packages=(
   "github-cli"
   "go"
   "imagemagick"
+  "luacheck"
   "meld"
   "ninja"
   "openssh"
