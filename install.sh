@@ -62,7 +62,6 @@ main() {
 
   # Install editors and terminal multiplexers.
   installNodeJs
-  installLunarVim
   loadTmuxPlugins
   loadNeovimPlugins
   loadVimPlugins
