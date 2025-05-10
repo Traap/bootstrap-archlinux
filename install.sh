@@ -263,6 +263,7 @@ cloneBase16Colors () {
 # -------------------------------------------------------------------------- }}}
 # {{{ cloneTmuxPlugins
 
+
 cloneTmuxPlugins () {
   if [[ $tmuxPluginsFlag == true ]]; then
     say 'Cloning TMUX plugins.'
@@ -273,27 +274,27 @@ cloneTmuxPlugins () {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ deleteSymLinks
+# {{{ Delete symbolic links
 
 deleteSymLinks() {
-  if [[ $symlinksFlag == true ]]; then
+  if [[ $deleteSymLinksFlag == 1 ]]; then
     echo "Deleting symbolic links."
 
     # Symlinks at .config
     rm -rfv ~/.config/Thunar
     rm -rfv ~/.config/alacritty
+    rm -rfv ~/.config/autostart
     rm -rfv ~/.config/bspwm
     rm -rfv ~/.config/dconf
     rm -rfv ~/.config/dunst
     rm -rfv ~/.config/foot
+    rm -rfv ~/.config/ghostty
     rm -rfv ~/.config/hypr
     rm -rfv ~/.config/kitty
-    # rm -rfv ~/.config/lvim
     rm -rfv ~/.config/nvim
     rm -rfv ~/.config/neofetch
     rm -rfv ~/.config/picom
     rm -rfv ~/.config/polybar
-    rm -rfv ~/.config/ranger
     rm -rfv ~/.config/remmina
     rm -rfv ~/.config/rofi
     rm -rfv ~/.config/screenkey.json
@@ -307,12 +308,13 @@ deleteSymLinks() {
     rm -rfv ~/.config/wlogout
     rm -rfv ~/.config/wofi
     rm -rfv ~/.config/wofifull
+    rm -rfv ~/.config/swaylock
 
     # Symlinks at $HOME
     rm -rfv ~/.bash_logout
     rm -rfv ~/.bash_profile
     rm -rfv ~/.bashrc
-    rm -rfv ~/.bashrc-personal
+    rm -rfv ~/.bashrc_personal
     rm -rfv ~/.config.vim
     rm -rfv ~/.dircolors
     rm -rfv ~/.gitconfig
@@ -332,13 +334,11 @@ deleteSymLinks() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ createSymLinks
-
+# {{{ Create symbolic links
 createSymLinks() {
-  if [[ $symlinksFlag == true ]]; then
-    say 'Creating symbolic links.'
+  if [[ $createSymLinksFlag == 1 ]]; then
+    echo "Creating symbolic links."
     mkdir -p ~/.config
-    mkdir -p ~/.config/ranger
 
     # Symlinks at .config
     ln -fsv ~/git/dotfiles/Thunar                ~/.config/Thunar
@@ -348,12 +348,12 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/dconf                 ~/.config/dconf
     ln -fsv ~/git/dotfiles/foot                  ~/.config/foot
     ln -fsv ~/git/dotfiles/dunst                 ~/.config/dunst
+    ln -fsv ~/git/dotfiles/ghostty               ~/.config/ghostty
     ln -fsv ~/git/dotfiles/hypr                  ~/.config/hypr
     ln -fsv ~/git/dotfiles/kitty                 ~/.config/kitty
     ln -fsv ~/git/dotfiles/neofetch              ~/.config/neofetch
     ln -fsv ~/git/dotfiles/picom                 ~/.config/picom
     ln -fsv ~/git/dotfiles/polybar               ~/.config/polybar
-    ln -fsv ~/git/dotfiles/ranger                ~/.config/ranger
     ln -fsv ~/git/dotfiles/remmina               ~/.config/remmina
     ln -fsv ~/git/dotfiles/rofi                  ~/.config/rofi
     ln -fsv ~/git/dotfiles/sk/screenkey.json     ~/.config/screenkey.json
@@ -368,14 +368,14 @@ createSymLinks() {
     ln -fsv ~/git/dotfiles/wlogout               ~/.config/wlogout
     ln -fsv ~/git/dotfiles/wofi                  ~/.config/wofi
     ln -fsv ~/git/dotfiles/wofifull              ~/.config/wofifull
-    # ln -fsv ~/git/lvim.traap                     ~/.config/lvim
+    ln -fsv ~/git/dotfiles/swaylock              ~/.config/swaylock
     ln -fsv ~/git/nvim.traap                     ~/.config/nvim
 
     # Symlinks at $HOME
     ln -fsv ~/git/dotfiles/bash/bash_logout      ~/.bash_logout
     ln -fsv ~/git/dotfiles/bash/bash_profile     ~/.bash_profile
     ln -fsv ~/git/dotfiles/bash/bashrc           ~/.bashrc
-    ln -fsv ~/git/dotfiles/bash/bashrc-personal  ~/.bashrc-personal
+    ln -fsv ~/git/dotfiles/bash/bashrc_personal  ~/.bashrc_personal
     ln -fsv ~/git/dotfiles/bash/dircolors        ~/.dircolors
     ln -fsv ~/git/dotfiles/bash/inputrc          ~/.inputrc
     ln -fsv ~/git/dotfiles/bash/xinitrc          ~/.xinitrc
@@ -390,8 +390,7 @@ createSymLinks() {
     ln -fsv ~/git/tmux/tmux.conf                 ~/.tmux.conf
     ln -fsv ~/git/vim                            ~/.vim
     ln -fsv ~/git/vim/vimrc                      ~/.vimrc
-
- fi
+  fi
 }
 
 # -------------------------------------------------------------------------- }}}
