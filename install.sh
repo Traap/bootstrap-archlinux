@@ -25,6 +25,7 @@ main() {
   updateOS
 
   # Install packages.
+  installBashGitPrompt
   installPacmanPackages
   installYayPackages
   installPipPackages
@@ -50,7 +51,6 @@ main() {
   setSshPermissions
 
   # Clone different repositories needed for personalization.
-  cloneBashGitPrompt
   cloneBase16Colors
   cloneMyRepos
   cloneTmuxPlugins
@@ -140,12 +140,97 @@ installDesktopApps() {
 }
 
 # -------------------------------------------------------------------------- }}}
+# {{{ Install BashGitPrompt
+
+installBashGitPrompt() {
+  if [[ $gitBashPromptFlag == true ]]; then
+    say 'Cloning bash-git-prompt.'
+    rm -rf ~/.bash-git-prompt
+    src=https://github.com/magicmonty/bash-git-prompt
+    dst=~/.bash-git-prompt
+    git clone "$sr$dst"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install HeyMail
+
+installHeyMail() {
+  if [[ $heyMailFlag == true ]]; then
+    say 'Installing Hey Mail.'
+
+    # Install Hey Mail
+    git clone https://aur.archlinux.org/snapd.git
+    cd snapd
+    makepkg -si
+
+    sudo systemctl enable --now snapd.socket
+
+    sudo ln -s /var/lib/snapd/snap /snap
+
+    # Next step is done after logout or reboot. Rats!
+    # sudo snap install hey-mail
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
 # {{{ Install pacman packages.
 
 installPacmanPackages() {
   if [[ $pacmanPackagesFlag == true ]]; then
     say 'Installing pacman packages.'
     sudo pacman -Syyu --noconfirm "${pacman_packages[@]}"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Ruby
+
+installRuby() {
+  if [[ $rbenvFlag == true ]]; then
+
+    say 'Installing ruby-build dependencies.'
+    sudo pacman -Syu --noconfirm "${ruby_build_packages[@]}"
+
+    say 'Acquire Ruby dependencies.'
+    yay -S --noconfirm \
+      rbenv \
+      ruby-build \
+
+    say 'Build and install Ruby.'
+    eval "$(rbenv init -)"
+    rbenv install "$rubyVersion"
+    rbenv global "$rubyVersion"
+
+    echo 'Ruby installed.'
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Ruby Gems
+
+installRubyGems() {
+  if [[ $rbenvFlag == true ]]; then
+
+    # Install Ruby Gems
+    gem install \
+      bundler \
+      rake \
+      rspec \
+      neovim
+
+    echo 'Ruby Gems installed.'
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Rust
+
+installRust() {
+  if [[ $rustFlag == true ]]; then
+    # Install Rust
+    curl --proto '=https' --tlsv1.2 -sFf https://sh.rustup.rs | sh
+    echo 'Rust installed.'
   fi
 }
 
@@ -232,19 +317,6 @@ cloneMyRepos() {
       git clone "$src" "$dst"
       echo ""
     done
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ cloneBashGitPrompt
-
-cloneBashGitPrompt() {
-  if [[ $gitBashPromptFlag == true ]]; then
-    say 'Cloning bash-git-prompt.'
-    rm -rf ~/.bash-git-prompt
-    src=https://github.com/magicmonty/bash-git-prompt
-    dst=~/.bash-git-prompt
-    git clone "$src" "$dst"
   fi
 }
 
@@ -459,18 +531,6 @@ addProgramsNeoVimInterfacesWith() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Install LunarVim
-
-installLunarVim() {
-  if [[ $lunarVimFlag == true ]]; then
-    say 'Install LunarVim.'
-    local release='release-1.2/neovim-0.8'
-    local cmdUrl='https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh'
-    LV_BRANCH=$release bash <(curl -s $cmdUrl)
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
 # {{{ Update mirror list with reflector
 
 updateMirrorList () {
@@ -510,78 +570,6 @@ loadVimPlugins() {
   if [[ $vimPluginsFlag == true ]]; then
     say 'Loading vim plugins.'
     vim
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ Install Ruby
-
-installRuby() {
-  if [[ $rbenvFlag == true ]]; then
-
-    say 'Installing ruby-build dependencies.'
-    sudo pacman -Syu --noconfirm "${ruby_build_packages[@]}"
-
-    say 'Acquire Ruby dependencies.'
-    yay -S --noconfirm \
-      rbenv \
-      ruby-build \
-
-    say 'Build and install Ruby.'
-    eval "$(rbenv init -)"
-    rbenv install "$rubyVersion"
-    rbenv global "$rubyVersion"
-
-    echo 'Ruby installed.'
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ Install Ruby Gems
-
-installRubyGems() {
-  if [[ $rbenvFlag == true ]]; then
-
-    # Install Ruby Gems
-    gem install \
-      bundler \
-      rake \
-      rspec \
-      neovim
-
-    echo 'Ruby Gems installed.'
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ Install Rust
-
-installRust() {
-  if [[ $rustFlag == true ]]; then
-    # Install Rust
-    curl --proto '=https' --tlsv1.2 -sFf https://sh.rustup.rs | sh
-    echo 'Rust installed.'
-  fi
-}
-
-# -------------------------------------------------------------------------- }}}
-# {{{ Install HeyMail
-
-installHeyMail() {
-  if [[ $heyMailFlag == true ]]; then
-    say 'Installing Hey Mail.'
-
-    # Install Hey Mail
-    git clone https://aur.archlinux.org/snapd.git
-    cd snapd
-    makepkg -si
-
-    sudo systemctl enable --now snapd.socket
-
-    sudo ln -s /var/lib/snapd/snap /snap
-
-    # Next step is done after logout or reboot. Rats!
-    # sudo snap install hey-mail
   fi
 }
 

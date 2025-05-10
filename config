@@ -16,7 +16,6 @@ gitBashPromptFlag=false
 heyMailFlag=false
 kjvFlag=false
 luarocksPackages=false
-lunarVimFlag=false
 mirrorFlag=false
 myReposFlag=false
 neovimBuildFlag=false
