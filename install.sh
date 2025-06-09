@@ -35,6 +35,10 @@ main() {
   # Update mirrors.
   updateMirrorList
 
+  # Install tools tools
+  installGits
+  installNvims
+
   # Install programming languages.
   installRuby
   installRubyGems
@@ -67,8 +71,9 @@ main() {
   loadVimPlugins
 
   # Install desktop applications.
-  installDesktopApps
-  installOtherApps
+  installBspwm
+  installHyrpland
+  installMsWindowsApps
   installHeyMail
 
   # Final personalization.
@@ -129,12 +134,12 @@ updateOS() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Install desktop applications.
+# {{{ Install bspwm
 
-installDesktopApps() {
+installBspwm() {
   if [[ $desktopAppsFlag == true ]]; then
-    say 'Installing desktop applications.'
-    sudo yay -Syyu --noconfirm "${desktop_packages[@]}"
+    say 'Installing BSPWM applications.'
+    sudo yay -Syyu --noconfirm "${bspwm_packages[@]}"
   fi
 }
 
@@ -148,6 +153,17 @@ installBashGitPrompt() {
     src=https://github.com/magicmonty/bash-git-prompt
     dst=~/.bash-git-prompt
     git clone "$sr$dst"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Gits
+
+installGits() {
+  if [[ $gitsFlag == true ]]; then
+    say 'Installing Gits.'
+    url="https://raw.githubusercontent.com/Traap/gits/master/install.sh"
+    /bin/bash -c "$(curl -fsSL $url)"
   fi
 }
 
@@ -169,6 +185,16 @@ installHeyMail() {
 
     # Next step is done after logout or reboot. Rats!
     # sudo snap install hey-mail
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Hyprland
+
+installHyprland() {
+  if [[ $hyprlandFlag == true ]]; then
+    say 'Installing Hyprland applications.'
+    sudo yay -Syyu --noconfirm "${hyprland_packages[@]}"
   fi
 }
 
@@ -236,10 +262,10 @@ installRust() {
 # -------------------------------------------------------------------------- }}}
 # {{{ Install other applications.
 
-installOtherApps() {
-  if [[ $otherAppsFlag == true ]]; then
-    say 'Installing other applications.'
-    sudo yay -Syyu --noconfirm "${other_packages[@]}"
+installMsWindowsApps() {
+  if [[ $msWindowsAppsFlag == true ]]; then
+    say 'Installing MS Windows applications.'
+    sudo yay -Syyu --noconfirm "${ms_windows_packages[@]}"
   fi
 }
 
@@ -250,6 +276,17 @@ installNodeJs() {
   if [[ $nodeJsFlag == true ]]; then
     say 'Installing NodeJs packages .'
     sudo npm install -g "${nodejs_packages[@]}"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Nvims
+
+installNvims() {
+  if [[ $NvimsFlag == true ]]; then
+    say 'Installing Nvims.'
+    url="https://raw.githubusercontent.com/Traap/nvims/master/install.sh"
+    /bin/bash -c "$(curl -fsSL $url)"
   fi
 }
 
@@ -309,13 +346,7 @@ installTexPackages() {
 cloneMyRepos() {
   if [[ $myReposFlag == true ]]; then
     say 'Cloning my repositories.'
-    for r in "${repos[@]}"
-    do
-      src=https://github.com/Traap/$r.git
-      dst=$cloneRoot/$r
-      git clone "$src" "$dst"
-      echo ""
-    done
+    gits clone -r git
   fi
 }
 

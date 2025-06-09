@@ -10,20 +10,23 @@
 # {{{ Products to install.
 
 base16ColorsFlag=false
-desktopAppsFlag=false
+bspwmFlag=false
 echoConfigFlag=false
 gitBashPromptFlag=false
+gitsFlag=true
 heyMailFlag=false
 kjvFlag=false
+hyprlandFlag=false
 luarocksPackages=false
 mirrorFlag=false
+msWindowsAppsFlag=false
 myReposFlag=false
+nvimsFlag=true
 neovimBuildFlag=false
 neovimPluginsFlag=false
 nodeJsFlag=false
 osUpdateFlag=false
 osUpdateKeysFlag=false
-otherAppsFlag=false
 pacmanPackagesFlag=false
 pipPackagesFlag=false
 rbenvFlag=false

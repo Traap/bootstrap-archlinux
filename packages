@@ -26,6 +26,12 @@ pacman_packages=(
   "unzip"
   "wget"
   "which"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ bspwm packages
+
+bwpwm_packages=(
   "wl-clipboard"
   "xclip"
   "xdg-desktop-portal"
@@ -35,6 +41,26 @@ pacman_packages=(
   "xfce4-appfinder"
   "xfce4-settings"
   "xsel"
+)
+
+# -------------------------------------------------------------------------- }}}
+# {{{ hyprland packages
+
+hyprland_packages=(
+  "hyprcursor"
+  "hyprgraphics"
+  "hyprland"
+  "hyprland-qt-support"
+  "hyprland-qtutilsrr"
+  "hyprlang"
+  "hyprpaper"
+  "hyprutils"
+  "hyprwayland-scanner"
+  "wavpack"
+  "waybar-git"
+  "wayland"
+  "wayland-protocols"
+  "wl-clipboard"
 )
 
 # -------------------------------------------------------------------------- }}}
@@ -106,6 +132,7 @@ yay_packages=(
   "fd"
   "fdfind"
   "flameshot"
+  "flameshot-git"
   "freerdp"
   "fzf"
   "giy-htmldocs"
@@ -159,9 +186,9 @@ desktop_packages=(
 )
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Other packages
+# {{{ MS Windows packages
 
-other_packages=(
+ms_windows_packages=(
   "aspnet-runtime"
   "dotnet-runtime"
   "dotnet-sdk"
