@@ -72,7 +72,7 @@ main() {
 
   # Install desktop applications.
   installBspwm
-  installHyrpland
+  installHyprland
   installMsWindowsApps
   installHeyMail
 
@@ -137,7 +137,7 @@ updateOS() {
 # {{{ Install bspwm
 
 installBspwm() {
-  if [[ $desktopAppsFlag == true ]]; then
+  if [[ $bspwmFlag == true ]]; then
     say 'Installing BSPWM applications.'
     sudo yay -Syyu --noconfirm "${bspwm_packages[@]}"
   fi
