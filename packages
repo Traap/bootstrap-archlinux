@@ -1,10 +1,8 @@
 # {{{ pacman packages
-
 pacman_packages=(
   "base-devel"
   "cmake"
   "curl"
-  "dunst"
   "git"
   "github-cli"
   "go"
@@ -26,20 +24,35 @@ pacman_packages=(
   "unzip"
   "wget"
   "which"
+  "wl-clipboard"
+  "xdg-utils"
+  "xdg-user-dirs"
 )
 
 # -------------------------------------------------------------------------- }}}
 # {{{ bspwm packages
 
-bwpwm_packages=(
-  "wl-clipboard"
+bspwm_packages=(
+  "acpid"
+  "arandr"
+  "bspwm"
+  "dunst"
+  "feh"
+  "lxappearance"
+  "picom"
+  "polybar"
+  "rofi"
+  "sxhkd"
   "xclip"
   "xdg-desktop-portal"
   "xdg-desktop-portal-gtk"
   "xdo"
   "xdotool"
   "xfce4-appfinder"
+  "xfce4-power-manager"
   "xfce4-settings"
+  "xorg-xinit"
+  "xorg-server"
   "xsel"
 )
 
@@ -47,20 +60,28 @@ bwpwm_packages=(
 # {{{ hyprland packages
 
 hyprland_packages=(
+  "foot"
+  "gnome-keyring"
   "hyprcursor"
   "hyprgraphics"
   "hyprland"
   "hyprland-qt-support"
-  "hyprland-qtutilsrr"
   "hyprlang"
   "hyprpaper"
   "hyprutils"
   "hyprwayland-scanner"
-  "wavpack"
+  "libnotify"
+  "mako"
+  "polkit-gnome"
+  "polkit-kde-agent"
+  "swaylock"
+  "waybar"
   "waybar-git"
   "wayland"
   "wayland-protocols"
-  "wl-clipboard"
+  "wofi"
+  "xdg-desktop-portal"
+  "xdg-desktop-portal-hyprland"
 )
 
 # -------------------------------------------------------------------------- }}}
@@ -180,8 +201,13 @@ desktop_packages=(
   "screenkey"
   "shotcut"
   "teams"
+  "thunar"
+  "thunar-archive-plugin"
+  "thunar-media-tags-plugin"
   "thunar-volman"
-  "thunderbird"
+  "thunar-shares-plugin"
+  "thunar-vcs-plugin"
+  "thunar-volman"
   "visual-studio-code-bin"
 )
 
