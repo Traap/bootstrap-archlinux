@@ -200,7 +200,6 @@ desktop_packages=(
   "remmina"
   "screenkey"
   "shotcut"
-  "teams"
   "thunar"
   "thunar-archive-plugin"
   "thunar-media-tags-plugin"
@@ -208,17 +207,23 @@ desktop_packages=(
   "thunar-shares-plugin"
   "thunar-vcs-plugin"
   "thunar-volman"
-  "visual-studio-code-bin"
 )
 
 # -------------------------------------------------------------------------- }}}
 # {{{ MS Windows packages
 
 ms_windows_packages=(
+  "visual-studio-code-bin"
+  "teams"
+)
+
+# -------------k------------------------------------------------------------- }}}
+# {{{ MS Windows packages
+
+ms_dotnet_packages=(
   "aspnet-runtime"
   "dotnet-runtime"
   "dotnet-sdk"
-  "teams"
 )
 
 # -------------k------------------------------------------------------------- }}}

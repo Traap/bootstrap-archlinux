@@ -74,7 +74,9 @@ main() {
   installBspwm
   installHyprland
   installMsWindowsApps
+  installMsDotnetApps
   installHeyMail
+  installDesktopApps
 
   # Final personalization.
   swapCapsLockAndEscKey
@@ -153,6 +155,16 @@ installBashGitPrompt() {
     src=https://github.com/magicmonty/bash-git-prompt
     dst=~/.bash-git-prompt
     git clone "$sr$dst"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install Desktop apps
+
+installDesktopApps() {
+  if [[ $desktopAppsFlag == true ]]; then
+    say 'Installing Desktop applications.'
+    sudo yay -Syyu --noconfirm "${desktop_packages[@]}"
   fi
 }
 
@@ -260,12 +272,22 @@ installRust() {
 }
 
 # -------------------------------------------------------------------------- }}}
-# {{{ Install other applications.
+# {{{ Install MicroSoft Windows applications
 
 installMsWindowsApps() {
   if [[ $msWindowsAppsFlag == true ]]; then
     say 'Installing MS Windows applications.'
     sudo yay -Syyu --noconfirm "${ms_windows_packages[@]}"
+  fi
+}
+
+# -------------------------------------------------------------------------- }}}
+# {{{ Install MicroSoft DotNet applications
+
+installMsDotnetApps() {
+  if [[ $msDotnetAppsFlag == true ]]; then
+    say 'Installing MS Dotnet applications.'
+    sudo yay -Syyu --noconfirm "${ms_dotnet_packages[@]}"
   fi
 }
 

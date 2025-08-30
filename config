@@ -11,6 +11,7 @@
 
 base16ColorsFlag=false
 bspwmFlag=false
+desktopAppsFlag=false
 echoConfigFlag=false
 gitBashPromptFlag=false
 gitsFlag=false
@@ -19,6 +20,7 @@ hyprlandFlag=false
 kjvFlag=false
 luarocksPackages=false
 mirrorFlag=false
+msDotnetAppsFlag=false
 msWindowsAppsFlag=false
 myReposFlag=false
 neovimBuildFlag=false
@@ -29,7 +31,7 @@ osUpdateFlag=false
 osUpdateKeysFlag=false
 pacmanPackagesFlag=false
 pipPackagesFlag=false
-rbenvFlag=false
+rbenvFlag=true
 removePersonalizationFlag=false
 resolvFlag=false
 rustFlag=false
