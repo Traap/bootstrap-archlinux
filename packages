@@ -134,6 +134,7 @@ tex_packages=(
   "texlive-latexextra"
   "texlive-music"
   "texlive-pictures"
+  "texlive-plaingeneric"
   "texlive-publishers"
   "texlive-science"
 )
