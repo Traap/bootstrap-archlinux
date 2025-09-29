@@ -79,6 +79,7 @@ hyprland_packages=(
   "waybar-git"
   "wayland"
   "wayland-protocols"
+  "wl-clipboard"
   "wofi"
   "xdg-desktop-portal"
   "xdg-desktop-portal-hyprland"
