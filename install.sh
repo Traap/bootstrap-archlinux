@@ -154,7 +154,7 @@ installBashGitPrompt() {
     rm -rf ~/.bash-git-prompt
     src=https://github.com/magicmonty/bash-git-prompt
     dst=~/.bash-git-prompt
-    git clone "$sr$dst"
+    git clone "$src $dst"
   fi
 }
 
